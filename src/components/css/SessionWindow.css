@@ -1,0 +1,15 @@
+.SessionWindow {
+    width: 100%;
+    overflow: hidden;
+}
+
+.Carousel {
+    width: 400%;
+    flex-direction: row;
+    display: flex;
+    
+}
+
+.Carousel_Item {
+    width: 100%;
+}
