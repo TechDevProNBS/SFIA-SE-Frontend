@@ -1,29 +1,74 @@
 import React from "react";
-import { Button } from "react-bootstrap";
 
-export default class Session extends React.Component {
+/*
+    Lists the Pages in a session
+    When a button is clicked the name of the page is sent to props (in Session.js)
+*/
 
-    toResponsibilities() {
-        console.log("Responsabilities")
-    }
+export default class NavBar extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-    toSkillList() {
-        console.log("toSkillList")
-    }
-    toSkillLevels() {
-        console.log("toSkillLevels")
-    }
-    toSkillReviewPage() {
-        console.log("toSkillReviewPage")
-    }
+  //   When the Responsabilities button is clicked send "Responsabilities" to props (in Session.js)"
+  toResponsibilities = event => {
+    this.props.handlePageChange("Responsabilities");
+  };
 
+  //   When the SkillList button is clicked send "SkillList to props (in Session.js)"
+  toSkillList = event => {
+    this.props.handlePageChange("SkillList");
+  };
+
+  //   When the SkillLevels button is clicked send "SkillLevels" to props (in Session.js)"
+  toSkillLevels = event => {
+    this.props.handlePageChange("SkillLevels");
+  };
+
+  //   When the SkillReviewPage button is clicked send "SkillReviewPage" to props (in Session.js)"
+  toSkillReviewPage = event => {
+    this.props.handlePageChange("SkillReviewPage");
+  };
 
   render() {
-    return <div>
-        <button type="button" class="btn btn-outline-primary" onClick={this.toResponsibilities}>Responsibilities</button>
-        <button type="button" class="btn btn-outline-primary" onClick={this.toSkillList}>Skill List</button>
-        <button type="button" class="btn btn-outline-primary" onClick={this.toSkillLevels}>Skill Levels</button>
-        <button type="button" class="btn btn-outline-primary" onClick={this.toSkillReviewPage}>Review_Page</button>
-    </div>;
+    return (
+      <div>
+        {/* Responsabilities button */}
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          onClick={this.toResponsibilities}
+        >
+          Responsibilities
+        </button>
+
+        {/* SkillList button */}
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          onClick={this.toSkillList}
+        >
+          Skill List
+        </button>
+
+        {/* SkillLevels button */}
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          onClick={this.toSkillLevels}
+        >
+          Skill Levels
+        </button>
+
+        {/* SkillReviewPage button */}
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          onClick={this.toSkillReviewPage}
+        >
+          Review_Page
+        </button>
+      </div>
+    );
   }
 }
