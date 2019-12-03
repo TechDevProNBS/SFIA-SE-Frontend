@@ -14,8 +14,8 @@ export default class Session extends React.Component {
   // HandlePageChange is called when a button in pressed in NavBar.js.
   // Event is the output returned by NavBar
   handlePageChange = event => {
-    // Assignes the word "Responsabilities" to the first page inside SessionWindow.js
-    if (event == "Responsabilities") {
+    // Assignes the word "Responsibilities" to the first page inside SessionWindow.js
+    if (event == "Responsibilities") {
       this.setState({
         Carousel_Page: 0
       });

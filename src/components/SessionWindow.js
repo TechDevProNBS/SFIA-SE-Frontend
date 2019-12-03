@@ -1,5 +1,5 @@
 import React from "react";
-import Responsabilities from "./Responsabilities";
+import Responsibilities from "./Responsibilities";
 import SkillList from "./SkillList";
 import SkillLevel from "./SkillLevel";
 import ReviewPage from "./ReviewPage";
@@ -26,7 +26,7 @@ export default class SessionWindow extends React.Component {
         <div className="Carousel" style={Carousel_Style}>
           {/* Calls each of the pages needed for a session */}
           <div className="Carousel_Item">
-            <Responsabilities />
+            <Responsibilities />
           </div>
           <div className="Carousel_Item">
             <SkillList />

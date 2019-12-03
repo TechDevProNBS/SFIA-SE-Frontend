@@ -10,9 +10,9 @@ export default class NavBar extends React.Component {
     super(props);
   }
 
-  //   When the Responsabilities button is clicked send "Responsabilities" to props (in Session.js)"
+  //   When the Responsibilities button is clicked send "Responsibilities" to props (in Session.js)"
   toResponsibilities = event => {
-    this.props.handlePageChange("Responsabilities");
+    this.props.handlePageChange("Responsibilities");
   };
 
   //   When the SkillList button is clicked send "SkillList to props (in Session.js)"
@@ -33,7 +33,7 @@ export default class NavBar extends React.Component {
   render() {
     return (
       <div>
-        {/* Responsabilities button */}
+        {/* Responsibilities button */}
         <button
           type="button"
           class="btn btn-outline-primary"
