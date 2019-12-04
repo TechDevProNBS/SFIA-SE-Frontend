@@ -12,6 +12,10 @@ import "./css/ReviewPage.css";
 
 export default class ReviewPage extends React.Component {
   // Contains all information required for the slider to function
+  constructor(props){
+    super(props);
+  }
+
   state = {
     remindIn: [
       "1 Week",
@@ -33,27 +37,22 @@ export default class ReviewPage extends React.Component {
       "11 Months",
       "1 Year"
     ],
-    remindInDate: 0
   };
 
-  // Updated remindInDate to the value of the slider
+  // Updated remindInDate as the value of the slider to SessionWindow.js
   updateRemindInDate = () => {
-    this.setState({
-      remindInDate: document.getElementById("slidecontainer").value
-    });
+    this.props.updateRemindInDate(document.getElementById("slidecontainer").value)
   };
 
-  // Updates the value of remindInDate to be the length of the slider on a first render
+  // Updates the value of remindInDate to be the length of the slider on a first render in SessionWindow.js
   componentDidMount() {
-    this.setState({
-      remindInDate: this.state.remindIn.length - 1
-    });
+    this.props.updateRemindInDate(this.state.remindIn.length - 1)
   }
 
   render() {
     // Determines the position of the words (date reminder set) underneath the slider
     var remindPosition = {
-      left: (this.state.remindInDate / (this.state.remindIn.length - 1)) * 100 - 3.5 + "%"
+      left: (this.props.remindInDate / (this.state.remindIn.length - 1)) * 100 - 3.5 + "%"
     }
     return (
       <Container className="ReviewPage">
@@ -207,7 +206,7 @@ export default class ReviewPage extends React.Component {
                   onChange={this.updateRemindInDate}
                   className="slider"
                 />
-                <div style={remindPosition} className="slidecontainer">{this.state.remindIn[this.state.remindInDate]}</div>
+                <div style={remindPosition} className="slidecontainer">{this.state.remindIn[this.props.remindInDate]}</div>
               </div>
               <div>&nbsp; 1 Year</div>
             </div>
