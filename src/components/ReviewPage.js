@@ -1,7 +1,5 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-// import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { Form, Col, Container, Button } from "react-bootstrap";
+import React from "react";
+import { Form, Container, Button } from "react-bootstrap";
 
 import "./css/ReviewPage.css";
 
