@@ -1,0 +1,21 @@
+
+/* Puts all text in ReviewPage to the left by default */
+.ReviewPage {
+    text-align: left !important;
+}
+
+.slidersection {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Determines the width of the slider. Position is for the words underneath the slider */
+.slidecontainer {
+    width: 40%;
+    position: relative;
+}
+
+/* Fills the width of the slider to the width of the container */
+.slider {
+    width: 100%
+}
