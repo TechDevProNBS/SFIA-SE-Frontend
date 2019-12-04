@@ -14,7 +14,18 @@ import "./css/SessionWindow.css"
 export default class SessionWindow extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      remindInDate: 0
+    }
   }
+
+  // Updated remindInDate to the value of the slider
+  updateRemindInDate = event => {
+    this.setState({
+      remindInDate: event
+    });
+  };
 
   render() {
     // edits Carousel_Style to display the page decieded by Session.js
@@ -35,7 +46,8 @@ export default class SessionWindow extends React.Component {
             <SkillLevel />
           </div>
           <div className="Carousel_Item">
-            <ReviewPage />
+            {/* Send the value for the slider as well as the function used to update the slider into ReviewPage.js */}
+            <ReviewPage remindInDate={this.state.remindInDate} updateRemindInDate={this.updateRemindInDate}/>
           </div>
         </div>
       </div>
