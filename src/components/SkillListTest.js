@@ -138,26 +138,13 @@ export default class SkillList extends React.Component {
               }
           ]
       }
-    ],
-    array: []
+    ]
     }
   }
-handleForm(){
-console.log("Submitting")
-let a = this.state.array
-a.push()
 
-}
 boxChecked(input){
-  var a = document.getElementById(`${input}`);
-  if(a.checked == true) {
-    this.state.array.push(input);
-  } else {
-    while (this.state.array.indexOf(input) !== -1) {
-      this.state.array.splice(this.state.array.indexOf(input), 1);
-    }
-  }
-  console.log(this.state.array);
+  // let skillName = document.getElementById("skill").value
+  console.log(input)
 }
  
   render() {
@@ -173,18 +160,16 @@ boxChecked(input){
                         </center><br />
                         <p>To alter or make your own custom list, select the checkboxes below:</p>
                     </Col>
-                    <form onSubmit={this.handleForm}>
       {this.state.records.map((cat, index) => (
       <p Key={index}>Catergory: {cat.category_name}
         {cat.subcategories.map((subcat, index) => (
           <p Key={index}>Subatergory: {subcat.subcategory_name}
             {subcat.skills.map((skill, index) => (
-              <span><p Key={index}> <input type="checkbox" id={(skill.skill_name)} onChange={() => this.boxChecked(skill.skill_name)}/> {skill.skill_name} </p>  </span>
+              <span><p Key={index}> <input type="checkbox" id="skill" onChange={() => this.boxChecked(skill.skill_name)}/> {skill.skill_name} </p>  </span>
             ))} </p> 
         ))}
       </p>
     ))}
-    </form>
     </div>;
   }
 }
