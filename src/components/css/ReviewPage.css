@@ -19,3 +19,8 @@
 .slider {
     width: 100%
 }
+
+.formBasicCheckbox {
+    display: flex;
+    flex-direction: row;
+}
