@@ -251,14 +251,17 @@ export default class ReviewPage extends React.Component {
                   var label = " " + item;
                   return (
                     <tr>
+                      {/* The Checkbox */}
                       <td style={{width: "24px"}}>
                         <input type="checkbox" label={label} />
                       </td>
+                      {/* The Id of the customGoal*/}
                       <td style={{width: "24px"}}>{input}</td>
                       <td>
+                        {/* Custom GOal Content */}
                         <div>{label}</div>
                       </td>
-
+                      {/* The Delete Button */}
                       <td style={{width: "24px"}} className="deleteButtonCell">
                         <button
                           id={input}
@@ -309,6 +312,7 @@ export default class ReviewPage extends React.Component {
                 onChange={this.updateRemindInDate}
                 className="slider"
               />
+              {/* Text underneath the slider */}
               <div style={remindPosition} className="slidecontainer">
                 {this.state.remindIn[this.props.remindInDate]}
               </div>
@@ -317,6 +321,7 @@ export default class ReviewPage extends React.Component {
           </div>
         </div>
         <div className="Centre-Bordered-Section">
+          {/* The Submit Button */}
           <Button variant="primary" className="Submit-Button">
             Submit
           </Button>
