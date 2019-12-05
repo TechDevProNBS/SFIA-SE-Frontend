@@ -1,18 +1,27 @@
 
 /* Puts all text in ReviewPage to the left by default */
 .ReviewPage {
-    text-align: left !important;
+    /* text-align: left !important; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .slidersection {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    width: 40%;
 }
 
 /* Determines the width of the slider. Position is for the words underneath the slider */
 .slidecontainer {
-    width: 40%;
+    width: 100%;
     position: relative;
+
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
 }
 
 /* Fills the width of the slider to the width of the container */
@@ -20,3 +29,43 @@
     width: 100%
 }
 
+.ReviewPage-Table {
+    /* width: 40% !important; */
+    /* font-size: 40px !important; */
+}
+
+.deleteButtonCell {
+    position: relative;
+    top: 50%;
+    transform: translateY(25%);
+}
+
+.Bordered-Section {
+    /* display: flex; */
+    /* text-align: center; */
+    border-style: solid;
+    border-color: black;
+    /* padding: 2%; */
+    margin: 2%;
+    width: fit-content;
+}
+
+.subHeader {
+    padding: 2%;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.Centre-Bordered-Section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.Submit-Button {
+    width: fit-content;
+}
+
+.sliderwords {
+    padding: 1%;
+}

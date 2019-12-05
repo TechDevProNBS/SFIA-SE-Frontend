@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Container, Button } from "react-bootstrap";
+import { Form, Container, Button, Table } from "react-bootstrap";
 
 import "./css/ReviewPage.css";
 
@@ -35,18 +35,18 @@ export default class ReviewPage extends React.Component {
         "10 Months",
         "11 Months",
         "1 Year"
-      ],
+      ]
     };
   }
 
   // Calls the deleteCustomGoal function in SessionWindow.js
   // input is the item in custom goals which needs to be deleted
   deleteCustomGoal = input => {
-    this.props.deleteCustomGoal(input)
+    this.props.deleteCustomGoal(input);
   };
 
   // Checks if the key pressed inside the "add custom goal" Textbox was the enterkey and
-  // calls the addCustomGoal function in SessionWindow.js if true. 
+  // calls the addCustomGoal function in SessionWindow.js if true.
   addCustomGoal() {
     document
       .getElementById("addCustomGoal")
@@ -56,7 +56,9 @@ export default class ReviewPage extends React.Component {
           document.getElementById("addCustomGoal").value !== ""
         ) {
           event.preventDefault();
-          this.props.addCustomGoal(document.getElementById("addCustomGoal").value)
+          this.props.addCustomGoal(
+            document.getElementById("addCustomGoal").value
+          );
           document.getElementById("addCustomGoal").value = "";
         }
       });
@@ -84,187 +86,219 @@ export default class ReviewPage extends React.Component {
     var remindPosition = {
       left:
         (this.props.remindInDate / (this.state.remindIn.length - 1)) * 100 -
-        3.5 +
+        50 +
         "%"
     };
 
     return (
-      <Container className="ReviewPage">
-        <div>
-          {/* Template Design for future inputs */}
-          <h2>
-            <p class="font-weight-bold" style={{ fontSize: 28 }}>
-              Review
+      <div className="ReviewPage">
+        {/* Template Design for future inputs */}
+        <h2>
+          <p class="font-weight-bold" style={{ fontSize: 28 }}>
+            Review
+          </p>
+        </h2>
+        <br></br>
+
+        <h2>
+          <center>
+            <p class="font-weight-bold" style={{ fontSize: 26 }}>
+              <u>YOU ARE SFIA LEVEL X</u>
             </p>
-          </h2>
-          <br></br>
+          </center>
+        </h2>
 
-          <h2>
-            <center>
-              <p class="font-weight-bold" style={{ fontSize: 26 }}>
-                <u>YOU ARE SFIA LEVEL X</u>
-              </p>
-            </center>
-          </h2>
-
-          <br></br>
-          <br></br>
-          <br></br>
-
-          <h4>
-            <p class="font-weight-bold" style={{ fontSize: 20 }}>
-              Areas you are doing well in:
-            </p>
-          </h4>
-          <br></br>
-          <p style={{ fontSize: 18 }}>
-            <span
-              class="glyphicon glyphicon-ok"
-              style={{ color: "green" }}
-            ></span>
-            <span>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x)&nbsp;&nbsp;Sample text
-              sample text sample text
-            </span>
-          </p>
-          <p style={{ fontSize: 18 }}>
-            <span
-              class="glyphicon glyphicon-ok"
-              style={{ color: "green" }}
-            ></span>
-            <span>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y)&nbsp;&nbsp;Sample text
-              sample text sample text
-            </span>
-          </p>
-          <br></br>
-          <br></br>
-          <br></br>
-
-          <h4>
-            <p class="font-weight-bold" style={{ fontSize: 20 }}>
-              Areas you need to improve:
-            </p>
-          </h4>
-          <br></br>
-          <p style={{ fontSize: 18 }}>
-            <span
-              class="glyphicon glyphicon-remove"
-              style={{ color: "red" }}
-            ></span>
-            <span>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z)&nbsp;&nbsp;Sample text
-              sample text sample text
-            </span>
-          </p>
-          <p style={{ fontSize: 18 }}>
-            <span
-              class="glyphicon glyphicon-remove"
-              style={{ color: "red" }}
-            ></span>
-            <span>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u)&nbsp;&nbsp;Sample text
-              sample text sample text
-            </span>
-          </p>
-          <p style={{ fontSize: 18 }}>
-            <span
-              class="glyphicon glyphicon-remove"
-              style={{ color: "red" }}
-            ></span>
-            <span>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v)&nbsp;&nbsp;Sample text
-              sample text sample text
-            </span>
-          </p>
-          <br></br>
-          <br></br>
-          <br></br>
-
-          <h4>
-            <p class="font-weight-bold" style={{ fontSize: 20 }}>
-              Goals for the future:
-            </p>
-          </h4>
-          <br></br>
-          <Form>
-            <Form.Group controlId="formBasicCheckbox">
-              <Form.Check
-                type="checkbox"
-                label="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z)&nbsp;&nbsp;Sample text sample text sample text"
-                style={{ fontSize: 18 }}
-              />
-            </Form.Group>
-            <Form.Group controlId="formBasicCheckbox">
-              <Form.Check
-                type="checkbox"
-                label="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u)&nbsp;&nbsp;Sample text sample text sample text"
-                style={{ fontSize: 18 }}
-              />
-            </Form.Group>
-            <Form.Group controlId="formBasicCheckbox">
-              <Form.Check
-                type="checkbox"
-                label="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v)&nbsp;&nbsp;Sample text sample text sample text"
-                style={{ fontSize: 18 }}
-              />
-            </Form.Group>
-          </Form>
-
-          {/* Maps all custom goals information here */}
-          <table style={{ fontSize: 18 }}>
-            {this.props.customGoals.map((item, input) => {
-              var label = " " + item;
-              return (
+        <br></br>
+        <br></br>
+        <br></br>
+        <div className="Centre-Bordered-Section">
+          <div className="Bordered-Section">
+            <h4>
+              {/* class="font-weight-bold" style={{ fontSize: 20 }} */}
+              <p className="subHeader">Areas you are doing well in:</p>
+            </h4>
+            <Table
+              style={{ fontSize: 18 }}
+              className="ReviewPage-Table"
+              striped
+              bordered
+              hover
+            >
+              <tbody>
                 <tr>
                   <td>
-                    <input
-                      type="checkbox"
-                      label={label}
-                    />
-                  </td>
-                  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                  <td>v)</td>
-                  <td>&nbsp;&nbsp;</td>
-                  <td>
-                    <div>{label}</div>
+                    <span
+                      class="glyphicon glyphicon-ok"
+                      style={{ color: "green" }}
+                    ></span>
                   </td>
                   <td>
-                    <button
-                      id={input}
-                      onClick={() => this.deleteCustomGoal(input)}
-                    >
-                      <span aria-hidden="true">&times;</span>
-                    </button>
+                    <span>x)</span>
                   </td>
+                  <td>Sample text sample text sample text</td>
                 </tr>
-              );
-            })}
-          </table>
+                <tr>
+                  <td>
+                    <span
+                      class="glyphicon glyphicon-ok"
+                      style={{ color: "green" }}
+                    ></span>
+                  </td>
+                  <td>
+                    <span>y)</span>
+                  </td>
+                  <td>Sample text sample text sample text</td>
+                </tr>
+              </tbody>
+            </Table>
+          </div>
+        </div>
 
-          {/* The Add Custom GOal textbox */}
-          <p class="font-weight-bold" style={{ fontSize: 20 }}>
-            <input
-              type="text"
-              placeholder="Add custom goal"
-              style={{ height: 30, width: 400, textAlign: "center" }}
-              id="addCustomGoal"
-              onKeyDown={() => this.addCustomGoal()}
-            />
-          </p>
-          <br></br>
-          <br></br>
+        <div className="Centre-Bordered-Section">
+          <div className="Bordered-Section">
+            <h4>
+              <p className="subHeader">Areas you need to improve:</p>
+            </h4>
+            <Table
+              style={{ fontSize: 18 }}
+              className="ReviewPage-Table"
+              striped
+              bordered
+              hover
+            >
+              <tbody>
+                <tr>
+                  <td>
+                    <span
+                      class="glyphicon glyphicon-remove"
+                      style={{ color: "red" }}
+                    ></span>
+                  </td>
+                  <td>
+                    <span>D)</span>
+                  </td>
+                  <td>Sample text sample text sample text</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span
+                      class="glyphicon glyphicon-remove"
+                      style={{ color: "red" }}
+                    ></span>
+                  </td>
+                  <td>
+                    <span>G)</span>
+                  </td>
+                  <td>Sample text sample text sample text</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span
+                      class="glyphicon glyphicon-remove"
+                      style={{ color: "red" }}
+                    ></span>
+                  </td>
+                  <td>
+                    <span>Z)</span>
+                  </td>
+                  <td>Sample text sample text sample text</td>
+                </tr>
+              </tbody>
+            </Table>
+          </div>
+        </div>
+        <div className="Centre-Bordered-Section">
+          <div className="Bordered-Section">
+            <h4>
+              <p className="subHeader">Goals for the future:</p>
+            </h4>
+            <br></br>
+            <Form>
+              <Form.Group controlId="formBasicCheckbox">
+                <Form.Check
+                  type="checkbox"
+                  label="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z)&nbsp;&nbsp;Sample text sample text sample text"
+                  style={{ fontSize: 18 }}
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicCheckbox">
+                <Form.Check
+                  type="checkbox"
+                  label="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u)&nbsp;&nbsp;Sample text sample text sample text"
+                  style={{ fontSize: 18 }}
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicCheckbox">
+                <Form.Check
+                  type="checkbox"
+                  label="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v)&nbsp;&nbsp;Sample text sample text sample text"
+                  style={{ fontSize: 18 }}
+                />
+              </Form.Group>
+            </Form>
 
-          <h4>
+            {/* Maps all custom goals information here */}
+            {/* style={{ fontSize: 18 }} */}
+            <Table
+              style={{ fontSize: 18 }}
+              className="ReviewPage-Table"
+              striped
+              bordered
+              hover
+            >
+              <tbody>
+                {this.props.customGoals.map((item, input) => {
+                  var label = " " + item;
+                  return (
+                    <tr>
+                      <td style={{width: "24px"}}>
+                        <input type="checkbox" label={label} />
+                      </td>
+                      <td style={{width: "24px"}}>{input}</td>
+                      <td>
+                        <div>{label}</div>
+                      </td>
+
+                      <td style={{width: "24px"}} className="deleteButtonCell">
+                        <button
+                          id={input}
+                          onClick={() => this.deleteCustomGoal(input)}
+                          type="button"
+                          class="btn btn-light btn-lg close"
+                          aria-label="Close"
+                        >
+                          &times;
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+
+            {/* The Add Custom GOal textbox */}
             <p class="font-weight-bold" style={{ fontSize: 20 }}>
-              Set deadline for:
+              <input
+                type="text"
+                placeholder="Add custom goal"
+                style={{ height: 30, width: 400, textAlign: "center" }}
+                id="addCustomGoal"
+                onKeyDown={() => this.addCustomGoal()}
+              />
             </p>
-          </h4>
-          <br></br>
+          </div>
+        </div>
 
+        <h4>
+          <p class="font-weight-bold" style={{ fontSize: 20 }}>
+            Set deadline for:
+          </p>
+        </h4>
+
+        <div className="Centre-Bordered-Section">
           {/* Code for the slider (date reminder) */}
           <div className="slidersection">
-            <div>1 Week &nbsp;</div>
+            <div className="sliderwords">1 Week</div>
             <div class="slidecontainer" className="slidecontainer">
               <input
                 type="range"
@@ -279,12 +313,15 @@ export default class ReviewPage extends React.Component {
                 {this.state.remindIn[this.props.remindInDate]}
               </div>
             </div>
-            <div>&nbsp; 1 Year</div>
+            <div>1 Year</div>
           </div>
-
-          <Button variant="primary">Submit</Button>
         </div>
-      </Container>
+        <div className="Centre-Bordered-Section">
+          <Button variant="primary" className="Submit-Button">
+            Submit
+          </Button>
+        </div>
+      </div>
     );
   }
 }
