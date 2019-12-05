@@ -36,42 +36,28 @@ export default class ReviewPage extends React.Component {
         "11 Months",
         "1 Year"
       ],
-      customGoals: []
     };
   }
 
+  // Calls the deleteCustomGoal function in SessionWindow.js
+  // input is the item in custom goals which needs to be deleted
   deleteCustomGoal = input => {
-    var newCustomGoals = this.state.customGoals;
-    newCustomGoals.splice(input, 1);
-    this.setState({
-      customGoals: newCustomGoals
-    });
+    this.props.deleteCustomGoal(input)
   };
 
-  customGoalsTextedit() {
-    var newText = document.getElementById("addCustomGoal").value;
-    this.setState({
-      customGoalsTextbox: newText
-    });
-  }
-
+  // Checks if the key pressed inside the "add custom goal" Textbox was the enterkey and
+  // calls the addCustomGoal function in SessionWindow.js if true. 
   addCustomGoal() {
     document
       .getElementById("addCustomGoal")
       .addEventListener("keypress", event => {
-        console.log("Keypress");
-        console.log(this.state.remindIn);
         if (
           event.keyCode == 13 &&
           document.getElementById("addCustomGoal").value !== ""
         ) {
           event.preventDefault();
-          var newCustomGoals = this.state.customGoals;
-          newCustomGoals.push(document.getElementById("addCustomGoal").value);
+          this.props.addCustomGoal(document.getElementById("addCustomGoal").value)
           document.getElementById("addCustomGoal").value = "";
-          this.setState({
-            customGoals: newCustomGoals
-          });
         }
       });
   }
@@ -105,6 +91,7 @@ export default class ReviewPage extends React.Component {
     return (
       <Container className="ReviewPage">
         <div>
+          {/* Template Design for future inputs */}
           <h2>
             <p class="font-weight-bold" style={{ fontSize: 28 }}>
               Review
@@ -224,8 +211,9 @@ export default class ReviewPage extends React.Component {
             </Form.Group>
           </Form>
 
+          {/* Maps all custom goals information here */}
           <table style={{ fontSize: 18 }}>
-            {this.state.customGoals.map((item, input) => {
+            {this.props.customGoals.map((item, input) => {
               var label = " " + item;
               return (
                 <tr>
@@ -233,10 +221,9 @@ export default class ReviewPage extends React.Component {
                     <input
                       type="checkbox"
                       label={label}
-                      style={{ fontSize: 18 }}
                     />
                   </td>
-                  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                   <td>v)</td>
                   <td>&nbsp;&nbsp;</td>
                   <td>
@@ -255,6 +242,7 @@ export default class ReviewPage extends React.Component {
             })}
           </table>
 
+          {/* The Add Custom GOal textbox */}
           <p class="font-weight-bold" style={{ fontSize: 20 }}>
             <input
               type="text"
@@ -282,7 +270,6 @@ export default class ReviewPage extends React.Component {
                 type="range"
                 min="0"
                 max={this.state.remindIn.length - 1}
-                // value={this.state.customGoalsTextbox}
                 class="slider"
                 id="slidecontainer"
                 onChange={this.updateRemindInDate}
