@@ -143,11 +143,13 @@ export default class SkillList extends React.Component {
             array: []
         }
     }
+    //calls the handleForm function on session window
     handleForm() {
         var newArray = this.state.array
         alert("hello")
         this.props.handleForm(newArray)
       };
+    //creates and array and also deletes entries if needed
     boxChecked(input) {
         var a = document.getElementById(`${input}`);
         if (a.checked == true) {
@@ -159,7 +161,7 @@ export default class SkillList extends React.Component {
         }
         console.log(this.state.array);
     }
-
+//maps the skills from the database and renders to the screen. CCS is still needed here
     render() {
         return <div>
             <Col>

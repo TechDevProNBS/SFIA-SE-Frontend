@@ -21,6 +21,7 @@ export default class SessionWindow extends React.Component {
       newSkillList: []
     };
   }
+  //Enters the new array from skill list page into this.state
   handleForm = newArray => {
     alert("dinosaur")
     var skillList = this.state.newSkillList;
