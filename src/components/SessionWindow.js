@@ -16,9 +16,14 @@ export default class SessionWindow extends React.Component {
     super(props);
 
     this.state = {
-      remindInDate: 0
-    }
+      remindInDate: 0,
+      customGoals: [],
+      newSkillList: [],
+      newResp: []
+    };
+
   }
+
 
   // Updated remindInDate to the value of the slider
   updateRemindInDate = event => {
@@ -26,6 +31,15 @@ export default class SessionWindow extends React.Component {
       remindInDate: event
     });
   };
+
+  pushResp = (newArr) => {
+    var resp = this.state.newResp;
+    resp.push(newArr);
+    this.setState({
+      newResp: resp
+    });
+    // alert(this.state.newResp)
+  }
 
   render() {
     // edits Carousel_Style to display the page decieded by Session.js
@@ -37,7 +51,8 @@ export default class SessionWindow extends React.Component {
         <div className="Carousel" style={Carousel_Style}>
           {/* Calls each of the pages needed for a session */}
           <div className="Carousel_Item">
-            <Responsibilities />
+            <Responsibilities
+            pushResp={this.pushResp} />
           </div>
           <div className="Carousel_Item">
             <SkillList />
@@ -47,7 +62,7 @@ export default class SessionWindow extends React.Component {
           </div>
           <div className="Carousel_Item">
             {/* Send the value for the slider as well as the function used to update the slider into ReviewPage.js */}
-            <ReviewPage remindInDate={this.state.remindInDate} updateRemindInDate={this.updateRemindInDate}/>
+            <ReviewPage remindInDate={this.state.remindInDate} updateRemindInDate={this.updateRemindInDate} />
           </div>
         </div>
       </div>
