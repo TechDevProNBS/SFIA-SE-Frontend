@@ -17,10 +17,19 @@ export default class SessionWindow extends React.Component {
 
     this.state = {
       remindInDate: 0,
-      customGoals: []
+      customGoals: [],
+      newSkillList: []
     };
   }
-
+  handleForm = newArray => {
+    alert("dinosaur")
+    var skillList = this.state.newSkillList;
+    skillList.push(newArray, 1);
+    this.setState({
+      newSkillList: skillList
+    });
+    console.log(this.state.newSkillList)
+  };
   // Deletes a Custom Goal, called from ReviewPage.js
   deleteCustomGoal = input => {
     var newCustomGoals = this.state.customGoals;
@@ -59,7 +68,8 @@ export default class SessionWindow extends React.Component {
             <Responsibilities />
           </div>
           <div className="Carousel_Item">
-            <SkillList />
+            <SkillList
+            handleForm={this.handleForm} />
           </div>
           <div className="Carousel_Item">
             <SkillLevel />

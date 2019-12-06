@@ -2,6 +2,7 @@ import React from 'react';
 import Page1 from './Page1'
 import Session from './Session'
 import Review from './Review'
+import SkillList from './SkillList'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 /*
