@@ -149,7 +149,15 @@ export default class SkillList extends React.Component {
         alert("hello")
         this.props.handleForm(newArray)
       };
-    //creates and array and also deletes entries if needed
+    //creates an array and also deletes entries if needed
+
+    /**
+    * 
+    * Example message
+    * 
+    * @param  input.
+    * 
+    */
     boxChecked(input) {
         var a = document.getElementById(`${input}`);
         if (a.checked == true) {
