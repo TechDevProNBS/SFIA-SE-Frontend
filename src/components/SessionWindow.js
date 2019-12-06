@@ -23,13 +23,11 @@ export default class SessionWindow extends React.Component {
   }
   //Enters the new array from skill list page into this.state
   handleForm = newArray => {
-    alert("dinosaur")
     var skillList = this.state.newSkillList;
     skillList.push(newArray, 1);
     this.setState({
       newSkillList: skillList
     });
-    console.log(this.state.newSkillList)
   };
   // Deletes a Custom Goal, called from ReviewPage.js
   deleteCustomGoal = input => {
