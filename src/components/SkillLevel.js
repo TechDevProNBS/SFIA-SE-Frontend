@@ -23,7 +23,6 @@ export default class SkillLevel extends React.Component {
   componentDidUpdate = () => {
     var select = document.getElementsByName("0");
     for (var i = 0; i < select.length; i++) {
-      console.log(select[i]);
       select[i].disabled = false;
     }
   }
@@ -31,7 +30,6 @@ export default class SkillLevel extends React.Component {
   enableSelect = (input) => {
     var select = document.getElementsByName(input);
     for (var i = 0; i < select.length; i++) {
-      console.log(select[i] + " enable");
       select[i].disabled = false;
     }
   }
@@ -39,7 +37,6 @@ export default class SkillLevel extends React.Component {
   disableSelect = (input) => {
     var select = document.getElementsByName(input);
     for (var i = 0; i < select.length; i++) {
-      console.log(select[i] + " disable");
       select[i].disabled = true;
     }
   }
@@ -47,7 +44,6 @@ export default class SkillLevel extends React.Component {
   selectCount = (index) => {
     var tab = document.getElementById("list");
     var select = document.getElementById(index);
-    console.log(select);
     var row = tab.rows.length;
     var tr, td;
     var count = 0;

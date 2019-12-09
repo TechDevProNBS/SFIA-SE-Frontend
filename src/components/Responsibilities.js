@@ -10,82 +10,45 @@ export default class Responsibilities extends React.Component {
       lblDefault: "Select",
       lblYes: "Yes",
       lblNo: "No",
-      visible: "visible",
       disable: true,
       respYesArr: [],
       respNoArr: [],
-      id: ""
+      lvl: ""
     }
   }
 
+  /**
+   * Gets the responsibilities from the database and sets it in the state
+   */
   getResp = () => {
     fetch(`http://localhost:8084/API/showResponsibilities`)
       .then(response => response.json())
       .then(responsibility_info => this.setState({ resp: responsibility_info }))
   }
 
+  /**
+   * Calls the getResp function 
+   */
   componentDidMount = () => {
-    this.getResp();
+    // this.getResp();
   }
 
+  /**
+   * Enables the select boxes in the first column
+   */
   componentDidUpdate = () => {
     var select = document.getElementsByName("0");
-    for (var i = 0; i < select.length; i++) {
-      select[i].disabled = false;
-    }
-  }
-
-  enableSelect = (input) => {
-    var select = document.getElementsByName(input);
-    for (var i = 0; i < select.length; i++) {
-      select[i].disabled = false;
-    }
-  }
-
-  disableSelect = (input) => {
-    var select = document.getElementsByName(input);
     var arr = Array.from(select);
     for (var i = 0; i < arr.length; i++) {
-      for (var opt, j = 0; opt = arr[j]; j++) {
-        opt.selectedIndex = 0;
-        select[i].disabled = true;
-      }
+      arr[i].firstElementChild.disabled = false;
     }
   }
 
-  selectClick = (index) => {
-    this.selectCount(index);
-  }
-
-  addArr = () => {
-    console.log(this.state.id);
-    var span = document.getElementsByTagName("span");
-    var select = document.getElementsByName("0");
-    console.log(select);
-    console.log(select.getAttribute('name'));
-    var yArr = this.state.respYesArr;
-    var nArr = this.state.respNoArr;
-    yArr = [];
-    nArr = [];
-
-    for (var i = 0; i < span.length; i++) {
-      if (span.item(i).firstElementChild !== null) {
-        if (span.item(i).firstElementChild.value === "true") {
-          yArr.push(span.item(i).lastElementChild.innerHTML);
-        }
-        else if (span.item(i).firstElementChild.value === "false") {
-          nArr.push(span.item(i).lastElementChild.innerHTML);
-        }
-      }
-    }
-    console.log(yArr);
-    console.log(nArr);
-
-
-    this.pushResp();
-
-  }
-
+  /**
+   * Calculates the percentage of true and false select boxes for each column 
+   * Then calls the enable function if greater than 2/3
+   * Calls disable function if less
+   */
   selectCount = (index) => {
     var tab = document.getElementById("list");
     var row = tab.rows.length;
@@ -180,11 +143,125 @@ export default class Responsibilities extends React.Component {
     }
   }
 
+  /**
+   * Gets the select boxes for the column from the input param
+   * Enables all boxes in the column
+   */
+  enableSelect = (input) => {
+    var select = document.getElementsByName(input);
+    var arr = Array.from(select);
+    for (var i = 0; i < arr.length; i++) {
+      arr[i].firstElementChild.disabled = false;
+    }
+  }
+
+   /**
+   * Gets the select boxes for the column from the input param
+   * Disables all boxes in the column and sets to default value
+   */
+  disableSelect = (input) => {
+    var span = document.getElementsByName(input);
+    var arr = Array.from(span);
+    for (var i = 0; i < arr.length; i++) {
+      var select = [arr[i].firstElementChild];
+      for (var opt, j = 0; opt = select[j]; j++) {
+        opt.selectedIndex = 0;
+        select[j].disabled = true;
+      }
+    }
+  }
+
+  /**
+   * Gets level based on which column select boxes are enabled
+   * Calls addArr function passing current level
+   */
+  getLvl = () => {
+    var span = document.getElementsByTagName("span");
+    var lvl = this.state.lvl;
+    var name, select;
+    for (var i = 0; i < span.length; i++) {
+      name = span[i].getAttribute("name");
+      select = span[i].firstElementChild;
+      if (select !== null) {
+        if (select.disabled === false) {
+          lvl = parseInt(name);
+        }
+      }
+    }
+    switch (lvl) {
+      case 0:
+        this.addArr(lvl);
+        break;
+      case 1:
+        this.addArr(lvl);
+        break;
+      case 2:
+        this.addArr(lvl);
+        break;
+      case 3:
+        this.addArr(lvl);
+        break;
+      case 4:
+        this.addArr(lvl);
+        break;
+      case 5:
+        this.addArr(lvl);
+        break;
+      case 6:
+        this.addArr(lvl);
+        break;
+    }
+  }
+
+  /**
+   * Creates arrays for all select boxes with true value for current level
+   * Creates arrays for all select boxes with false value for previous level
+   * Assigns arrays and current level to state
+   * Calls pushResp function 
+   */
+  addArr = (lvl) => {
+    var curLvl = document.getElementsByName(lvl);
+    var prevLvl = document.getElementsByName(lvl - 1);
+    var curArr = Array.from(curLvl);
+    var prevArr = Array.from(prevLvl);
+    var yArr = [];
+    var nArr = [];
+    if (lvl == 0) {
+      for (var i = 0; i < curArr.length; i++) {
+        if (curArr[i].firstElementChild.value === "true") {
+          yArr.push(curArr[i].lastElementChild.innerHTML);
+        } else if (curArr[i].firstElementChild.value === "false") {
+          nArr.push(curArr[i].lastElementChild.innerHTML);
+        }
+      }
+    } else {
+      for (var i = 0; i < curArr.length; i++) {
+        if (curArr[i].firstElementChild.value === "true") {
+          yArr.push(curArr[i].lastElementChild.innerHTML);
+        }
+      }
+      for (var i = 0; i < prevArr.length; i++) {
+        if (prevArr[i].firstElementChild.value === "false") {
+          nArr.push(prevArr[i].lastElementChild.innerHTML);
+        }
+      }
+    }
+    this.state.lvl = lvl + 1;
+    this.state.respYesArr = yArr;
+    this.state.respNoArr = nArr;
+    this.pushResp();
+  }
+
+  /**
+   * Passes array and level in state to SessionWindow
+   */
   pushResp = () => {
+    var lvl = this.state.lvl;
     var newYArray = this.state.respYesArr;
     var newNArray = this.state.respNoArr;
     this.props.pushResp(newYArray);
-    this.props.pushResp(newNArray);
+    this.props.pushResp1(newNArray);
+    this.props.pushLvl(lvl)
   }
 
   render() {
@@ -206,17 +283,19 @@ export default class Responsibilities extends React.Component {
             </thead>
             <tbody id="list">
               {this.state.resp.map((name, index) => (
-                <tr>
+                <tr id="">
                   <td><b>{name.responsibility_name}</b></td>
                   {name.responsibility_descriptions.map((desc, index) => (
                     <td>
                       {desc.responsibility_criteria.map((desc2, index2) => (
-                        <span style={{ visibility: this.state.visible }}>
-                          <select id={index2} name={index} disabled={this.state.disable} onChange={() => this.selectClick(index)}>
+                        <span name={index}>
+                          {/* click box */}
+                          <select id={index2} disabled={this.state.disable} onChange={() => this.selectCount(index)}>
                             <option selected>{this.state.lblDefault}</option>
                             <option value="true">{this.state.lblYes}</option>
                             <option value="false">{this.state.lblNo}</option>
                           </select>
+                          {/* end click box */}
                           <p id="info">{desc2.responsibility_criterion}</p>
                         </span>
                       ))}
@@ -227,7 +306,7 @@ export default class Responsibilities extends React.Component {
             </tbody>
           </table>
         </div><br />
-        <button name="skillList" onClick={() => this.addArr()}>Skill List Selection</button>
+        <button name="skillList" onClick={() => this.getLvl()}>Skill List Selection</button>
       </Container>
     );
   }

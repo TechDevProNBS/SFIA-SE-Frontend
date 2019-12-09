@@ -19,7 +19,9 @@ export default class SessionWindow extends React.Component {
       remindInDate: 0,
       customGoals: [],
       newSkillList: [],
-      newResp: []
+      yResp: [],
+      nResp: [],
+      lvl: ""
     };
 
   }
@@ -33,12 +35,28 @@ export default class SessionWindow extends React.Component {
   };
 
   pushResp = (newArr) => {
-    var resp = this.state.newResp;
+    var resp = this.state.yResp;
+    resp = [];
     resp.push(newArr);
     this.setState({
-      newResp: resp
+      yResp: resp
     });
-    // alert(this.state.newResp)
+    // alert(this.state.yResp)
+  }
+  pushResp1 = (newArr) => {
+    var resp = this.state.nResp;
+    resp = [];
+    resp.push(newArr);
+    this.setState({
+      nResp: resp
+    });
+    // alert(this.state.nResp)
+  }
+  pushLvl = (level) => {
+    this.setState({
+      lvl: level
+    });
+    // alert(this.state.lvl)
   }
 
   render() {
@@ -52,7 +70,9 @@ export default class SessionWindow extends React.Component {
           {/* Calls each of the pages needed for a session */}
           <div className="Carousel_Item">
             <Responsibilities
-            pushResp={this.pushResp} />
+            pushResp={this.pushResp}
+            pushResp1={this.pushResp1}
+            pushLvl={this.pushLvl} />
           </div>
           <div className="Carousel_Item">
             <SkillList />
