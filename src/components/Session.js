@@ -2,6 +2,8 @@ import React from "react";
 import NavBar from "./NavBar";
 import SessionWindow from "./SessionWindow";
 
+import "./css/Session.css"
+
 /*
   The Parent file from which all files required to make a review are called.
   Communication between NavBar.js and SessionWindow.js occurs here
@@ -48,8 +50,11 @@ export default class Session extends React.Component {
   render() {
     return (
       <div>
+        <div className="Session-Header">
+          SFIA Development
+        </div>
         {/* HandlePageChange is the Output from NavBar */}
-        <NavBar handlePageChange={this.handlePageChange} />
+        <NavBar handlePageChange={this.handlePageChange} Carousel_Page={this.state.Carousel_Page}/>
         {/* Carousel_Page is the page that should appear in the session */}
         <SessionWindow Carousel_Page={this.state.Carousel_Page} />
       </div>
