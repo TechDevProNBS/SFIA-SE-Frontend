@@ -21,7 +21,7 @@ export default class Responsibilities extends React.Component {
    * Gets the responsibilities from the database and sets it in the state
    */
   getResp = () => {
-    fetch(`http://localhost:8084/API/showResponsibilities`)
+    fetch(`http://localhost:3500/API/showResponsibilities`)
       .then(response => response.json())
       .then(responsibility_info => this.setState({ resp: responsibility_info }))
   }
@@ -30,7 +30,7 @@ export default class Responsibilities extends React.Component {
    * Calls the getResp function 
    */
   componentDidMount = () => {
-    // this.getResp();
+    this.getResp();
   }
 
   /**
