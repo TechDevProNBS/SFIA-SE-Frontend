@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./css/NavBar.css";
+
 /*
     Lists the Pages in a session
     When a button is clicked the name of the page is sent to props (in Session.js)
@@ -31,43 +33,82 @@ export default class NavBar extends React.Component {
   };
 
   render() {
+    var progressBarStyle = {
+      width: (this.props.Carousel_Page / 3) * 100 + "%"
+    };
+
+    var activeButton = "btn btn-outline-primary active";
+    var nonActiveButton = "btn btn-outline-primary";
+
+    var buttonPages = [
+      nonActiveButton,
+      nonActiveButton,
+      nonActiveButton,
+      nonActiveButton
+    ];
+
+    buttonPages[this.props.Carousel_Page] = activeButton;
     return (
-      <div>
-        {/* Responsibilities button */}
-        <button
-          type="button"
-          class="btn btn-outline-primary"
-          onClick={this.toResponsibilities}
-        >
-          Responsibilities
-        </button>
+      <div className="NavBar-Container">
+        <div className="Progress-Bar">
+          <div
+            className="Progress-Bar-Completed"
+            style={progressBarStyle}
+          ></div>
+        </div>
+        <div className="Buttons-Container">
+          {/* Responsibilities button */}
+          <div className="Button">
+            <button
+              type="button"
+              class={buttonPages[0]}
+              onClick={this.toResponsibilities}
+              style={this.responsibilitiesButton}
+            >
+              &nbsp;&nbsp;&nbsp;
+            </button>
+            <div>Responsibilities</div>
+          </div>
 
-        {/* SkillList button */}
-        <button
-          type="button"
-          class="btn btn-outline-primary"
-          onClick={this.toSkillList}
-        >
-          Skill List
-        </button>
+          {/* SkillList button */}
 
-        {/* SkillLevels button */}
-        <button
-          type="button"
-          class="btn btn-outline-primary"
-          onClick={this.toSkillLevels}
-        >
-          Skill Levels
-        </button>
+          <div className="Button">
+            <button
+              type="button"
+              class={buttonPages[1]}
+              onClick={this.toSkillList}
+            >
+              &nbsp;&nbsp;&nbsp;
+            </button>
+            <div>Skill List</div>
+          </div>
 
-        {/* SkillReviewPage button */}
-        <button
-          type="button"
-          class="btn btn-outline-primary"
-          onClick={this.toSkillReviewPage}
-        >
-          Review_Page
-        </button>
+          {/* SkillLevels button */}
+
+          <div className="Button">
+            <button
+              type="button"
+              class={buttonPages[2]}
+              onClick={this.toSkillLevels}
+            >
+              &nbsp;&nbsp;&nbsp;
+            </button>
+            <div>Skill Levels</div>
+          </div>
+
+          {/* SkillReviewPage button */}
+
+          <div className="Button">
+            <button
+              type="button"
+              class={buttonPages[3]}
+              onClick={this.toSkillReviewPage}
+            >
+              &nbsp;&nbsp;&nbsp;
+            </button>
+            <div>Review_Page</div>
+          </div>
+        </div>
       </div>
     );
   }
