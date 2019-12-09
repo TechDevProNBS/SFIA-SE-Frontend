@@ -54,7 +54,7 @@ export default class Session extends React.Component {
           SFIA Development
         </div>
         {/* HandlePageChange is the Output from NavBar */}
-        <NavBar handlePageChange={this.handlePageChange} />
+        <NavBar handlePageChange={this.handlePageChange} Carousel_Page={this.state.Carousel_Page}/>
         {/* Carousel_Page is the page that should appear in the session */}
         <SessionWindow Carousel_Page={this.state.Carousel_Page} />
       </div>
