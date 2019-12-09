@@ -2,6 +2,7 @@ import React from "react";
 import NavBar from "./NavBar";
 import SessionWindow from "./SessionWindow";
 
+
 /*
   The Parent file from which all files required to make a review are called.
   Communication between NavBar.js and SessionWindow.js occurs here
@@ -45,13 +46,18 @@ export default class Session extends React.Component {
     return event;
   };
 
+
   render() {
     return (
       <div>
         {/* HandlePageChange is the Output from NavBar */}
         <NavBar handlePageChange={this.handlePageChange} />
         {/* Carousel_Page is the page that should appear in the session */}
-        <SessionWindow Carousel_Page={this.state.Carousel_Page} />
+        <SessionWindow 
+        Carousel_Page={this.state.Carousel_Page} 
+        handlePageChange={this.handlePageChange} />
+       
+        {/* skillLeve is the page that should appear in the session */}
       </div>
     );
   }

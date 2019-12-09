@@ -14,6 +14,7 @@ export default class SkillList extends React.Component {
             array: []
         }
     }
+    //This pulls the data from the database and puts it into "records"
     getSkills = () => {
         fetch(`http://localhost:4500/API/showSkillList`)
           .then(response => response.json())
@@ -25,7 +26,9 @@ export default class SkillList extends React.Component {
     //calls the handleForm function on session window
     handleForm() {
         var newArray = this.state.array
+        
         this.props.handleForm(newArray)
+        this.props.handlePageChange("SkillLevels")
       };
     //creates an array and also deletes entries if needed
 

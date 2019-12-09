@@ -68,7 +68,8 @@ export default class SessionWindow extends React.Component {
           </div>
           <div className="Carousel_Item">
             <SkillList
-            handleForm={this.handleForm} />
+            handleForm={this.handleForm}
+            handlePageChange={this.props.handlePageChange}/>
           </div>
           <div className="Carousel_Item">
             <SkillLevel />
