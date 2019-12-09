@@ -175,6 +175,12 @@ export default class Responsibilities extends React.Component {
    * Gets level based on which column select boxes are enabled
    * Calls addArr function passing current level
    */
+
+  handleOnClick = () => {
+    this.getLvl();
+    this.nextPage();
+  }
+
   getLvl = () => {
     var span = document.getElementsByTagName("span");
     var lvl = this.state.lvl;
@@ -211,6 +217,10 @@ export default class Responsibilities extends React.Component {
         this.addArr(lvl);
         break;
     }
+  }
+
+  nextPage = () => {
+    this.props.handlePageChange("SkillList")
   }
 
   /**
@@ -306,7 +316,7 @@ export default class Responsibilities extends React.Component {
             </tbody>
           </table>
         </div><br />
-        <button name="skillList" onClick={() => this.getLvl()}>Skill List Selection</button>
+        <button name="skillList" onClick={() => this.handleOnClick()}>Skill List Selection</button>
       </Container>
     );
   }

@@ -6,7 +6,7 @@ import ReviewPage from "./ReviewPage";
 
 import "./css/SessionWindow.css";
 
-/*
+/*  
   Calls all pages used during a session and determines
   which to display based on this.props.Carousel_Page
   inputed from Session.js
@@ -21,17 +21,21 @@ export default class SessionWindow extends React.Component {
       newSkillList: [],
       yResp: [],
       nResp: [],
-      lvl: ""
+      lvl: "",
+      selectedSkill: []
     };
 
   }
   //Enters the new array from skill list page into this.state
   handleForm = newArray => {
     var skillList = this.state.newSkillList;
-    skillList.push(newArray, 1);
+    // skillList = []
+    skillList.push(newArray);
+    var uniqueSL = Array.from(new Set(skillList));
     this.setState({
-      newSkillList: skillList
+      newSkillList: uniqueSL
     });
+    this.getList();
   };
   // Deletes a Custom Goal, called from ReviewPage.js
   deleteCustomGoal = input => {
@@ -66,7 +70,6 @@ export default class SessionWindow extends React.Component {
     this.setState({
       yResp: resp
     });
-    // alert(this.state.yResp)
   }
   pushResp1 = (newArr) => {
     var resp = this.state.nResp;
@@ -75,13 +78,23 @@ export default class SessionWindow extends React.Component {
     this.setState({
       nResp: resp
     });
-    // alert(this.state.nResp)
   }
   pushLvl = (level) => {
     this.setState({
       lvl: level
     });
-    // alert(this.state.lvl)
+  }
+
+  getList = () =>{
+    console.log(`http://localhost:5500/API/showSkillLevelIn?skill_name=${this.state.newSkillList}`)
+    fetch(`http://localhost:5500/API/showSkillLevelIn?skill_name=${this.state.newSkillList}`)
+      .then(response => response.json(),)
+      .then(skillname => this.setState({ selectedSkill: skillname }))
+      console.log(this.state.selectedSkill)
+  }
+
+  getSelect = () => {
+    
   }
 
   render() {
@@ -95,16 +108,24 @@ export default class SessionWindow extends React.Component {
           {/* Calls each of the pages needed for a session */}
           <div className="Carousel_Item">
             <Responsibilities
+            handlePageChange={this.props.handlePageChange}
             pushResp={this.pushResp}
             pushResp1={this.pushResp1}
             pushLvl={this.pushLvl} />
           </div>
           <div className="Carousel_Item">
             <SkillList
-            handleForm={this.handleForm} />
+            handleForm={this.handleForm}
+            handlePageChange={this.props.handlePageChange}
+            getList={this.getList}
+             />
           </div>
           <div className="Carousel_Item">
-            <SkillLevel />
+            <SkillLevel 
+            newSkillList={this.state.newSkillList}
+            level={this.state.lvl}
+            selectedSkill={this.state.selectedSkill}
+            />
           </div>
           <div className="Carousel_Item">
             {/* 

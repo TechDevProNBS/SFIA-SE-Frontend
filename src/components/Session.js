@@ -10,8 +10,10 @@ import "./css/Session.css"
 */
 export default class Session extends React.Component {
   state = {
-    Carousel_Page: 0
+    Carousel_Page: 0,
+    skill_name: []
   };
+
 
   // HandlePageChange is called when a button in pressed in NavBar.js.
   // Event is the output returned by NavBar
@@ -32,6 +34,7 @@ export default class Session extends React.Component {
 
     // Assignes the word "SkillLevels" to the first page inside SessionWindow.js
     else if (event == "SkillLevels") {
+
       this.setState({
         Carousel_Page: 2
       });
@@ -47,6 +50,13 @@ export default class Session extends React.Component {
     return event;
   };
 
+  getList = () => {
+    console.log("here")
+    fetch(`http://localhost:5500/API/showSkillLevelIn?skill_name=${this.props.newSkillList}`)
+      .then(response => response.json())
+      .then(skillname => this.setState({ skill_name: skillname }))
+  }
+
   render() {
     return (
       <div>
@@ -54,9 +64,11 @@ export default class Session extends React.Component {
           SFIA Development
         </div>
         {/* HandlePageChange is the Output from NavBar */}
-        <NavBar handlePageChange={this.handlePageChange} Carousel_Page={this.state.Carousel_Page}/>
+        <NavBar handlePageChange={this.handlePageChange} Carousel_Page={this.state.Carousel_Page} />
         {/* Carousel_Page is the page that should appear in the session */}
-        <SessionWindow Carousel_Page={this.state.Carousel_Page} />
+        <SessionWindow Carousel_Page={this.state.Carousel_Page}
+          handlePageChange={this.handlePageChange}
+        />
       </div>
     );
   }
