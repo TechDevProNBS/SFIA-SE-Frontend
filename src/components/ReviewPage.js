@@ -117,102 +117,165 @@ export default class ReviewPage extends React.Component {
         <br></br>
         <br></br>
         <br></br>
-        <div className="Centre-Bordered-Section">
-          <div className="Bordered-Section">
-            <h4>
-              {/* class="font-weight-bold" style={{ fontSize: 20 }} */}
-              <p className="subHeader">Areas you are doing well in:</p>
-            </h4>
-            <Table
-              style={{ fontSize: 18 }}
-              className="ReviewPage-Table"
-              striped
-              bordered
-              hover
-            >
-              <tbody>
-                <tr>
-                  <td>
-                    <span
-                      class="glyphicon glyphicon-ok"
-                      style={{ color: "green" }}
-                    ></span>
-                  </td>
-                  <td>
-                    <span>x)</span>
-                  </td>
-                  <td>Sample text sample text sample text</td>
-                </tr>
-                <tr>
-                  <td>
-                    <span
-                      class="glyphicon glyphicon-ok"
-                      style={{ color: "green" }}
-                    ></span>
-                  </td>
-                  <td>
-                    <span>y)</span>
-                  </td>
-                  <td>Sample text sample text sample text</td>
-                </tr>
-              </tbody>
-            </Table>
+        <div className="did-well-improve-section">
+          <div className="Centre-Bordered-Section">
+            <div className="Bordered-Section">
+              <h4 className="subHeader">Responsibilities</h4>
+              <div className="border-line"></div>
+              <h4>
+                <p className="subHeader">Areas you are doing well in:</p>
+              </h4>
+              <Table
+                style={{ fontSize: 18 }}
+                className="ReviewPage-Table"
+                striped
+                bordered
+                hover
+              >
+                <tbody>
+                  <tr>
+                    <td>
+                      <span
+                        class="glyphicon glyphicon-ok"
+                        style={{ color: "green" }}
+                      ></span>
+                    </td>
+                    <td>Sample text sample text sample text</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span
+                        class="glyphicon glyphicon-ok"
+                        style={{ color: "green" }}
+                      ></span>
+                    </td>
+                    <td>Sample text sample text sample text</td>
+                  </tr>
+                </tbody>
+              </Table>
+              <div className="border-line"></div>
+              <h4>
+                <p className="subHeader">Areas you need to improve:</p>
+              </h4>
+              <Table
+                style={{ fontSize: 18 }}
+                className="ReviewPage-Table"
+                striped
+                bordered
+                hover
+              >
+                <tbody>
+                  <tr>
+                    <td>
+                      <span
+                        class="glyphicon glyphicon-remove"
+                        style={{ color: "red" }}
+                      ></span>
+                    </td>
+                    <td>Sample text sample text sample text</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span
+                        class="glyphicon glyphicon-remove"
+                        style={{ color: "red" }}
+                      ></span>
+                    </td>
+                    <td>Sample text sample text sample text</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span
+                        class="glyphicon glyphicon-remove"
+                        style={{ color: "red" }}
+                      ></span>
+                    </td>
+                    <td>Sample text sample text sample text</td>
+                  </tr>
+                </tbody>
+              </Table>
+            </div>
+          </div>
+          <div className="Centre-Bordered-Section">
+            <div className="Bordered-Section">
+            <h4 className="subHeader">Skill Levels</h4>
+              <div className="border-line"></div>
+              <h4>
+                <p className="subHeader">Areas you are doing well in:</p>
+              </h4>
+              <Table
+                style={{ fontSize: 18 }}
+                className="ReviewPage-Table"
+                striped
+                bordered
+                hover
+              >
+                <tbody>
+                  <tr>
+                    <td>
+                      <span
+                        class="glyphicon glyphicon-ok"
+                        style={{ color: "green" }}
+                      ></span>
+                    </td>
+                    <td>Sample text sample text sample text</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span
+                        class="glyphicon glyphicon-ok"
+                        style={{ color: "green" }}
+                      ></span>
+                    </td>
+                    <td>Sample text sample text sample text</td>
+                  </tr>
+                </tbody>
+              </Table>
+              <div className="border-line"></div>
+              <h4>
+                <p className="subHeader">Areas you need to improve:</p>
+              </h4>
+              <Table
+                style={{ fontSize: 18 }}
+                className="ReviewPage-Table"
+                striped
+                bordered
+                hover
+              >
+                <tbody>
+                  <tr>
+                    <td>
+                      <span
+                        class="glyphicon glyphicon-remove"
+                        style={{ color: "red" }}
+                      ></span>
+                    </td>
+                    <td>Sample text sample text sample text</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span
+                        class="glyphicon glyphicon-remove"
+                        style={{ color: "red" }}
+                      ></span>
+                    </td>
+                    <td>Sample text sample text sample text</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span
+                        class="glyphicon glyphicon-remove"
+                        style={{ color: "red" }}
+                      ></span>
+                    </td>
+                    <td>Sample text sample text sample text</td>
+                  </tr>
+                </tbody>
+              </Table>
+            </div>
           </div>
         </div>
 
-        <div className="Centre-Bordered-Section">
-          <div className="Bordered-Section">
-            <h4>
-              <p className="subHeader">Areas you need to improve:</p>
-            </h4>
-            <Table
-              style={{ fontSize: 18 }}
-              className="ReviewPage-Table"
-              striped
-              bordered
-              hover
-            >
-              <tbody>
-                <tr>
-                  <td>
-                    <span
-                      class="glyphicon glyphicon-remove"
-                      style={{ color: "red" }}
-                    ></span>
-                  </td>
-                  <td>
-                    <span>D)</span>
-                  </td>
-                  <td>Sample text sample text sample text</td>
-                </tr>
-                <tr>
-                  <td>
-                    <span
-                      class="glyphicon glyphicon-remove"
-                      style={{ color: "red" }}
-                    ></span>
-                  </td>
-                  <td>
-                    <span>G)</span>
-                  </td>
-                  <td>Sample text sample text sample text</td>
-                </tr>
-                <tr>
-                  <td>
-                    <span
-                      class="glyphicon glyphicon-remove"
-                      style={{ color: "red" }}
-                    ></span>
-                  </td>
-                  <td>
-                    <span>Z)</span>
-                  </td>
-                  <td>Sample text sample text sample text</td>
-                </tr>
-              </tbody>
-            </Table>
-          </div>
-        </div>
         <div className="Centre-Bordered-Section">
           <div className="Bordered-Section">
             <h4>
@@ -244,7 +307,6 @@ export default class ReviewPage extends React.Component {
             </Form>
 
             {/* Maps all custom goals information here */}
-            {/* style={{ fontSize: 18 }} */}
             <Table
               style={{ fontSize: 18 }}
               className="ReviewPage-Table"
@@ -261,14 +323,15 @@ export default class ReviewPage extends React.Component {
                       <td style={{ width: "24px" }}>
                         <input type="checkbox" label={label} />
                       </td>
-                      {/* The Id of the customGoal*/}
-                      <td style={{ width: "24px" }}>{input}</td>
                       <td>
-                        {/* Custom GOal Content */}
+                        {/* Custom Goal Content */}
                         <div>{label}</div>
                       </td>
                       {/* The Delete Button */}
-                      <td style={{ width: "24px" }} className="deleteButtonCell">
+                      <td
+                        style={{ width: "24px" }}
+                        className="deleteButtonCell"
+                      >
                         <button
                           id={input}
                           onClick={() => this.deleteCustomGoal(input)}

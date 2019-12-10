@@ -16,7 +16,7 @@ export default class Home extends React.Component {
             <Router>
                 <Route exact path={"/page1"} component={Page1}></Route>
                 <Route exact path={"/session"} component={Session}></Route>
-                <Route exact path={"/review"} component={Review}></Route>
+                <Route exact path={"/review/:id"} component={Review}></Route>
             </Router>
         </div>
     );

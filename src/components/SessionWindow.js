@@ -33,7 +33,7 @@ export default class SessionWindow extends React.Component {
   //Enters the new array from skill list page into this.state
   handleForm = newArray => {
     var skillList = this.state.newSkillList;
-    // skillList = []
+    skillList = []
     skillList.push(newArray);
     var uniqueSL = Array.from(new Set(skillList));
     this.setState({

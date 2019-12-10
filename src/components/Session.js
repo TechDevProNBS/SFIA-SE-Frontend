@@ -49,6 +49,7 @@ export default class Session extends React.Component {
     return event;
   };
 
+
   render() {
     return (
       <div>
@@ -58,9 +59,11 @@ export default class Session extends React.Component {
         {/* HandlePageChange is the Output from NavBar */}
         <NavBar handlePageChange={this.handlePageChange} Carousel_Page={this.state.Carousel_Page} />
         {/* Carousel_Page is the page that should appear in the session */}
-        <SessionWindow Carousel_Page={this.state.Carousel_Page}
-          handlePageChange={this.handlePageChange}
-        />
+        <SessionWindow 
+        Carousel_Page={this.state.Carousel_Page} 
+        handlePageChange={this.handlePageChange} />
+       
+        {/* skillLevel is the page that should appear in the session */}
       </div>
     );
   }

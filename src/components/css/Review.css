@@ -29,11 +29,6 @@
     width: 100%
 }
 
-.ReviewPage-Table {
-    /* width: 40% !important; */
-    /* font-size: 40px !important; */
-}
-
 /* Css for the delete button */
 .deleteButtonCell {
     position: relative;
@@ -42,11 +37,8 @@
 }
 
 .Bordered-Section {
-    /* display: flex; */
-    /* text-align: center; */
     border-style: solid;
     border-color: black;
-    /* padding: 2%; */
     margin: 2%;
     width: fit-content;
 }
@@ -73,14 +65,4 @@
 /* css for words on either side of the slider */
 .sliderwords {
     padding: 1%;
-}
-
-.did-well-improve-section{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.border-line {
-    border-top: 4px solid black;
 }
