@@ -35,7 +35,9 @@ export default class ReviewPage extends React.Component {
         "10 Months",
         "11 Months",
         "1 Year"
-      ]
+      ],
+      skillLevelYesArr: [],
+      skillLevelNoArr: []
     };
   }
 
@@ -103,8 +105,12 @@ export default class ReviewPage extends React.Component {
         <h2>
           <center>
             <p class="font-weight-bold" style={{ fontSize: 26 }}>
-              <u>YOU ARE SFIA LEVEL X</u>
+              <u>YOU ARE SFIA LEVEL {this.props.level}</u>
             </p>
+            <p>{this.props.yesResp}</p>
+            <p>{this.props.noResp}</p>
+            <p>{this.props.yesSkillList}</p>
+            <p>{this.props.noSkillList}</p>
           </center>
         </h2>
 
@@ -252,17 +258,17 @@ export default class ReviewPage extends React.Component {
                   return (
                     <tr>
                       {/* The Checkbox */}
-                      <td style={{width: "24px"}}>
+                      <td style={{ width: "24px" }}>
                         <input type="checkbox" label={label} />
                       </td>
                       {/* The Id of the customGoal*/}
-                      <td style={{width: "24px"}}>{input}</td>
+                      <td style={{ width: "24px" }}>{input}</td>
                       <td>
                         {/* Custom GOal Content */}
                         <div>{label}</div>
                       </td>
                       {/* The Delete Button */}
-                      <td style={{width: "24px"}} className="deleteButtonCell">
+                      <td style={{ width: "24px" }} className="deleteButtonCell">
                         <button
                           id={input}
                           onClick={() => this.deleteCustomGoal(input)}

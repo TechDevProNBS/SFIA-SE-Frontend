@@ -10,10 +10,10 @@ div.lvls{
 .headcol {
     position: absolute;
     width: 5em;
-    left: 0;
+    left: 2%;
     top: auto;
     border-top-width: 1px;
-    margin-top: -1px;
+    margin-top: -2px;
 }
 
    /* th:nth-child(3), th:nth-child(4), th:nth-child(5), th:nth-child(6), th:nth-child(7), th:nth-child(8){

@@ -155,10 +155,10 @@ export default class Responsibilities extends React.Component {
     }
   }
 
-   /**
-   * Gets the select boxes for the column from the input param
-   * Disables all boxes in the column and sets to default value
-   */
+  /**
+  * Gets the select boxes for the column from the input param
+  * Disables all boxes in the column and sets to default value
+  */
   disableSelect = (input) => {
     var span = document.getElementsByName(input);
     var arr = Array.from(span);
@@ -236,6 +236,7 @@ export default class Responsibilities extends React.Component {
     var prevArr = Array.from(prevLvl);
     var yArr = [];
     var nArr = [];
+    console.log(lvl);
     if (lvl == 0) {
       for (var i = 0; i < curArr.length; i++) {
         if (curArr[i].firstElementChild.value === "true") {
@@ -269,6 +270,8 @@ export default class Responsibilities extends React.Component {
     var lvl = this.state.lvl;
     var newYArray = this.state.respYesArr;
     var newNArray = this.state.respNoArr;
+    console.log(newYArray)
+    console.log(newNArray)
     this.props.pushResp(newYArray);
     this.props.pushResp1(newNArray);
     this.props.pushLvl(lvl)
@@ -299,13 +302,11 @@ export default class Responsibilities extends React.Component {
                     <td>
                       {desc.responsibility_criteria.map((desc2, index2) => (
                         <span name={index}>
-                          {/* click box */}
                           <select id={index2} disabled={this.state.disable} onChange={() => this.selectCount(index)}>
                             <option selected>{this.state.lblDefault}</option>
                             <option value="true">{this.state.lblYes}</option>
                             <option value="false">{this.state.lblNo}</option>
                           </select>
-                          {/* end click box */}
                           <p id="info">{desc2.responsibility_criterion}</p>
                         </span>
                       ))}

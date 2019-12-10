@@ -10,8 +10,7 @@ import "./css/Session.css"
 */
 export default class Session extends React.Component {
   state = {
-    Carousel_Page: 0,
-    skill_name: []
+    Carousel_Page: 0
   };
 
 
@@ -49,13 +48,6 @@ export default class Session extends React.Component {
 
     return event;
   };
-
-  getList = () => {
-    console.log("here")
-    fetch(`http://localhost:5500/API/showSkillLevelIn?skill_name=${this.props.newSkillList}`)
-      .then(response => response.json())
-      .then(skillname => this.setState({ skill_name: skillname }))
-  }
 
   render() {
     return (

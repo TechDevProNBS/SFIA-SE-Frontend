@@ -21,8 +21,12 @@ export default class SessionWindow extends React.Component {
       newSkillList: [],
       yResp: [],
       nResp: [],
+      yesSkillList: [],
+      noSkillList: [],
       lvl: "",
-      selectedSkill: []
+      Carousel_Page: "",
+      selectedSkill: [],
+      refreshSkillLevel: false
     };
 
   }
@@ -33,7 +37,9 @@ export default class SessionWindow extends React.Component {
     skillList.push(newArray);
     var uniqueSL = Array.from(new Set(skillList));
     this.setState({
-      newSkillList: uniqueSL
+      newSkillList: uniqueSL,
+      refreshSkillLevel: true,
+      Carousel_Page: 2
     });
     this.getList();
   };
@@ -55,6 +61,12 @@ export default class SessionWindow extends React.Component {
     });
   };
 
+  skillLevelRefreshed = () => {
+    this.setState({
+      refreshSkillLevel: false
+    })
+  }
+
 
   // Updated remindInDate to the value of the slider
   updateRemindInDate = event => {
@@ -71,6 +83,7 @@ export default class SessionWindow extends React.Component {
       yResp: resp
     });
   }
+
   pushResp1 = (newArr) => {
     var resp = this.state.nResp;
     resp = [];
@@ -79,23 +92,37 @@ export default class SessionWindow extends React.Component {
       nResp: resp
     });
   }
+
   pushLvl = (level) => {
     this.setState({
       lvl: level
     });
   }
 
-  getList = () =>{
-    console.log(`http://localhost:5500/API/showSkillLevelIn?skill_name=${this.state.newSkillList}`)
-    fetch(`http://localhost:5500/API/showSkillLevelIn?skill_name=${this.state.newSkillList}`)
-      .then(response => response.json(),)
-      .then(skillname => this.setState({ selectedSkill: skillname }))
-      console.log(this.state.selectedSkill)
+  pushYesSL = (newArr) => {
+    var skillLevel = this.state.yesSkillList;
+    skillLevel = [];
+    skillLevel.push(newArr);
+    this.setState({
+      yesSkillList: skillLevel
+    });
   }
 
-  getSelect = () => {
-    
+  pushNoSL = (newArr) => {
+    var skillLevel = this.state.noSkillList;
+    skillLevel = [];
+    skillLevel.push(newArr);
+    this.setState({
+      noSkillList: skillLevel
+    });
   }
+
+  getList = () => {
+    fetch(`http://localhost:5500/API/showSkillLevelIn?skill_name=${this.state.newSkillList}`)
+      .then(response => response.json())
+      .then(skillname => this.setState({ selectedSkill: skillname }))
+  }
+
 
   render() {
     // edits Carousel_Style to display the page decieded by Session.js
@@ -108,23 +135,29 @@ export default class SessionWindow extends React.Component {
           {/* Calls each of the pages needed for a session */}
           <div className="Carousel_Item">
             <Responsibilities
-            handlePageChange={this.props.handlePageChange}
-            pushResp={this.pushResp}
-            pushResp1={this.pushResp1}
-            pushLvl={this.pushLvl} />
+              handlePageChange={this.props.handlePageChange}
+              pushResp={this.pushResp}
+              pushResp1={this.pushResp1}
+              pushLvl={this.pushLvl} />
           </div>
           <div className="Carousel_Item">
             <SkillList
-            handleForm={this.handleForm}
-            handlePageChange={this.props.handlePageChange}
-            getList={this.getList}
-             />
+              handleForm={this.handleForm}
+              handlePageChange={this.props.handlePageChange}
+              getList={this.getList}
+            />
           </div>
           <div className="Carousel_Item">
-            <SkillLevel 
-            newSkillList={this.state.newSkillList}
-            level={this.state.lvl}
-            selectedSkill={this.state.selectedSkill}
+            <SkillLevel
+              newSkillList={this.state.newSkillList}
+              level={this.state.lvl}
+              selectedSkill={this.state.selectedSkill}
+              refreshSkillLevel={this.state.refreshSkillLevel}
+              Carousel_Page={this.state.Carousel_Page}
+              skillLevelRefreshed={this.skillLevelRefreshed}
+              pushYesSL={this.pushYesSL}
+              pushNoSL={this.pushNoSL}
+              handlePageChange={this.props.handlePageChange}
             />
           </div>
           <div className="Carousel_Item">
@@ -138,6 +171,11 @@ export default class SessionWindow extends React.Component {
               deleteCustomGoal={this.deleteCustomGoal}
               addCustomGoal={this.addCustomGoal}
               customGoals={this.state.customGoals}
+              yesResp={this.state.yResp}
+              noResp={this.state.nResp}
+              level={this.state.lvl}
+              yesSkillList={this.state.yesSkillList}
+              noSkillList={this.state.noSkillList}
             />
           </div>
         </div>
