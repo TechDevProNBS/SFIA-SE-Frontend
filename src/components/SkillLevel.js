@@ -1,8 +1,6 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import './css/Responsibilities.css'
-import { array } from 'prop-types';
-import SkillList from './SkillList';
 
 export default class SkillLevel extends React.Component {
 
@@ -19,107 +17,122 @@ export default class SkillLevel extends React.Component {
     }
   }
 
+  componentDidUpdate = () => {
+    this.skillLevelStart()
+  }
+
+  skillLevelStart = () => {
+    var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
+    var startLvl = Array.from(carousel)
+    var select = startLvl[2].getElementsByClassName("slData")
+    for (var i = 0; i < select.length; i++) {
+      var name = select[i].firstElementChild.getAttribute("name")
+      if (parseInt(name) == parseInt(this.props.level)) {
+        var span = select[i].getElementsByTagName("span")
+        for (var j = 0; j < span.length; j++) {
+          span[j].firstElementChild.disabled = false;
+        }
+      }
+    }
+  }
+
   /**
  * Calculates the percentage of true and false select boxes for each column 
  * Then calls the enable function if greater than 2/3
  * Calls disable function if less
  */
   selectCount = (index) => {
-    var tab = document.getElementById("list1");
-    var row = tab.rows.length;
-    var tr, td;
-    var count = 0;
-    var per = 0;
-    var total = 0;
-    for (var i = 0; i < row; i++) {
-      tr = tab.rows[i];
-      td = tr.cells[index];
-      if (td !== undefined) {
-        var a = td.getElementsByTagName("span");
-        var b = td.getElementsByTagName("p");
-        for (var j = 0; j < a.length; j++) {
-          if (a[j].firstElementChild.value === "true") {
-            count++;
-          }
-          total++;
-        }
+    var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
+    var select = Array.from(carousel[2].querySelectorAll("[name=" + "'" + index + "'" + "]"))
+    var count = 0, per = 0, total = 0;
+
+    for (var i = 0; i < select.length; i++) {
+      if (select[i].firstElementChild.value === "true") {
+        count++;
+      }
+      total++;
+    }
+
+    var noOfSelect = 0;
+    for (var j = 0; j < select.length; j++) {
+      if (select[j].firstElementChild.value !== "true" && select[j].firstElementChild.value !== "false") {
+        noOfSelect++;
       }
     }
     per = ((count / total) * 100).toFixed(2);
-    if (per > ((2 / 3) * 100)) {
-      switch (index) {
-        case 0:
-          this.enableSelect(1);
-          break;
-        case 1:
-          this.enableSelect(2);
-          break;
-        case 2:
-          this.enableSelect(3);
-          break;
-        case 3:
-          this.enableSelect(4);
-          break;
-        case 4:
-          this.enableSelect(5);
-          break;
-        case 5:
-          this.enableSelect(6);
-          break;
-      }
-    } else {
-      switch (index) {
-        case 0:
-          if (per < ((2 / 3) * 100)) {
-            this.disableSelect(1);
-            this.disableSelect(2);
-            this.disableSelect(3);
-            this.disableSelect(4);
-            this.disableSelect(5);
-            this.disableSelect(6);
-          }
-          break;
-        case 1:
-          if (per < ((2 / 3) * 100)) {
-            this.disableSelect(2);
-            this.disableSelect(3);
-            this.disableSelect(4);
-            this.disableSelect(5);
-            this.disableSelect(6);
-          }
-          break;
-        case 2:
-          if (per < ((2 / 3) * 100)) {
-            this.disableSelect(3);
-            this.disableSelect(4);
-            this.disableSelect(5);
-            this.disableSelect(6);
-          }
-          break;
-        case 3:
-          if (per < ((2 / 3) * 100)) {
-            this.disableSelect(4);
-            this.disableSelect(5);
-            this.disableSelect(6);
-          }
-          break;
-        case 4:
-          if (per < ((2 / 3) * 100)) {
-            this.disableSelect(5);
-            this.disableSelect(6);
-          }
-          break;
-        case 5:
-          if (per < ((2 / 3) * 100)) {
-            this.disableSelect(6);
-          }
-          break;
+    if (noOfSelect === 0) {
+      if (per > ((2 / 3) * 100)) {
+        switch (index) {
+          case 0:
+            this.enableSelect(1);
+            break;
+          case 1:
+            this.enableSelect(2);
+            break;
+          case 2:
+            this.enableSelect(3);
+            break;
+          case 3:
+            this.enableSelect(4);
+            break;
+          case 4:
+            this.enableSelect(5);
+            break;
+          case 5:
+            this.enableSelect(6);
+            break;
+        }
+      } else {
+        switch (index) {
+          case 0:
+            if (per < ((2 / 3) * 100)) {
+              this.disableSelect(1);
+              this.disableSelect(2);
+              this.disableSelect(3);
+              this.disableSelect(4);
+              this.disableSelect(5);
+              this.disableSelect(6);
+            }
+            break;
+          case 1:
+            if (per < ((2 / 3) * 100)) {
+              this.disableSelect(2);
+              this.disableSelect(3);
+              this.disableSelect(4);
+              this.disableSelect(5);
+              this.disableSelect(6);
+            }
+            break;
+          case 2:
+            if (per < ((2 / 3) * 100)) {
+              this.disableSelect(3);
+              this.disableSelect(4);
+              this.disableSelect(5);
+              this.disableSelect(6);
+            }
+            break;
+          case 3:
+            if (per < ((2 / 3) * 100)) {
+              this.disableSelect(4);
+              this.disableSelect(5);
+              this.disableSelect(6);
+            }
+            break;
+          case 4:
+            if (per < ((2 / 3) * 100)) {
+              this.disableSelect(5);
+              this.disableSelect(6);
+            }
+            break;
+          case 5:
+            if (per < ((2 / 3) * 100)) {
+              this.disableSelect(6);
+            }
+            break;
+        }
       }
     }
     switch (index) {
-      case 0:
-        this.addArr(index);
-        break;
       case 1:
         this.addArr(index);
         break;
@@ -138,6 +151,9 @@ export default class SkillLevel extends React.Component {
       case 6:
         this.addArr(index);
         break;
+      case 7:
+        this.addArr(index);
+        break;
     }
   }
 
@@ -146,8 +162,9 @@ export default class SkillLevel extends React.Component {
    * Enables all boxes in the column
    */
   enableSelect = (input) => {
-    var select = document.getElementsByName(input);
-    var arr = Array.from(select);
+    var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
+    var span = Array.from(carousel[2].querySelectorAll("[name=" + "'" + input + "'" + "]"))
+    var arr = Array.from(span);
     for (var i = 0; i < arr.length; i++) {
       arr[i].firstElementChild.disabled = false;
     }
@@ -158,7 +175,8 @@ export default class SkillLevel extends React.Component {
   * Disables all boxes in the column and sets to default value
   */
   disableSelect = (input) => {
-    var span = document.getElementsByName(input);
+    var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
+    var span = Array.from(carousel[2].querySelectorAll("[name=" + "'" + input + "'" + "]"))
     var arr = Array.from(span);
     for (var i = 0; i < arr.length; i++) {
       var select = [arr[i].firstElementChild];
@@ -169,16 +187,40 @@ export default class SkillLevel extends React.Component {
     }
   }
 
- 
+
   addArr = (lvl) => {
-    var prev = lvl-1
+    var prev = lvl - 1;
+    var next = lvl + 1;
     var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
-    var curLvl = Array.from(carousel[2].querySelectorAll("[name="+"'"+lvl+"'"+"]"))
-    var prevLvl = Array.from(carousel[2].querySelectorAll("[name="+"'"+prev+"'"+"]"))
+    var curLvl = Array.from(carousel[2].querySelectorAll("[name=" + "'" + lvl + "'" + "]"))
+    var nextLvl = Array.from(carousel[2].querySelectorAll("[name=" + "'" + next + "'" + "]"))
+    var prevLvl = Array.from(carousel[2].querySelectorAll("[name=" + "'" + prev + "'" + "]"))
     var yArr = [];
     var nArr = [];
-    console.log(lvl);
-    if (lvl == 1) {
+
+    if (nextLvl[0].firstElementChild.disabled == true) {
+      for (var j = 0; j < curLvl.length; j++) {
+        if (curLvl[j].firstElementChild.value === "true") {
+          yArr.push(curLvl[j].lastElementChild.innerHTML);
+        }
+      }
+      for (var k = 0; k < prevLvl.length; k++) {
+        if (prevLvl[k].firstElementChild.value === "false") {
+          nArr.push(prevLvl[k].lastElementChild.innerHTML);
+        }
+      }
+    } else if (nextLvl[0].firstElementChild.disabled == false) {
+      for (var j = 0; j < nextLvl.length; j++) {
+        if (nextLvl[j].firstElementChild.value === "true") {
+          yArr.push(nextLvl[j].lastElementChild.innerHTML);
+        }
+      }
+      for (var k = 0; k < curLvl.length; k++) {
+        if (curLvl[k].firstElementChild.value === "false") {
+          nArr.push(curLvl[k].lastElementChild.innerHTML);
+        }
+      }
+    } else if(nextLvl[0].firstElementChild.disabled == false && prevLvl[0].firstElementChild.disabled == false) {
       for (var i = 0; i < curLvl.length; i++) {
         if (curLvl[i].firstElementChild.value === "true") {
           yArr.push(curLvl[i].lastElementChild.innerHTML);
@@ -186,27 +228,17 @@ export default class SkillLevel extends React.Component {
           nArr.push(curLvl[i].lastElementChild.innerHTML);
         }
       }
-    } else {
-      for (var i = 0; i < curLvl.length; i++) {
-        if (curLvl[i].firstElementChild.value === "true") {
-          yArr.push(curLvl[i].lastElementChild.innerHTML);
-        }
-      }
-      for (var i = 0; i < prevLvl.length; i++) {
-        if (prevLvl[i].firstElementChild.value === "false") {
-          nArr.push(prevLvl[i].lastElementChild.innerHTML);
-        }
-      }
     }
     this.state.SkillYesArr = yArr;
     this.state.SkillNoArr = nArr;
+    this.state.lvl = lvl;
   }
 
   sendSkillList = () => {
     var yesArray = this.state.SkillYesArr;
     var noArray = this.state.SkillNoArr;
-    console.log(yesArray)
-    console.log(noArray)
+    var lvl = this.state.lvl
+    this.props.pushSlLvl(lvl);
     this.props.pushYesSL(yesArray);
     this.props.pushNoSL(noArray);
   }
@@ -247,7 +279,7 @@ export default class SkillLevel extends React.Component {
                   {name.skill_descriptions.map((desc, index) => (
                     <td className="slData">
                       {desc.skill_criteria.map((desc2, index2) => (
-                        <span name={desc.level} className={desc.level}>
+                        <span name={desc.level} className={desc.level} >
                           <select id={index2} disabled={this.state.disable} onChange={() => this.selectCount(desc.level)}>
                             <option selected>{this.state.lblDefault}</option>
                             <option value="true">{this.state.lblYes}</option>

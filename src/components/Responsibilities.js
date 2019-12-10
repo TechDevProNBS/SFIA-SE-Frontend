@@ -6,7 +6,227 @@ export default class Responsibilities extends React.Component {
   constructor() {
     super();
     this.state = {
-      resp: [],
+      resp: [{
+        "responsibility_name": "Autonomy",
+        "responsibility_descriptions": [
+          {
+            "level": 1,
+            "responsibility_criteria": [
+              {
+                "responsibility_criterion": "Works under supervision."
+              },
+              {
+                "responsibility_criterion": "Uses little discretion."
+              },
+              {
+                "responsibility_criterion": "Is expected to seek guidance in unexpected situations."
+              }
+            ]
+          },
+          {
+            "level": 2,
+            "responsibility_criteria": [
+              {
+                "responsibility_criterion": "Works under routine direction."
+              },
+              {
+                "responsibility_criterion": "Uses limited discretion in resolving issues or enquiries."
+              },
+              {
+                "responsibility_criterion": "Works without frequent reference to others."
+              }
+            ]
+          },
+          {
+            "level": 3,
+            "responsibility_criteria": [
+              {
+                "responsibility_criterion": "Works under general direction."
+              },
+              {
+                "responsibility_criterion": "Uses discretion in identifying and responding to complex issues and assignments."
+              },
+              {
+                "responsibility_criterion": "Receives specific direction, accepts guidance and has work reviewed at agreed milestones. Determines when issues should be escalated to a higher level."
+              }
+            ]
+          },
+          {
+            "level": 4,
+            "responsibility_criteria": [
+              {
+                "responsibility_criterion": "Works under general direction within a clear framework of accountability."
+              },
+              {
+                "responsibility_criterion": "Exercises substantial personal responsibility and autonomy."
+              },
+              {
+                "responsibility_criterion": "Plans own work to meet given objectives and processes."
+              }
+            ]
+          },
+          {
+            "level": 4,
+            "responsibility_criteria": [
+              {
+                "responsibility_criterion": "Works under general direction within a clear framework of accountability."
+              },
+              {
+                "responsibility_criterion": "Exercises substantial personal responsibility and autonomy."
+              },
+              {
+                "responsibility_criterion": "Plans own work to meet given objectives and processes."
+              }
+            ]
+          },
+          {
+            "level": 4,
+            "responsibility_criteria": [
+              {
+                "responsibility_criterion": "Works under general direction within a clear framework of accountability."
+              },
+              {
+                "responsibility_criterion": "Exercises substantial personal responsibility and autonomy."
+              },
+              {
+                "responsibility_criterion": "Plans own work to meet given objectives and processes."
+              }
+            ]
+          },
+          {
+            "level": 4,
+            "responsibility_criteria": [
+              {
+                "responsibility_criterion": "Works under general direction within a clear framework of accountability."
+              },
+              {
+                "responsibility_criterion": "Exercises substantial personal responsibility and autonomy."
+              },
+              {
+                "responsibility_criterion": "Plans own work to meet given objectives and processes."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "responsibility_name": "Influence",
+        "responsibility_descriptions": [
+          {
+            "level": 1,
+            "responsibility_criteria": [
+              {
+                "responsibility_criterion": "Minimal influence."
+              },
+              {
+                "responsibility_criterion": "May work alone, or interact with immediate colleagues."
+              }
+            ]
+          },
+          {
+            "level": 2,
+            "responsibility_criteria": [
+              {
+                "responsibility_criterion": "Interacts with and may influence immediate colleagues."
+              },
+              {
+                "responsibility_criterion": "May have some external contact with customers, suppliers and partners."
+              },
+              {
+                "responsibility_criterion": "May have more influence in own domain."
+              },
+              {
+                "responsibility_criterion": "Aware of need to collaborate with team and represent users/customer needs."
+              }
+            ]
+          },
+          {
+            "level": 2,
+            "responsibility_criteria": [
+              {
+                "responsibility_criterion": "Interacts with and may influence immediate colleagues."
+              },
+              {
+                "responsibility_criterion": "May have some external contact with customers, suppliers and partners."
+              },
+              {
+                "responsibility_criterion": "May have more influence in own domain."
+              },
+              {
+                "responsibility_criterion": "Aware of need to collaborate with team and represent users/customer needs."
+              }
+            ]
+          },
+          {
+            "level": 2,
+            "responsibility_criteria": [
+              {
+                "responsibility_criterion": "Interacts with and may influence immediate colleagues."
+              },
+              {
+                "responsibility_criterion": "May have some external contact with customers, suppliers and partners."
+              },
+              {
+                "responsibility_criterion": "May have more influence in own domain."
+              },
+              {
+                "responsibility_criterion": "Aware of need to collaborate with team and represent users/customer needs."
+              }
+            ]
+          },
+          {
+            "level": 2,
+            "responsibility_criteria": [
+              {
+                "responsibility_criterion": "Interacts with and may influence immediate colleagues."
+              },
+              {
+                "responsibility_criterion": "May have some external contact with customers, suppliers and partners."
+              },
+              {
+                "responsibility_criterion": "May have more influence in own domain."
+              },
+              {
+                "responsibility_criterion": "Aware of need to collaborate with team and represent users/customer needs."
+              }
+            ]
+          },
+          {
+            "level": 2,
+            "responsibility_criteria": [
+              {
+                "responsibility_criterion": "Interacts with and may influence immediate colleagues."
+              },
+              {
+                "responsibility_criterion": "May have some external contact with customers, suppliers and partners."
+              },
+              {
+                "responsibility_criterion": "May have more influence in own domain."
+              },
+              {
+                "responsibility_criterion": "Aware of need to collaborate with team and represent users/customer needs."
+              }
+            ]
+          },
+          {
+            "level": 2,
+            "responsibility_criteria": [
+              {
+                "responsibility_criterion": "Interacts with and may influence immediate colleagues."
+              },
+              {
+                "responsibility_criterion": "May have some external contact with customers, suppliers and partners."
+              },
+              {
+                "responsibility_criterion": "May have more influence in own domain."
+              },
+              {
+                "responsibility_criterion": "Aware of need to collaborate with team and represent users/customer needs."
+              }
+            ]
+          }
+        ]
+      }],
       lblDefault: "Select",
       lblYes: "Yes",
       lblNo: "No",
@@ -50,25 +270,14 @@ export default class Responsibilities extends React.Component {
    * Calls disable function if less
    */
   selectCount = (index) => {
-    var tab = document.getElementById("list");
-    var row = tab.rows.length;
-    var tr, td;
-    var count = 0;
-    var per = 0;
-    var total = 0;
-    for (var i = 0; i < row; i++) {
-      tr = tab.rows[i];
-      td = tr.cells[index + 1];
-      if (td !== undefined) {
-        var a = td.getElementsByTagName("span");
-        var b = td.getElementsByTagName("p");
-        for (var j = 0; j < a.length; j++) {
-          if (a[j].firstElementChild.value === "true") {
-            count++;
-          }
-          total++;
-        }
+    var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
+    var select = Array.from(carousel[0].querySelectorAll("[name=" + "'" + index + "'" + "]"))
+    var count = 0, per = 0, total = 0;
+    for (var i = 0; i < select.length; i++) {
+      if (select[i].firstElementChild.value === "true") {
+        count++;
       }
+      total++;
     }
     per = ((count / total) * 100).toFixed(2);
     if (per > ((2 / 3) * 100)) {
@@ -236,8 +445,7 @@ export default class Responsibilities extends React.Component {
     var prevArr = Array.from(prevLvl);
     var yArr = [];
     var nArr = [];
-    console.log(lvl);
-    if (lvl == 0) {
+    if (lvl === 0) {
       for (var i = 0; i < curArr.length; i++) {
         if (curArr[i].firstElementChild.value === "true") {
           yArr.push(curArr[i].lastElementChild.innerHTML);
@@ -246,18 +454,18 @@ export default class Responsibilities extends React.Component {
         }
       }
     } else {
-      for (var i = 0; i < curArr.length; i++) {
-        if (curArr[i].firstElementChild.value === "true") {
-          yArr.push(curArr[i].lastElementChild.innerHTML);
+      for (var j = 0; j < curArr.length; j++) {
+        if (curArr[j].firstElementChild.value === "true") {
+          yArr.push(curArr[j].lastElementChild.innerHTML);
         }
       }
-      for (var i = 0; i < prevArr.length; i++) {
-        if (prevArr[i].firstElementChild.value === "false") {
-          nArr.push(prevArr[i].lastElementChild.innerHTML);
+      for (var k = 0; k < prevArr.length; k++) {
+        if (prevArr[k].firstElementChild.value === "false") {
+          nArr.push(prevArr[k].lastElementChild.innerHTML);
         }
       }
     }
-    this.state.lvl = lvl + 1;
+    this.state.lvl = lvl;
     this.state.respYesArr = yArr;
     this.state.respNoArr = nArr;
     this.pushResp();
@@ -270,8 +478,6 @@ export default class Responsibilities extends React.Component {
     var lvl = this.state.lvl;
     var newYArray = this.state.respYesArr;
     var newNArray = this.state.respNoArr;
-    console.log(newYArray)
-    console.log(newNArray)
     this.props.pushResp(newYArray);
     this.props.pushResp1(newNArray);
     this.props.pushLvl(lvl)

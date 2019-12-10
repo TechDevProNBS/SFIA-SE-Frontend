@@ -80,7 +80,6 @@ export default class ReviewPage extends React.Component {
     this.setState({
       customGoalsTextbox: ""
     });
-    console.log(document.getElementById("addCustomGoal").value);
   }
 
   render() {
@@ -108,7 +107,8 @@ export default class ReviewPage extends React.Component {
               <u>YOU ARE SFIA LEVEL {this.props.level}</u>
             </p>
             <p>{this.props.yesResp}</p>
-            <p>{this.props.noResp}</p>
+            <p>{this.props.noResp}</p><br/>
+            <p>{this.props.slLevel}</p>
             <p>{this.props.yesSkillList}</p>
             <p>{this.props.noSkillList}</p>
           </center>

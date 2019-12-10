@@ -24,7 +24,7 @@ export default class SessionWindow extends React.Component {
       yesSkillList: [],
       noSkillList: [],
       lvl: "",
-      Carousel_Page: "",
+      slLvl: "",
       selectedSkill: [],
       refreshSkillLevel: false
     };
@@ -33,15 +33,14 @@ export default class SessionWindow extends React.Component {
   //Enters the new array from skill list page into this.state
   handleForm = newArray => {
     var skillList = this.state.newSkillList;
-    skillList = []
     skillList.push(newArray);
     var uniqueSL = Array.from(new Set(skillList));
     this.setState({
       newSkillList: uniqueSL,
-      refreshSkillLevel: true,
-      Carousel_Page: 2
+      refreshSkillLevel: true
     });
     this.getList();
+  
   };
   // Deletes a Custom Goal, called from ReviewPage.js
   deleteCustomGoal = input => {
@@ -117,12 +116,19 @@ export default class SessionWindow extends React.Component {
     });
   }
 
+  pushSlLvl = (level) => {
+    this.setState({
+      slLvl: level
+    });
+  }
+
   getList = () => {
     fetch(`http://localhost:5500/API/showSkillLevelIn?skill_name=${this.state.newSkillList}`)
       .then(response => response.json())
       .then(skillname => this.setState({ selectedSkill: skillname }))
   }
 
+ 
 
   render() {
     // edits Carousel_Style to display the page decieded by Session.js
@@ -157,6 +163,7 @@ export default class SessionWindow extends React.Component {
               skillLevelRefreshed={this.skillLevelRefreshed}
               pushYesSL={this.pushYesSL}
               pushNoSL={this.pushNoSL}
+              pushSlLvl={this.pushSlLvl}
               handlePageChange={this.props.handlePageChange}
             />
           </div>
@@ -174,6 +181,7 @@ export default class SessionWindow extends React.Component {
               yesResp={this.state.yResp}
               noResp={this.state.nResp}
               level={this.state.lvl}
+              slLevel={this.state.slLvl}
               yesSkillList={this.state.yesSkillList}
               noSkillList={this.state.noSkillList}
             />
