@@ -51,6 +51,7 @@ export default class SkillList extends React.Component {
                 .then(this.autofill)
         }
     }
+    //This auto fills the skills after the role is selected
     autofill = () => {
         var array = this.state.array;
         for (var i = 0; i < array.length; i++) {
@@ -59,6 +60,7 @@ export default class SkillList extends React.Component {
             tick.checked = true;
         }
     }
+    //this removes the auto fiolled ticks when select is clicked
     autofillRemove = () => {
         var array = this.state.array;
         for (var i = 0; i < array.length; i++) {
