@@ -19,7 +19,9 @@ export default class Review extends React.Component {
           improve_responsibilities: [""],
           goals: [""]
         }
-      ]
+      ],
+
+      // id: "5dee1c821c9d440000fedcab"
     };
   }
 
@@ -27,7 +29,9 @@ export default class Review extends React.Component {
    * Get request called after page has been rendered once
    */
   componentDidMount = () => {
-    fetch(`http://localhost:2500/API/getReportList/`)
+    const { id } = this.props.match.params
+
+    fetch(`http://localhost:2500/API/getReportById/${id}`)
       .then(response => response.json())
       .then(SkillList_info =>
         this.setState(
