@@ -44,8 +44,10 @@ export default class Page1 extends React.Component {
     // sets up the review variable with an ordered list of review dates
     var reviews = <ul>
     {this.state.reports.map(review => {
+      let id = review._id
       let date = new Date(review.date_created)
-      return <li><a href="/review">Review on the {date.getDate()}/{date.getMonth()+1}/{date.getFullYear()}</a></li>
+      let href = "/review/" + id
+      return <li><a href={href}>Review on the {date.getDate()}/{date.getMonth()+1}/{date.getFullYear()}</a></li>
     })}
     </ul>
 
