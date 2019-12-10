@@ -30,6 +30,43 @@ export default class SkillList extends React.Component {
         this.props.handleForm(newArray)
         this.props.handlePageChange("SkillLevels")
       };
+      getRoles = () => {
+        var selectMenu = document.getElementById("dropdown");
+        var selectVal = selectMenu.options[selectMenu.selectedIndex].text;
+        if (selectVal === "---Select---") {
+            if (this.state.array !== 0) {
+                this.autofillRemove();
+            }
+            this.state.array = [];
+        } else {
+            var tempArray = [];
+            fetch(`http://localhost:2000/API/getRoleByName/${selectVal}`)
+                .then(response => response.json())
+                .then(vals =>
+                    tempArray = vals[0].skills.map(function (data) {
+                        tempArray.push(data.skill_name)
+                    })
+                )
+                .then(this.state.array = tempArray)
+                .then(this.autofill)
+        }
+    }
+    autofill = () => {
+        var array = this.state.array;
+        for (var i = 0; i < array.length; i++) {
+            var skill = array[i];
+            var tick = document.getElementById(`${skill}`);
+            tick.checked = true;
+        }
+    }
+    autofillRemove = () => {
+        var array = this.state.array;
+        for (var i = 0; i < array.length; i++) {
+            var skill = array[i];
+            var tick = document.getElementById(`${skill}`);
+            tick.checked = false;
+        }
+    }
     //creates an array and also deletes entries if needed
 
     /**
@@ -56,7 +93,7 @@ export default class SkillList extends React.Component {
                 <h3>Skill List</h3>
                 <p>Please select an appropriate job role, or customise your own list.</p>
                 <center>
-                    <select>
+                    <select id="dropdown" onChange={()=>this.getRoles()}>
                         <option>---Select---</option>
                         <option>Analyst</option>
                     </select>

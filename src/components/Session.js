@@ -2,10 +2,7 @@ import React from "react";
 import NavBar from "./NavBar";
 import SessionWindow from "./SessionWindow";
 
-<<<<<<< HEAD
-=======
 import "./css/Session.css"
->>>>>>> developer
 
 /*
   The Parent file from which all files required to make a review are called.
@@ -64,7 +61,7 @@ export default class Session extends React.Component {
         Carousel_Page={this.state.Carousel_Page} 
         handlePageChange={this.handlePageChange} />
        
-        {/* skillLeve is the page that should appear in the session */}
+        {/* skillLevel is the page that should appear in the session */}
       </div>
     );
   }
