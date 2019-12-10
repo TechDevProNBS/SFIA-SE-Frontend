@@ -24,7 +24,8 @@ export default class SessionWindow extends React.Component {
   //Enters the new array from skill list page into this.state
   handleForm = newArray => {
     var skillList = this.state.newSkillList;
-    skillList.push(newArray, 1);
+    skillList = [];
+    skillList.push(newArray);
     this.setState({
       newSkillList: skillList
     });
@@ -68,7 +69,8 @@ export default class SessionWindow extends React.Component {
           </div>
           <div className="Carousel_Item">
             <SkillList
-            handleForm={this.handleForm} />
+            handleForm={this.handleForm}
+            handlePageChange={this.props.handlePageChange}/>
           </div>
           <div className="Carousel_Item">
             <SkillLevel />
