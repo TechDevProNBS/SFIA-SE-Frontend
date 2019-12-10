@@ -3,6 +3,11 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 export default class Page1 extends React.Component {
   
+  /**
+   * sets up the state
+   * 
+   * @param props 
+   */
   constructor(props) {
 
     super(props);
@@ -12,24 +17,38 @@ export default class Page1 extends React.Component {
     }
 }
 
+  /**
+   * gets the reports from the database
+   * 
+   */
   getReports = () => {
     fetch(`http://localhost:2500/API/getReportListByDate/desc`)
       .then(response => response.json())
       .then(reports => this.setState({ reports: reports }))
   }
 
+  /**
+   * calls the getReports function when 
+   * loaded
+   * 
+   */
   componentDidMount = () => {
     this.getReports();
   }
   
+  /**
+   * displays the information in a row/column structure
+   * 
+   */
   render() {
-    
+    // sets up the review variable with an ordered list of review dates
     var reviews = <ul>
     {this.state.reports.map(review => {
       let date = new Date(review.date_created)
       return <li><a href="/review">Review on the {date.getDate()}/{date.getMonth()+1}/{date.getFullYear()}</a></li>
     })}
     </ul>
+
     return  <Container>
     <Row>
         <Col>
