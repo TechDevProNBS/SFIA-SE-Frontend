@@ -25,8 +25,7 @@ export default class SessionWindow extends React.Component {
       noSkillList: [],
       lvl: "",
       slLvl: "",
-      selectedSkill: [],
-      refreshSkillLevel: false
+      selectedSkill: []
     };
 
   }
@@ -60,13 +59,6 @@ export default class SessionWindow extends React.Component {
     });
   };
 
-  skillLevelRefreshed = () => {
-    this.setState({
-      refreshSkillLevel: false
-    })
-  }
-
-
   // Updated remindInDate to the value of the slider
   updateRemindInDate = event => {
     this.setState({
@@ -74,6 +66,9 @@ export default class SessionWindow extends React.Component {
     });
   };
 
+  /**
+   * Gets yes array from responsibilities and sets in state
+   */
   pushResp = (newArr) => {
     var resp = this.state.yResp;
     resp = [];
@@ -83,6 +78,9 @@ export default class SessionWindow extends React.Component {
     });
   }
 
+  /**
+   * Gets no array from responsibilities and sets in state
+   */
   pushResp1 = (newArr) => {
     var resp = this.state.nResp;
     resp = [];
@@ -92,12 +90,18 @@ export default class SessionWindow extends React.Component {
     });
   }
 
+  /**
+   * Gets level from responsibilities and sets in state
+   */
   pushLvl = (level) => {
     this.setState({
       lvl: level
     });
   }
 
+  /**
+   * Gets yes array from skill level and sets in state
+   */
   pushYesSL = (newArr) => {
     var skillLevel = this.state.yesSkillList;
     skillLevel = [];
@@ -107,6 +111,9 @@ export default class SessionWindow extends React.Component {
     });
   }
 
+  /**
+   * Gets no array from skill level and sets in state
+   */
   pushNoSL = (newArr) => {
     var skillLevel = this.state.noSkillList;
     skillLevel = [];
@@ -116,12 +123,18 @@ export default class SessionWindow extends React.Component {
     });
   }
 
+  /**
+   * Gets level from skill level and sets in state
+   */
   pushSlLvl = (level) => {
     this.setState({
       slLvl: level
     });
   }
 
+  /**
+   * Fetchs skill list criteria from database based on selected skill
+   */
   getList = () => {
     fetch(`http://localhost:5500/API/showSkillLevelIn?skill_name=${this.state.newSkillList}`)
       .then(response => response.json())
@@ -129,7 +142,6 @@ export default class SessionWindow extends React.Component {
   }
 
  
-
   render() {
     // edits Carousel_Style to display the page decieded by Session.js
     var Carousel_Style = {

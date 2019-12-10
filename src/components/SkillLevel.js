@@ -17,10 +17,16 @@ export default class SkillLevel extends React.Component {
     }
   }
 
+  /**
+   * Calls the skillLevelStart function
+   */
   componentDidUpdate = () => {
     this.skillLevelStart()
   }
 
+  /**
+   * Enables select boxes in column depending on level from responsibilities page
+   */
   skillLevelStart = () => {
     var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
     var startLvl = Array.from(carousel)
@@ -40,6 +46,7 @@ export default class SkillLevel extends React.Component {
  * Calculates the percentage of true and false select boxes for each column 
  * Then calls the enable function if greater than 2/3
  * Calls disable function if less
+ * Calls add array function passing current level
  */
   selectCount = (index) => {
     var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
@@ -52,7 +59,6 @@ export default class SkillLevel extends React.Component {
       }
       total++;
     }
-
     var noOfSelect = 0;
     for (var j = 0; j < select.length; j++) {
       if (select[j].firstElementChild.value !== "true" && select[j].firstElementChild.value !== "false") {
@@ -187,7 +193,11 @@ export default class SkillLevel extends React.Component {
     }
   }
 
-
+  /**
+   * Creates arrays for all select boxes with true value for current level
+   * Creates arrays for all select boxes with false value for previous level
+   * Assigns arrays and current level to state
+   */
   addArr = (lvl) => {
     var prev = lvl - 1;
     var next = lvl + 1;
@@ -220,7 +230,7 @@ export default class SkillLevel extends React.Component {
           nArr.push(curLvl[k].lastElementChild.innerHTML);
         }
       }
-    } else if(nextLvl[0].firstElementChild.disabled == false && prevLvl[0].firstElementChild.disabled == false) {
+    } else if (nextLvl[0].firstElementChild.disabled == false && prevLvl[0].firstElementChild.disabled == false) {
       for (var i = 0; i < curLvl.length; i++) {
         if (curLvl[i].firstElementChild.value === "true") {
           yArr.push(curLvl[i].lastElementChild.innerHTML);
@@ -234,6 +244,9 @@ export default class SkillLevel extends React.Component {
     this.state.lvl = lvl;
   }
 
+  /**
+   * Passes array and level in state to SessionWindow
+   */
   sendSkillList = () => {
     var yesArray = this.state.SkillYesArr;
     var noArray = this.state.SkillNoArr;
@@ -243,11 +256,17 @@ export default class SkillLevel extends React.Component {
     this.props.pushNoSL(noArray);
   }
 
+  /**
+   * Calls sendSkillList and nextPage function on button click
+   */
   handleOnClick = () => {
     this.sendSkillList();
     this.nextPage();
   }
 
+  /**
+   * Go to the Review page on button click
+   */
   nextPage = () => {
     this.props.handlePageChange("SkillReviewPage")
   }
