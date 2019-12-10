@@ -7,6 +7,9 @@ export default class Review extends React.Component {
   constructor(props) {
     super(props);
 
+    /**
+     * Empty layout so that the page compiles on the first render
+     */
     this.state = {
       report: [
         {
@@ -20,8 +23,11 @@ export default class Review extends React.Component {
     };
   }
 
+  /**
+   * Get request called after page has been rendered once
+   */
   componentDidMount = () => {
-    fetch(`http://localhost:2500/API/getReportList`)
+    fetch(`http://localhost:2500/API/getReportList/`)
       .then(response => response.json())
       .then(SkillList_info =>
         this.setState(
@@ -34,8 +40,6 @@ export default class Review extends React.Component {
   render() {
     return (
       <div className="ReviewPage">
-        {/* <div>{this.state.report[0]._id}</div> */}
-        {/* Template Design for future inputs */}
         <h2>
           <p class="font-weight-bold" style={{ fontSize: 28 }}>
             Review
@@ -69,6 +73,7 @@ export default class Review extends React.Component {
                 bordered
                 hover
               >
+                {/* Mapping responsibilities that the user is doing well in */}
                 <tbody>
                   {this.state.report[0].great_responsibilities.map(item => {
                     console.log(item);
@@ -97,6 +102,7 @@ export default class Review extends React.Component {
                 bordered
                 hover
               >
+              {/* Mapping responsibilities that the user could improve upon */}
                 <tbody>
                   {this.state.report[0].improve_responsibilities.map(item => {
                     console.log(item);
@@ -130,6 +136,7 @@ export default class Review extends React.Component {
                 bordered
                 hover
               >
+              {/* Mapping skills that the user is doing well in */}
                 <tbody>
                   {this.state.report[0].great_skills.map(item => {
                     console.log(item);
@@ -158,6 +165,7 @@ export default class Review extends React.Component {
                 bordered
                 hover
               >
+              {/* Mapping skills that the user could improve upon */}
                 <tbody>
                   {this.state.report[0].improve_skills.map(item => {
                     console.log(item);
@@ -192,6 +200,8 @@ export default class Review extends React.Component {
                 bordered
                 hover
               >
+
+                {/* Mapping future goals that the user has set for themselves */}
                 <tbody>
                   {this.state.report[0].goals.map(item => {
                     console.log(item);
