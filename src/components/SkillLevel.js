@@ -1,13 +1,14 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import './css/Responsibilities.css'
+import { thisExpression } from '@babel/types';
 
 export default class SkillLevel extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      lvl: "",
+      lvl1: "",
       lblDefault: "Select",
       lblYes: "Yes",
       lblNo: "No",
@@ -26,17 +27,37 @@ export default class SkillLevel extends React.Component {
 
   /**
    * Enables select boxes in column depending on level from responsibilities page
+   * Enables lowest level if passed level is too low
    */
   skillLevelStart = () => {
     var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
     var startLvl = Array.from(carousel)
     var select = startLvl[2].getElementsByClassName("slData")
+    var lvlArr = []
+    var min = 1;
+    var temp = 0;
     for (var i = 0; i < select.length; i++) {
       var name = select[i].firstElementChild.getAttribute("name")
       if (parseInt(name) == parseInt(this.props.level)) {
         var span = select[i].getElementsByTagName("span")
         for (var j = 0; j < span.length; j++) {
           span[j].firstElementChild.disabled = false;
+        }
+      }
+      else {
+        lvlArr.push(name)
+        min = lvlArr.sort((a, b) => a - b)[0];
+        temp++;
+      }
+    }
+    if (temp !== 0) {
+      for (var i = 0; i < select.length; i++) {
+        var name = select[i].firstElementChild.getAttribute("name")
+        if (parseInt(name) == parseInt(min)) {
+          var span = select[i].getElementsByTagName("span")
+          for (var j = 0; j < span.length; j++) {
+            span[j].firstElementChild.disabled = false;
+          }
         }
       }
     }
@@ -65,13 +86,18 @@ export default class SkillLevel extends React.Component {
         noOfSelect++;
       }
     }
+    var count2 = 0, per2 = 0, total2 = 0;
+    for (var k = 0; k < select.length; k++) {
+      if (select[k].firstElementChild.value === "false") {
+        count2++;
+      }
+      total2++;
+    }
     per = ((count / total) * 100).toFixed(2);
+    per2 = ((count2 / total2) * 100).toFixed(2);
     if (noOfSelect === 0) {
       if (per > ((2 / 3) * 100)) {
         switch (index) {
-          case 0:
-            this.enableSelect(1);
-            break;
           case 1:
             this.enableSelect(2);
             break;
@@ -87,19 +113,12 @@ export default class SkillLevel extends React.Component {
           case 5:
             this.enableSelect(6);
             break;
+          case 6:
+            this.enableSelect(7);
+            break;
         }
       } else {
         switch (index) {
-          case 0:
-            if (per < ((2 / 3) * 100)) {
-              this.disableSelect(1);
-              this.disableSelect(2);
-              this.disableSelect(3);
-              this.disableSelect(4);
-              this.disableSelect(5);
-              this.disableSelect(6);
-            }
-            break;
           case 1:
             if (per < ((2 / 3) * 100)) {
               this.disableSelect(2);
@@ -107,6 +126,7 @@ export default class SkillLevel extends React.Component {
               this.disableSelect(4);
               this.disableSelect(5);
               this.disableSelect(6);
+              this.disableSelect(7);
             }
             break;
           case 2:
@@ -115,6 +135,7 @@ export default class SkillLevel extends React.Component {
               this.disableSelect(4);
               this.disableSelect(5);
               this.disableSelect(6);
+              this.disableSelect(7);
             }
             break;
           case 3:
@@ -122,18 +143,48 @@ export default class SkillLevel extends React.Component {
               this.disableSelect(4);
               this.disableSelect(5);
               this.disableSelect(6);
+              this.disableSelect(7);
             }
             break;
           case 4:
             if (per < ((2 / 3) * 100)) {
               this.disableSelect(5);
               this.disableSelect(6);
+              this.disableSelect(7);
             }
             break;
           case 5:
             if (per < ((2 / 3) * 100)) {
               this.disableSelect(6);
+              this.disableSelect(7);
             }
+            break;
+          case 6:
+            if (per < ((2 / 3) * 100)) {
+              this.disableSelect(7);
+            }
+            break;
+        }
+      }
+      if (per2 > ((2 / 3) * 100)) {
+        switch (index) {
+          case 2:
+            this.enableSelect(1);
+            break;
+          case 3:
+            this.enableSelect(2);
+            break;
+          case 4:
+            this.enableSelect(3);
+            break;
+          case 5:
+            this.enableSelect(4);
+            break;
+          case 6:
+            this.enableSelect(5);
+            break;
+          case 7:
+            this.enableSelect(6);
             break;
         }
       }
@@ -160,6 +211,29 @@ export default class SkillLevel extends React.Component {
       case 7:
         this.addArr(index);
         break;
+    }
+    this.levelFunc(index);
+  }
+
+  /**
+   * Gets level of column with true values over 2/3
+   */
+  levelFunc = (index) => {
+    var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
+    var select = Array.from(carousel[2].querySelectorAll("[name=" + "'" + index + "'" + "]"))
+    var count = 0, per = 0, total = 0;
+
+    for (var i = 0; i < select.length; i++) {
+      if (select[i].firstElementChild.value === "true") {
+        count++;
+      }
+      total++;
+    }
+    per = ((count / total) * 100).toFixed(2);
+    if (per > ((2 / 3) * 100)) {
+      this.state.lvl1 = index;
+    } else {
+      this.state.lvl1 = index - 1;
     }
   }
 
@@ -205,43 +279,93 @@ export default class SkillLevel extends React.Component {
     var curLvl = Array.from(carousel[2].querySelectorAll("[name=" + "'" + lvl + "'" + "]"))
     var nextLvl = Array.from(carousel[2].querySelectorAll("[name=" + "'" + next + "'" + "]"))
     var prevLvl = Array.from(carousel[2].querySelectorAll("[name=" + "'" + prev + "'" + "]"))
-    var yArr = [];
-    var nArr = [];
+    var ySlArr = [];
+    var nSlArr = [];
+    var temp = 0;
 
-    if (nextLvl[0].firstElementChild.disabled == true) {
-      for (var j = 0; j < curLvl.length; j++) {
-        if (curLvl[j].firstElementChild.value === "true") {
-          yArr.push(curLvl[j].lastElementChild.innerHTML);
-        }
-      }
-      for (var k = 0; k < prevLvl.length; k++) {
-        if (prevLvl[k].firstElementChild.value === "false") {
-          nArr.push(prevLvl[k].lastElementChild.innerHTML);
-        }
-      }
-    } else if (nextLvl[0].firstElementChild.disabled == false) {
-      for (var j = 0; j < nextLvl.length; j++) {
-        if (nextLvl[j].firstElementChild.value === "true") {
-          yArr.push(nextLvl[j].lastElementChild.innerHTML);
-        }
-      }
-      for (var k = 0; k < curLvl.length; k++) {
-        if (curLvl[k].firstElementChild.value === "false") {
-          nArr.push(curLvl[k].lastElementChild.innerHTML);
-        }
-      }
-    } else if (nextLvl[0].firstElementChild.disabled == false && prevLvl[0].firstElementChild.disabled == false) {
+    if (nextLvl[0] === undefined) {
+      var counter = 0;
+      var tot = 0;
+      var per = 0;
       for (var i = 0; i < curLvl.length; i++) {
         if (curLvl[i].firstElementChild.value === "true") {
-          yArr.push(curLvl[i].lastElementChild.innerHTML);
-        } else if (curLvl[i].firstElementChild.value === "false") {
-          nArr.push(curLvl[i].lastElementChild.innerHTML);
+          counter++;
+        }
+        tot++;
+      }
+      per = counter / tot * 100;
+      if (per > (2 / 3) * 100) {
+        for (var i = 0; i < curLvl.length; i++) {
+          if (curLvl[i].firstElementChild.value === "true") {
+            ySlArr.push(curLvl[i].lastElementChild.innerHTML);
+          }
+          else if (curLvl[i].firstElementChild.value === "false") {
+            nSlArr.push(curLvl[i].lastElementChild.innerHTML);
+          }
+        }
+      } else if (per <= (2 / 3) * 100) {
+        for (var j = 0; j < curLvl.length; j++) {
+          if (curLvl[j].firstElementChild.value === "true") {
+            ySlArr.push(curLvl[j].lastElementChild.innerHTML);
+          }
+        }
+        for (var k = 0; k < prevLvl.length; k++) {
+          if (prevLvl[k].firstElementChild.value === "false") {
+            nSlArr.push(prevLvl[k].lastElementChild.innerHTML);
+          }
         }
       }
     }
-    this.state.SkillYesArr = yArr;
-    this.state.SkillNoArr = nArr;
-    this.state.lvl = lvl;
+    if (prevLvl.length === 0) {
+      var counter = 0;
+      var tot = 0;
+      var per = 0;
+      for (var i = 0; i < curLvl.length; i++) {
+        if (curLvl[i].firstElementChild.value === "true") {
+          counter++;
+        }
+        tot++;
+      }
+      per = counter / tot * 100;
+      if (per < (2 / 3) * 100) {
+        for (var i = 0; i < curLvl.length; i++) {
+          if (curLvl[i].firstElementChild.value === "true") {
+            ySlArr.push(curLvl[i].lastElementChild.innerHTML);
+          }
+          else if (curLvl[i].firstElementChild.value === "false") {
+            nSlArr.push(curLvl[i].lastElementChild.innerHTML);
+          }
+        }
+      }
+    }
+    else if (parseInt(curLvl[0].getAttribute("name")) < 7) {
+      if (nextLvl[0].firstElementChild.disabled == true) {
+        for (var j = 0; j < curLvl.length; j++) {
+          if (curLvl[j].firstElementChild.value === "true") {
+            ySlArr.push(curLvl[j].lastElementChild.innerHTML);
+          }
+        }
+        for (var k = 0; k < prevLvl.length; k++) {
+          if (prevLvl[k].firstElementChild.value === "false") {
+            nSlArr.push(prevLvl[k].lastElementChild.innerHTML);
+          }
+        }
+      }
+      else if (nextLvl[0].firstElementChild.disabled == false) {
+        for (var j = 0; j < nextLvl.length; j++) {
+          if (nextLvl[j].firstElementChild.value === "true") {
+            ySlArr.push(nextLvl[j].lastElementChild.innerHTML);
+          }
+        }
+        for (var k = 0; k < curLvl.length; k++) {
+          if (curLvl[k].firstElementChild.value === "false") {
+            nSlArr.push(curLvl[k].lastElementChild.innerHTML);
+          }
+        }
+      }
+    }
+    this.state.SkillYesArr = ySlArr;
+    this.state.SkillNoArr = nSlArr;
   }
 
   /**
@@ -250,7 +374,10 @@ export default class SkillLevel extends React.Component {
   sendSkillList = () => {
     var yesArray = this.state.SkillYesArr;
     var noArray = this.state.SkillNoArr;
-    var lvl = this.state.lvl
+    var lvl = this.state.lvl1
+    if (lvl === 0) {
+      lvl = 1;
+    }
     this.props.pushSlLvl(lvl);
     this.props.pushYesSL(yesArray);
     this.props.pushNoSL(noArray);
@@ -275,7 +402,7 @@ export default class SkillLevel extends React.Component {
     return (
       <Container>
         <div className="lvls">
-          <table id="table" class="table table-hover">
+          <table id="tableSL" class="table table-hover">
             <thead>
               <tr>
                 <th></th>
@@ -301,8 +428,8 @@ export default class SkillLevel extends React.Component {
                         <span name={desc.level} className={desc.level} >
                           <select id={index2} disabled={this.state.disable} onChange={() => this.selectCount(desc.level)}>
                             <option selected>{this.state.lblDefault}</option>
-                            <option value="true">{this.state.lblYes}</option>
-                            <option value="false">{this.state.lblNo}</option>
+                            <option value="true">&#10004;</option>
+                            <option value="false">&#10006;</option>
                           </select>
                           <p id="info">{desc2.skill_criterion}</p>
                         </span>

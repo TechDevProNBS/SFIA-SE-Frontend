@@ -43,7 +43,7 @@ export default class SessionWindow extends React.Component {
       refreshSkillLevel: true
     });
     this.getList();
-  
+
   };
 
   /**
