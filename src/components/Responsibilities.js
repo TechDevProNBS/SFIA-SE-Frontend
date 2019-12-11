@@ -295,11 +295,11 @@ export default class Responsibilities extends React.Component {
 
   render() {
     return (
-      <Container>
-        <div className="lvls">
-          <table id="table" class="table table-hover">
+      <div className="outter">
+        <div className="inner">
+          <table id="table" className="table table-hover responsibilities">
             <thead>
-              <tr>
+              <tr className="responsibilities">
                 <th></th>
                 <th>Level 1</th>
                 <th>Level 2</th>
@@ -312,7 +312,7 @@ export default class Responsibilities extends React.Component {
             </thead>
             <tbody id="list">
               {this.state.resp.map((name, index) => (
-                <tr id="">
+                <tr id="" className="responsibilities">
                   <td><b>{name.responsibility_name}</b></td>
                   {name.responsibility_descriptions.map((desc, index) => (
                     <td>
@@ -334,7 +334,7 @@ export default class Responsibilities extends React.Component {
           </table>
         </div><br />
         <button name="skillList" onClick={() => this.handleOnClick()}>Skill List Selection</button>
-      </Container>
+      </div>
     );
   }
 }
