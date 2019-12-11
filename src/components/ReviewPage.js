@@ -35,7 +35,9 @@ export default class ReviewPage extends React.Component {
         "10 Months",
         "11 Months",
         "1 Year"
-      ]
+      ],
+      skillLevelYesArr: [],
+      skillLevelNoArr: []
     };
   }
 
@@ -78,7 +80,6 @@ export default class ReviewPage extends React.Component {
     this.setState({
       customGoalsTextbox: ""
     });
-    console.log(document.getElementById("addCustomGoal").value);
   }
 
   render() {
@@ -103,8 +104,13 @@ export default class ReviewPage extends React.Component {
         <h2>
           <center>
             <p class="font-weight-bold" style={{ fontSize: 26 }}>
-              <u>YOU ARE SFIA LEVEL X</u>
+              <u>YOU ARE SFIA LEVEL {this.props.level}</u>
             </p>
+            <p>{this.props.yesResp}</p>
+            <p>{this.props.noResp}</p><br/>
+            <p>{this.props.slLevel}</p>
+            <p>{this.props.yesSkillList}</p>
+            <p>{this.props.noSkillList}</p>
           </center>
         </h2>
 

@@ -1,7 +1,321 @@
-import React from "react";
+import React from 'react';
+import { Container } from 'react-bootstrap';
+import './css/Responsibilities.css'
 
-export default class SkillList extends React.Component {
+export default class SkillLevel extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      lvl: "",
+      lblDefault: "Select",
+      lblYes: "Yes",
+      lblNo: "No",
+      disable: true,
+      skillYesArr: [],
+      skillNoArr: []
+    }
+  }
+
+  /**
+   * Calls the skillLevelStart function
+   */
+  componentDidUpdate = () => {
+    this.skillLevelStart()
+  }
+
+  /**
+   * Enables select boxes in column depending on level from responsibilities page
+   */
+  skillLevelStart = () => {
+    var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
+    var startLvl = Array.from(carousel)
+    var select = startLvl[2].getElementsByClassName("slData")
+    for (var i = 0; i < select.length; i++) {
+      var name = select[i].firstElementChild.getAttribute("name")
+      if (parseInt(name) == parseInt(this.props.level)) {
+        var span = select[i].getElementsByTagName("span")
+        for (var j = 0; j < span.length; j++) {
+          span[j].firstElementChild.disabled = false;
+        }
+      }
+    }
+  }
+
+  /**
+ * Calculates the percentage of true and false select boxes for each column 
+ * Then calls the enable function if greater than 2/3
+ * Calls disable function if less
+ * Calls add array function passing current level
+ */
+  selectCount = (index) => {
+    var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
+    var select = Array.from(carousel[2].querySelectorAll("[name=" + "'" + index + "'" + "]"))
+    var count = 0, per = 0, total = 0;
+
+    for (var i = 0; i < select.length; i++) {
+      if (select[i].firstElementChild.value === "true") {
+        count++;
+      }
+      total++;
+    }
+    var noOfSelect = 0;
+    for (var j = 0; j < select.length; j++) {
+      if (select[j].firstElementChild.value !== "true" && select[j].firstElementChild.value !== "false") {
+        noOfSelect++;
+      }
+    }
+    per = ((count / total) * 100).toFixed(2);
+    if (noOfSelect === 0) {
+      if (per > ((2 / 3) * 100)) {
+        switch (index) {
+          case 0:
+            this.enableSelect(1);
+            break;
+          case 1:
+            this.enableSelect(2);
+            break;
+          case 2:
+            this.enableSelect(3);
+            break;
+          case 3:
+            this.enableSelect(4);
+            break;
+          case 4:
+            this.enableSelect(5);
+            break;
+          case 5:
+            this.enableSelect(6);
+            break;
+        }
+      } else {
+        switch (index) {
+          case 0:
+            if (per < ((2 / 3) * 100)) {
+              this.disableSelect(1);
+              this.disableSelect(2);
+              this.disableSelect(3);
+              this.disableSelect(4);
+              this.disableSelect(5);
+              this.disableSelect(6);
+            }
+            break;
+          case 1:
+            if (per < ((2 / 3) * 100)) {
+              this.disableSelect(2);
+              this.disableSelect(3);
+              this.disableSelect(4);
+              this.disableSelect(5);
+              this.disableSelect(6);
+            }
+            break;
+          case 2:
+            if (per < ((2 / 3) * 100)) {
+              this.disableSelect(3);
+              this.disableSelect(4);
+              this.disableSelect(5);
+              this.disableSelect(6);
+            }
+            break;
+          case 3:
+            if (per < ((2 / 3) * 100)) {
+              this.disableSelect(4);
+              this.disableSelect(5);
+              this.disableSelect(6);
+            }
+            break;
+          case 4:
+            if (per < ((2 / 3) * 100)) {
+              this.disableSelect(5);
+              this.disableSelect(6);
+            }
+            break;
+          case 5:
+            if (per < ((2 / 3) * 100)) {
+              this.disableSelect(6);
+            }
+            break;
+        }
+      }
+    }
+    switch (index) {
+      case 1:
+        this.addArr(index);
+        break;
+      case 2:
+        this.addArr(index);
+        break;
+      case 3:
+        this.addArr(index);
+        break;
+      case 4:
+        this.addArr(index);
+        break;
+      case 5:
+        this.addArr(index);
+        break;
+      case 6:
+        this.addArr(index);
+        break;
+      case 7:
+        this.addArr(index);
+        break;
+    }
+  }
+
+  /**
+   * Gets the select boxes for the column from the input param
+   * Enables all boxes in the column
+   */
+  enableSelect = (input) => {
+    var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
+    var span = Array.from(carousel[2].querySelectorAll("[name=" + "'" + input + "'" + "]"))
+    var arr = Array.from(span);
+    for (var i = 0; i < arr.length; i++) {
+      arr[i].firstElementChild.disabled = false;
+    }
+  }
+
+  /**
+  * Gets the select boxes for the column from the input param
+  * Disables all boxes in the column and sets to default value
+  */
+  disableSelect = (input) => {
+    var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
+    var span = Array.from(carousel[2].querySelectorAll("[name=" + "'" + input + "'" + "]"))
+    var arr = Array.from(span);
+    for (var i = 0; i < arr.length; i++) {
+      var select = [arr[i].firstElementChild];
+      for (var opt, j = 0; opt = select[j]; j++) {
+        opt.selectedIndex = 0;
+        select[j].disabled = true;
+      }
+    }
+  }
+
+  /**
+   * Creates arrays for all select boxes with true value for current level
+   * Creates arrays for all select boxes with false value for previous level
+   * Assigns arrays and current level to state
+   */
+  addArr = (lvl) => {
+    var prev = lvl - 1;
+    var next = lvl + 1;
+    var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
+    var curLvl = Array.from(carousel[2].querySelectorAll("[name=" + "'" + lvl + "'" + "]"))
+    var nextLvl = Array.from(carousel[2].querySelectorAll("[name=" + "'" + next + "'" + "]"))
+    var prevLvl = Array.from(carousel[2].querySelectorAll("[name=" + "'" + prev + "'" + "]"))
+    var yArr = [];
+    var nArr = [];
+
+    if (nextLvl[0].firstElementChild.disabled == true) {
+      for (var j = 0; j < curLvl.length; j++) {
+        if (curLvl[j].firstElementChild.value === "true") {
+          yArr.push(curLvl[j].lastElementChild.innerHTML);
+        }
+      }
+      for (var k = 0; k < prevLvl.length; k++) {
+        if (prevLvl[k].firstElementChild.value === "false") {
+          nArr.push(prevLvl[k].lastElementChild.innerHTML);
+        }
+      }
+    } else if (nextLvl[0].firstElementChild.disabled == false) {
+      for (var j = 0; j < nextLvl.length; j++) {
+        if (nextLvl[j].firstElementChild.value === "true") {
+          yArr.push(nextLvl[j].lastElementChild.innerHTML);
+        }
+      }
+      for (var k = 0; k < curLvl.length; k++) {
+        if (curLvl[k].firstElementChild.value === "false") {
+          nArr.push(curLvl[k].lastElementChild.innerHTML);
+        }
+      }
+    } else if (nextLvl[0].firstElementChild.disabled == false && prevLvl[0].firstElementChild.disabled == false) {
+      for (var i = 0; i < curLvl.length; i++) {
+        if (curLvl[i].firstElementChild.value === "true") {
+          yArr.push(curLvl[i].lastElementChild.innerHTML);
+        } else if (curLvl[i].firstElementChild.value === "false") {
+          nArr.push(curLvl[i].lastElementChild.innerHTML);
+        }
+      }
+    }
+    this.state.SkillYesArr = yArr;
+    this.state.SkillNoArr = nArr;
+    this.state.lvl = lvl;
+  }
+
+  /**
+   * Passes array and level in state to SessionWindow
+   */
+  sendSkillList = () => {
+    var yesArray = this.state.SkillYesArr;
+    var noArray = this.state.SkillNoArr;
+    var lvl = this.state.lvl
+    this.props.pushSlLvl(lvl);
+    this.props.pushYesSL(yesArray);
+    this.props.pushNoSL(noArray);
+  }
+
+  /**
+   * Calls sendSkillList and nextPage function on button click
+   */
+  handleOnClick = () => {
+    this.sendSkillList();
+    this.nextPage();
+  }
+
+  /**
+   * Go to the Review page on button click
+   */
+  nextPage = () => {
+    this.props.handlePageChange("SkillReviewPage")
+  }
+
   render() {
-    return <div>It's skillLevel</div>;
+    return (
+      <Container>
+        <div className="lvls">
+          <table id="table" class="table table-hover">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Level 1</th>
+                <th>Level 2</th>
+                <th>Level 3</th>
+                <th>Level 4</th>
+                <th>Level 5</th>
+                <th>Level 6</th>
+                <th>Level 7</th>
+              </tr>
+            </thead>
+            <tbody id="list1">
+              {this.props.selectedSkill.map((name, index) => (
+                <tr>
+                  <td><b>{name.skill_name}</b></td>
+                  {[...Array(name.skill_descriptions[0].level - 1)].map((e, i) => (
+                    <td></td>
+                  ))}
+                  {name.skill_descriptions.map((desc, index) => (
+                    <td className="slData">
+                      {desc.skill_criteria.map((desc2, index2) => (
+                        <span name={desc.level} className={desc.level} >
+                          <select id={index2} disabled={this.state.disable} onChange={() => this.selectCount(desc.level)}>
+                            <option selected>{this.state.lblDefault}</option>
+                            <option value="true">{this.state.lblYes}</option>
+                            <option value="false">{this.state.lblNo}</option>
+                          </select>
+                          <p id="info">{desc2.skill_criterion}</p>
+                        </span>
+                      ))}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div> <br />
+        <button name="skillList" onClick={() => this.handleOnClick()}>Review</button>
+      </Container>
+    );
   }
 }

@@ -20,7 +20,15 @@ export default class SessionWindow extends React.Component {
       customGoals: [],
       newSkillList: [],
       old_Carousel_Page: 0
+      yResp: [],
+      nResp: [],
+      yesSkillList: [],
+      noSkillList: [],
+      lvl: "",
+      slLvl: "",
+      selectedSkill: []
     };
+
   }
 
   /**
@@ -28,11 +36,14 @@ export default class SessionWindow extends React.Component {
    */
   handleForm = newArray => {
     var skillList = this.state.newSkillList;
-    skillList = [];
     skillList.push(newArray);
+    var uniqueSL = Array.from(new Set(skillList));
     this.setState({
-      newSkillList: skillList
+      newSkillList: uniqueSL,
+      refreshSkillLevel: true
     });
+    this.getList();
+  
   };
 
   /**
@@ -168,6 +179,80 @@ export default class SessionWindow extends React.Component {
     }
   };
 
+   * Gets yes array from responsibilities and sets in state
+   */
+  pushResp = (newArr) => {
+    var resp = this.state.yResp;
+    resp = [];
+    resp.push(newArr);
+    this.setState({
+      yResp: resp
+    });
+  }
+
+  /**
+   * Gets no array from responsibilities and sets in state
+   */
+  pushResp1 = (newArr) => {
+    var resp = this.state.nResp;
+    resp = [];
+    resp.push(newArr);
+    this.setState({
+      nResp: resp
+    });
+  }
+
+  /**
+   * Gets level from responsibilities and sets in state
+   */
+  pushLvl = (level) => {
+    this.setState({
+      lvl: level
+    });
+  }
+
+  /**
+   * Gets yes array from skill level and sets in state
+   */
+  pushYesSL = (newArr) => {
+    var skillLevel = this.state.yesSkillList;
+    skillLevel = [];
+    skillLevel.push(newArr);
+    this.setState({
+      yesSkillList: skillLevel
+    });
+  }
+
+  /**
+   * Gets no array from skill level and sets in state
+   */
+  pushNoSL = (newArr) => {
+    var skillLevel = this.state.noSkillList;
+    skillLevel = [];
+    skillLevel.push(newArr);
+    this.setState({
+      noSkillList: skillLevel
+    });
+  }
+
+  /**
+   * Gets level from skill level and sets in state
+   */
+  pushSlLvl = (level) => {
+    this.setState({
+      slLvl: level
+    });
+  }
+
+  /**
+   * Fetchs skill list criteria from database based on selected skill
+   */
+  getList = () => {
+    fetch(`http://localhost:5500/API/showSkillLevelIn?skill_name=${this.state.newSkillList}`)
+      .then(response => response.json())
+      .then(skillname => this.setState({ selectedSkill: skillname }))
+  }
+
   render() {
     /**
      * If a different page is selected, trigger the CarouselAnimation to move
@@ -182,16 +267,32 @@ export default class SessionWindow extends React.Component {
         <div className="Carousel">
           {/* Calls each of the pages needed for a session */}
           <div className="Carousel_Item">
-            <Responsibilities />
+            <Responsibilities
+              handlePageChange={this.props.handlePageChange}
+              pushResp={this.pushResp}
+              pushResp1={this.pushResp1}
+              pushLvl={this.pushLvl} />
           </div>
           <div className="Carousel_Item">
             <SkillList
               handleForm={this.handleForm}
               handlePageChange={this.props.handlePageChange}
+              getList={this.getList}
             />
           </div>
           <div className="Carousel_Item">
-            <SkillLevel />
+            <SkillLevel
+              newSkillList={this.state.newSkillList}
+              level={this.state.lvl}
+              selectedSkill={this.state.selectedSkill}
+              refreshSkillLevel={this.state.refreshSkillLevel}
+              Carousel_Page={this.state.Carousel_Page}
+              skillLevelRefreshed={this.skillLevelRefreshed}
+              pushYesSL={this.pushYesSL}
+              pushNoSL={this.pushNoSL}
+              pushSlLvl={this.pushSlLvl}
+              handlePageChange={this.props.handlePageChange}
+            />
           </div>
           <div className="Carousel_Item">
             {/* 
@@ -204,6 +305,12 @@ export default class SessionWindow extends React.Component {
               deleteCustomGoal={this.deleteCustomGoal}
               addCustomGoal={this.addCustomGoal}
               customGoals={this.state.customGoals}
+              yesResp={this.state.yResp}
+              noResp={this.state.nResp}
+              level={this.state.lvl}
+              slLevel={this.state.slLvl}
+              yesSkillList={this.state.yesSkillList}
+              noSkillList={this.state.noSkillList}
             />
           </div>
         </div>
