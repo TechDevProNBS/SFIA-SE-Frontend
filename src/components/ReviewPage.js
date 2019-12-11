@@ -90,7 +90,6 @@ export default class ReviewPage extends React.Component {
         50 +
         "%"
     };
-
     return (
       <div className="ReviewPage">
         {/* Template Design for future inputs */}
@@ -100,7 +99,6 @@ export default class ReviewPage extends React.Component {
           </p>
         </h2>
         <br></br>
-
         <h2>
           <center>
             <p class="font-weight-bold" style={{ fontSize: 26 }}>
@@ -113,7 +111,7 @@ export default class ReviewPage extends React.Component {
             <p>{this.props.noSkillList}</p>
           </center>
         </h2>
-
+        
         <br></br>
         <br></br>
         <br></br>
@@ -133,24 +131,24 @@ export default class ReviewPage extends React.Component {
                 hover
               >
                 <tbody>
-                  <tr>
-                    <td>
-                      <span
-                        class="glyphicon glyphicon-ok"
-                        style={{ color: "green" }}
-                      ></span>
-                    </td>
-                    <td>Sample text sample text sample text</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span
-                        class="glyphicon glyphicon-ok"
-                        style={{ color: "green" }}
-                      ></span>
-                    </td>
-                    <td>Sample text sample text sample text</td>
-                  </tr>
+                  {this.props.yesResp.map(items => {
+                    console.log(items);
+                    return (
+                      <div>
+                        {items.map(item => (
+                          <tr>
+                            <td>
+                              <span
+                                class="glyphicon glyphicon-ok"
+                                style={{ color: "green" }}
+                              ></span>
+                            </td>
+                            <td>{item}</td>
+                          </tr>
+                        ))}
+                      </div>
+                    );
+                  })}
                 </tbody>
               </Table>
               <div className="border-line"></div>
@@ -165,40 +163,30 @@ export default class ReviewPage extends React.Component {
                 hover
               >
                 <tbody>
-                  <tr>
-                    <td>
-                      <span
-                        class="glyphicon glyphicon-remove"
-                        style={{ color: "red" }}
-                      ></span>
-                    </td>
-                    <td>Sample text sample text sample text</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span
-                        class="glyphicon glyphicon-remove"
-                        style={{ color: "red" }}
-                      ></span>
-                    </td>
-                    <td>Sample text sample text sample text</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span
-                        class="glyphicon glyphicon-remove"
-                        style={{ color: "red" }}
-                      ></span>
-                    </td>
-                    <td>Sample text sample text sample text</td>
-                  </tr>
+                  {this.props.noResp.map(items => {
+                    return (
+                      <div>
+                        {items.map(item => (
+                          <tr>
+                            <td>
+                              <span
+                                class="glyphicon glyphicon-remove"
+                                style={{ color: "red" }}
+                              ></span>
+                            </td>
+                            <td>{item}</td>
+                          </tr>
+                        ))}
+                      </div>
+                    );
+                  })}
                 </tbody>
               </Table>
             </div>
           </div>
           <div className="Centre-Bordered-Section">
             <div className="Bordered-Section">
-            <h4 className="subHeader">Skill Levels</h4>
+              <h4 className="subHeader">Skill Levels</h4>
               <div className="border-line"></div>
               <h4>
                 <p className="subHeader">Areas you are doing well in:</p>
@@ -211,24 +199,23 @@ export default class ReviewPage extends React.Component {
                 hover
               >
                 <tbody>
-                  <tr>
-                    <td>
-                      <span
-                        class="glyphicon glyphicon-ok"
-                        style={{ color: "green" }}
-                      ></span>
-                    </td>
-                    <td>Sample text sample text sample text</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span
-                        class="glyphicon glyphicon-ok"
-                        style={{ color: "green" }}
-                      ></span>
-                    </td>
-                    <td>Sample text sample text sample text</td>
-                  </tr>
+                  {this.props.yesSkillList.map(items => {
+                    return (
+                      <div>
+                        {items.map(item => (
+                          <tr>
+                            <td>
+                              <span
+                                class="glyphicon glyphicon-ok"
+                                style={{ color: "green" }}
+                              ></span>
+                            </td>
+                            <td>{item}</td>
+                          </tr>
+                        ))}
+                      </div>
+                    );
+                  })}
                 </tbody>
               </Table>
               <div className="border-line"></div>
@@ -243,69 +230,85 @@ export default class ReviewPage extends React.Component {
                 hover
               >
                 <tbody>
-                  <tr>
-                    <td>
-                      <span
-                        class="glyphicon glyphicon-remove"
-                        style={{ color: "red" }}
-                      ></span>
-                    </td>
-                    <td>Sample text sample text sample text</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span
-                        class="glyphicon glyphicon-remove"
-                        style={{ color: "red" }}
-                      ></span>
-                    </td>
-                    <td>Sample text sample text sample text</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span
-                        class="glyphicon glyphicon-remove"
-                        style={{ color: "red" }}
-                      ></span>
-                    </td>
-                    <td>Sample text sample text sample text</td>
-                  </tr>
+                  {this.props.noSkillList.map(items => {
+                    return (
+                      <div>
+                        {items.map(item => (
+                          <tr>
+                            <td>
+                              <span
+                                class="glyphicon glyphicon-ok"
+                                style={{ color: "green" }}
+                              ></span>
+                            </td>
+                            <td>{item}</td>
+                          </tr>
+                        ))}
+                      </div>
+                    );
+                  })}
                 </tbody>
               </Table>
             </div>
           </div>
         </div>
-
         <div className="Centre-Bordered-Section">
           <div className="Bordered-Section">
             <h4>
               <p className="subHeader">Goals for the future:</p>
             </h4>
             <br></br>
-            <Form>
-              <Form.Group controlId="formBasicCheckbox">
-                <Form.Check
-                  type="checkbox"
-                  label="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z)&nbsp;&nbsp;Sample text sample text sample text"
-                  style={{ fontSize: 18 }}
-                />
-              </Form.Group>
-              <Form.Group controlId="formBasicCheckbox">
-                <Form.Check
-                  type="checkbox"
-                  label="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u)&nbsp;&nbsp;Sample text sample text sample text"
-                  style={{ fontSize: 18 }}
-                />
-              </Form.Group>
-              <Form.Group controlId="formBasicCheckbox">
-                <Form.Check
-                  type="checkbox"
-                  label="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v)&nbsp;&nbsp;Sample text sample text sample text"
-                  style={{ fontSize: 18 }}
-                />
-              </Form.Group>
-            </Form>
-
+            {/* Maps all custom goals information here */}
+            <Table
+              style={{ fontSize: 18 }}
+              className="ReviewPage-Table"
+              striped
+              bordered
+              hover
+            >
+              <tbody>
+                {this.props.noResp.map(items => {
+                  return (
+                    <div>
+                      {items.map(item => (
+                        <tr>
+                          {/* The Checkbox */}
+                          <td style={{ width: "24px" }}>
+                            <input type="checkbox" label={item} />
+                          </td>
+                          <td>
+                            {/* Custom Goal Content */}
+                            <div>{item}</div>
+                          </td>
+                          {/* The Delete Button */}
+                        </tr>
+                      ))}
+                    </div>
+                  );
+                })}
+              </tbody>
+              <tbody>
+                {this.props.noSkillList.map(items => {
+                  return (
+                    <div>
+                      {items.map(item => (
+                        <tr>
+                          {/* The Checkbox */}
+                          <td style={{ width: "24px" }}>
+                            <input type="checkbox" label={item} />
+                          </td>
+                          <td>
+                            {/* Custom Goal Content */}
+                            <div>{item}</div>
+                          </td>
+                          {/* The Delete Button */}
+                        </tr>
+                      ))}
+                    </div>
+                  );
+                })}
+              </tbody>
+            </Table>
             {/* Maps all custom goals information here */}
             <Table
               style={{ fontSize: 18 }}
@@ -347,7 +350,6 @@ export default class ReviewPage extends React.Component {
                 })}
               </tbody>
             </Table>
-
             {/* The Add Custom GOal textbox */}
             <p class="font-weight-bold" style={{ fontSize: 20 }}>
               <input
@@ -360,13 +362,11 @@ export default class ReviewPage extends React.Component {
             </p>
           </div>
         </div>
-
         <h4>
           <p class="font-weight-bold" style={{ fontSize: 20 }}>
             Set deadline for:
           </p>
         </h4>
-
         <div className="Centre-Bordered-Section">
           {/* Code for the slider (date reminder) */}
           <div className="slidersection">
