@@ -91,70 +91,175 @@ export default class ReviewPage extends React.Component {
         "%"
     };
     return (
-      <div className="ReviewPage">
-        {/* Template Design for future inputs */}
-        <h2>
-          <p class="font-weight-bold" style={{ fontSize: 28 }}>
-            Review
+      <div className="outter">
+        <div className="inner">
+          {/* Template Design for future inputs */}
+          <h2>
+            <p class="font-weight-bold" style={{ fontSize: 28 }}>
+              Review
           </p>
-        </h2>
-        <br></br>
-        <h2>
-          <center>
-            <p class="font-weight-bold" style={{ fontSize: 26 }}>
-              <u>YOU ARE SFIA LEVEL {this.props.level}</u>
-            </p>
-            <p>{this.props.yesResp}</p>
-            <p>{this.props.noResp}</p><br/>
-            <p>{this.props.slLevel}</p>
-            <p>{this.props.yesSkillList}</p>
-            <p>{this.props.noSkillList}</p>
-          </center>
-        </h2>
-        
-        <br></br>
-        <br></br>
-        <br></br>
-        <div className="did-well-improve-section">
+          </h2>
+          <br></br>
+          <h2>
+            <center>
+              <p class="font-weight-bold" style={{ fontSize: 26 }}>
+                <u>YOU ARE SFIA LEVEL {this.props.level}</u>
+              </p>
+              <p>{this.props.yesResp}</p>
+              <p>{this.props.noResp}</p><br />
+              <p>{this.props.slLevel}</p>
+              <p>{this.props.yesSkillList}</p>
+              <p>{this.props.noSkillList}</p>
+            </center>
+          </h2>
+
+          <br></br>
+          <br></br>
+          <br></br>
+          <div className="did-well-improve-section">
+            <div className="Centre-Bordered-Section">
+              <div className="Bordered-Section">
+                <h4 className="subHeader">Responsibilities</h4>
+                <div className="border-line"></div>
+                <h4>
+                  <p className="subHeader">Areas you are doing well in:</p>
+                </h4>
+                <Table
+                  style={{ fontSize: 18 }}
+                  className="ReviewPage-Table"
+                  striped
+                  bordered
+                  hover
+                >
+                  <tbody>
+                    {this.props.yesResp.map(items => {
+                      console.log(items);
+                      return (
+                        <div>
+                          {items.map(item => (
+                            <tr>
+                              <td>
+                                <span
+                                  class="glyphicon glyphicon-ok"
+                                  style={{ color: "green" }}
+                                ></span>
+                              </td>
+                              <td>{item}</td>
+                            </tr>
+                          ))}
+                        </div>
+                      );
+                    })}
+                  </tbody>
+                </Table>
+                <div className="border-line"></div>
+                <h4>
+                  <p className="subHeader">Areas you need to improve:</p>
+                </h4>
+                <Table
+                  style={{ fontSize: 18 }}
+                  className="ReviewPage-Table"
+                  striped
+                  bordered
+                  hover
+                >
+                  <tbody>
+                    {this.props.noResp.map(items => {
+                      return (
+                        <div>
+                          {items.map(item => (
+                            <tr>
+                              <td>
+                                <span
+                                  class="glyphicon glyphicon-remove"
+                                  style={{ color: "red" }}
+                                ></span>
+                              </td>
+                              <td>{item}</td>
+                            </tr>
+                          ))}
+                        </div>
+                      );
+                    })}
+                  </tbody>
+                </Table>
+              </div>
+            </div>
+            <div className="Centre-Bordered-Section">
+              <div className="Bordered-Section">
+                <h4 className="subHeader">Skill Levels</h4>
+                <div className="border-line"></div>
+                <h4>
+                  <p className="subHeader">Areas you are doing well in:</p>
+                </h4>
+                <Table
+                  style={{ fontSize: 18 }}
+                  className="ReviewPage-Table"
+                  striped
+                  bordered
+                  hover
+                >
+                  <tbody>
+                    {this.props.yesSkillList.map(items => {
+                      return (
+                        <div>
+                          {items.map(item => (
+                            <tr>
+                              <td>
+                                <span
+                                  class="glyphicon glyphicon-ok"
+                                  style={{ color: "green" }}
+                                ></span>
+                              </td>
+                              <td>{item}</td>
+                            </tr>
+                          ))}
+                        </div>
+                      );
+                    })}
+                  </tbody>
+                </Table>
+                <div className="border-line"></div>
+                <h4>
+                  <p className="subHeader">Areas you need to improve:</p>
+                </h4>
+                <Table
+                  style={{ fontSize: 18 }}
+                  className="ReviewPage-Table"
+                  striped
+                  bordered
+                  hover
+                >
+                  <tbody>
+                    {this.props.noSkillList.map(items => {
+                      return (
+                        <div>
+                          {items.map(item => (
+                            <tr>
+                              <td>
+                                <span
+                                  class="glyphicon glyphicon-ok"
+                                  style={{ color: "green" }}
+                                ></span>
+                              </td>
+                              <td>{item}</td>
+                            </tr>
+                          ))}
+                        </div>
+                      );
+                    })}
+                  </tbody>
+                </Table>
+              </div>
+            </div>
+          </div>
           <div className="Centre-Bordered-Section">
             <div className="Bordered-Section">
-              <h4 className="subHeader">Responsibilities</h4>
-              <div className="border-line"></div>
               <h4>
-                <p className="subHeader">Areas you are doing well in:</p>
+                <p className="subHeader">Goals for the future:</p>
               </h4>
-              <Table
-                style={{ fontSize: 18 }}
-                className="ReviewPage-Table"
-                striped
-                bordered
-                hover
-              >
-                <tbody>
-                  {this.props.yesResp.map(items => {
-                    console.log(items);
-                    return (
-                      <div>
-                        {items.map(item => (
-                          <tr>
-                            <td>
-                              <span
-                                class="glyphicon glyphicon-ok"
-                                style={{ color: "green" }}
-                              ></span>
-                            </td>
-                            <td>{item}</td>
-                          </tr>
-                        ))}
-                      </div>
-                    );
-                  })}
-                </tbody>
-              </Table>
-              <div className="border-line"></div>
-              <h4>
-                <p className="subHeader">Areas you need to improve:</p>
-              </h4>
+              <br></br>
+              {/* Maps all custom goals information here */}
               <Table
                 style={{ fontSize: 18 }}
                 className="ReviewPage-Table"
@@ -168,80 +273,36 @@ export default class ReviewPage extends React.Component {
                       <div>
                         {items.map(item => (
                           <tr>
-                            <td>
-                              <span
-                                class="glyphicon glyphicon-remove"
-                                style={{ color: "red" }}
-                              ></span>
+                            {/* The Checkbox */}
+                            <td style={{ width: "24px" }}>
+                              <input type="checkbox" label={item} />
                             </td>
-                            <td>{item}</td>
+                            <td>
+                              {/* Custom Goal Content */}
+                              <div>{item}</div>
+                            </td>
+                            {/* The Delete Button */}
                           </tr>
                         ))}
                       </div>
                     );
                   })}
                 </tbody>
-              </Table>
-            </div>
-          </div>
-          <div className="Centre-Bordered-Section">
-            <div className="Bordered-Section">
-              <h4 className="subHeader">Skill Levels</h4>
-              <div className="border-line"></div>
-              <h4>
-                <p className="subHeader">Areas you are doing well in:</p>
-              </h4>
-              <Table
-                style={{ fontSize: 18 }}
-                className="ReviewPage-Table"
-                striped
-                bordered
-                hover
-              >
-                <tbody>
-                  {this.props.yesSkillList.map(items => {
-                    return (
-                      <div>
-                        {items.map(item => (
-                          <tr>
-                            <td>
-                              <span
-                                class="glyphicon glyphicon-ok"
-                                style={{ color: "green" }}
-                              ></span>
-                            </td>
-                            <td>{item}</td>
-                          </tr>
-                        ))}
-                      </div>
-                    );
-                  })}
-                </tbody>
-              </Table>
-              <div className="border-line"></div>
-              <h4>
-                <p className="subHeader">Areas you need to improve:</p>
-              </h4>
-              <Table
-                style={{ fontSize: 18 }}
-                className="ReviewPage-Table"
-                striped
-                bordered
-                hover
-              >
                 <tbody>
                   {this.props.noSkillList.map(items => {
                     return (
                       <div>
                         {items.map(item => (
                           <tr>
-                            <td>
-                              <span
-                                class="glyphicon glyphicon-ok"
-                                style={{ color: "green" }}
-                              ></span>
+                            {/* The Checkbox */}
+                            <td style={{ width: "24px" }}>
+                              <input type="checkbox" label={item} />
                             </td>
-                            <td>{item}</td>
+                            <td>
+                              {/* Custom Goal Content */}
+                              <div>{item}</div>
+                            </td>
+                            {/* The Delete Button */}
                           </tr>
                         ))}
                       </div>
@@ -249,151 +310,92 @@ export default class ReviewPage extends React.Component {
                   })}
                 </tbody>
               </Table>
-            </div>
-          </div>
-        </div>
-        <div className="Centre-Bordered-Section">
-          <div className="Bordered-Section">
-            <h4>
-              <p className="subHeader">Goals for the future:</p>
-            </h4>
-            <br></br>
-            {/* Maps all custom goals information here */}
-            <Table
-              style={{ fontSize: 18 }}
-              className="ReviewPage-Table"
-              striped
-              bordered
-              hover
-            >
-              <tbody>
-                {this.props.noResp.map(items => {
-                  return (
-                    <div>
-                      {items.map(item => (
-                        <tr>
-                          {/* The Checkbox */}
-                          <td style={{ width: "24px" }}>
-                            <input type="checkbox" label={item} />
-                          </td>
-                          <td>
-                            {/* Custom Goal Content */}
-                            <div>{item}</div>
-                          </td>
-                          {/* The Delete Button */}
-                        </tr>
-                      ))}
-                    </div>
-                  );
-                })}
-              </tbody>
-              <tbody>
-                {this.props.noSkillList.map(items => {
-                  return (
-                    <div>
-                      {items.map(item => (
-                        <tr>
-                          {/* The Checkbox */}
-                          <td style={{ width: "24px" }}>
-                            <input type="checkbox" label={item} />
-                          </td>
-                          <td>
-                            {/* Custom Goal Content */}
-                            <div>{item}</div>
-                          </td>
-                          {/* The Delete Button */}
-                        </tr>
-                      ))}
-                    </div>
-                  );
-                })}
-              </tbody>
-            </Table>
-            {/* Maps all custom goals information here */}
-            <Table
-              style={{ fontSize: 18 }}
-              className="ReviewPage-Table"
-              striped
-              bordered
-              hover
-            >
-              <tbody>
-                {this.props.customGoals.map((item, input) => {
-                  var label = " " + item;
-                  return (
-                    <tr>
-                      {/* The Checkbox */}
-                      <td style={{ width: "24px" }}>
-                        <input type="checkbox" label={label} />
-                      </td>
-                      <td>
-                        {/* Custom Goal Content */}
-                        <div>{label}</div>
-                      </td>
-                      {/* The Delete Button */}
-                      <td
-                        style={{ width: "24px" }}
-                        className="deleteButtonCell"
-                      >
-                        <button
-                          id={input}
-                          onClick={() => this.deleteCustomGoal(input)}
-                          type="button"
-                          class="btn btn-light btn-lg close"
-                          aria-label="Close"
+              {/* Maps all custom goals information here */}
+              <Table
+                style={{ fontSize: 18 }}
+                className="ReviewPage-Table"
+                striped
+                bordered
+                hover
+              >
+                <tbody>
+                  {this.props.customGoals.map((item, input) => {
+                    var label = " " + item;
+                    return (
+                      <tr>
+                        {/* The Checkbox */}
+                        <td style={{ width: "24px" }}>
+                          <input type="checkbox" label={label} />
+                        </td>
+                        <td>
+                          {/* Custom Goal Content */}
+                          <div>{label}</div>
+                        </td>
+                        {/* The Delete Button */}
+                        <td
+                          style={{ width: "24px" }}
+                          className="deleteButtonCell"
                         >
-                          &times;
+                          <button
+                            id={input}
+                            onClick={() => this.deleteCustomGoal(input)}
+                            type="button"
+                            class="btn btn-light btn-lg close"
+                            aria-label="Close"
+                          >
+                            &times;
                         </button>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </Table>
-            {/* The Add Custom GOal textbox */}
-            <p class="font-weight-bold" style={{ fontSize: 20 }}>
-              <input
-                type="text"
-                placeholder="Add custom goal"
-                style={{ height: 30, width: 400, textAlign: "center" }}
-                id="addCustomGoal"
-                onKeyDown={() => this.addCustomGoal()}
-              />
-            </p>
-          </div>
-        </div>
-        <h4>
-          <p class="font-weight-bold" style={{ fontSize: 20 }}>
-            Set deadline for:
-          </p>
-        </h4>
-        <div className="Centre-Bordered-Section">
-          {/* Code for the slider (date reminder) */}
-          <div className="slidersection">
-            <div className="sliderwords">1 Week</div>
-            <div class="slidecontainer" className="slidecontainer">
-              <input
-                type="range"
-                min="0"
-                max={this.state.remindIn.length - 1}
-                class="slider"
-                id="slidecontainer"
-                onChange={this.updateRemindInDate}
-                className="slider"
-              />
-              {/* Text underneath the slider */}
-              <div style={remindPosition} className="slidecontainer">
-                {this.state.remindIn[this.props.remindInDate]}
-              </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>
+              {/* The Add Custom GOal textbox */}
+              <p class="font-weight-bold" style={{ fontSize: 20 }}>
+                <input
+                  type="text"
+                  placeholder="Add custom goal"
+                  style={{ height: 30, width: 400, textAlign: "center" }}
+                  id="addCustomGoal"
+                  onKeyDown={() => this.addCustomGoal()}
+                />
+              </p>
             </div>
-            <div>1 Year</div>
+          </div>
+          <h4>
+            <p class="font-weight-bold" style={{ fontSize: 20 }}>
+              Set deadline for:
+          </p>
+          </h4>
+          <div className="Centre-Bordered-Section">
+            {/* Code for the slider (date reminder) */}
+            <div className="slidersection">
+              <div className="sliderwords">1 Week</div>
+              <div class="slidecontainer" className="slidecontainer">
+                <input
+                  type="range"
+                  min="0"
+                  max={this.state.remindIn.length - 1}
+                  class="slider"
+                  id="slidecontainer"
+                  onChange={this.updateRemindInDate}
+                  className="slider"
+                />
+                {/* Text underneath the slider */}
+                <div style={remindPosition} className="slidecontainer">
+                  {this.state.remindIn[this.props.remindInDate]}
+                </div>
+              </div>
+              <div>1 Year</div>
+            </div>
           </div>
         </div>
         <div className="Centre-Bordered-Section">
           {/* The Submit Button */}
           <Button variant="primary" className="Submit-Button">
             Submit
-          </Button>
+        </Button>
         </div>
       </div>
     );
