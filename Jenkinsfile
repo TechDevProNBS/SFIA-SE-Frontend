@@ -10,8 +10,9 @@ pipeline {
 	}
             steps {
             echo "Testing"
-		sh 'docker image build --build-arg ENVIRON1="location.hostname" -t="sebs2112/sfia-frontend:testing" .'
-                sh 'docker push sebs2112/sfia-frontend:testing' 
+		sh 'docker image build --build-arg ENVIRON1="location.hostname" -t="10.0.5.4/5000:testing" .'
+                sh 'docker push 10.0.5.4/5000:testing' 
+		sh '/home/manager/terraform-azure/frontEndUpdate.sh'
                 }
             }
 
@@ -23,9 +24,10 @@ pipeline {
 		}
 	}
             steps {
-		sh 'docker image build --build-arg ENVIRON1="location.hostname" -t="sebs2112/sfia-frontend:staging" .'
-                sh 'docker push sebs2112/sfia-frontend:staging' 
-                 echo "staging"
+		echo "staging"
+		sh 'docker image build --build-arg ENVIRON1="location.hostname" -t="10.0.5.4/5000:staging" .'
+                sh 'docker push 10.0.5.4/5000:staging' 
+		sh '/home/manager/terraform-azure/frontEndUpdate.sh'
                 } 
             }
 
@@ -38,8 +40,9 @@ pipeline {
 	}
             steps {
 		echo "production"
-               sh 'docker image build --build-arg ENVIRON1="location.hostname" -t="sebs2112/sfia-frontend:production" .'
-                sh 'docker push sebs2112/sfia-frontend:production' 
+                sh 'docker image build --build-arg ENVIRON1="location.hostname" -t="10.0.5.4/5000:production" .'
+                sh 'docker push 10.0.5.4/5000:production' 
+		sh '/home/manager/terraform-azure/frontEndUpdate.sh'
             }
         }
 }
