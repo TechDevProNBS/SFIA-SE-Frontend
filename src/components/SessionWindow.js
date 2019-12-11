@@ -19,7 +19,7 @@ export default class SessionWindow extends React.Component {
       remindInDate: 0,
       customGoals: [],
       newSkillList: [],
-      old_Carousel_Page: 0
+      old_Carousel_Page: 0,
       yResp: [],
       nResp: [],
       yesSkillList: [],
@@ -184,7 +184,7 @@ export default class SessionWindow extends React.Component {
       }
     }
   };
-
+  /**
    * Gets yes array from responsibilities and sets in state
    */
   pushResp = (newArr) => {
