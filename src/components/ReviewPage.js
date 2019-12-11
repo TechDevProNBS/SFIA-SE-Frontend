@@ -134,7 +134,7 @@ export default class ReviewPage extends React.Component {
                 hover
               >
                 <tbody>
-                  {this.props.yResp.map(items => {
+                  {this.props.yesResp.map(items => {
                     console.log(items);
                     return (
                       <div>
@@ -166,7 +166,7 @@ export default class ReviewPage extends React.Component {
                 hover
               >
                 <tbody>
-                  {this.props.nResp.map(items => {
+                  {this.props.noResp.map(items => {
                     return (
                       <div>
                         {items.map(item => (
@@ -204,7 +204,7 @@ export default class ReviewPage extends React.Component {
                 <tbody>
                   {this.props.yesSkillList.map(items => {
                     return (
-                      <p>
+                      <div>
                         {items.map(item => (
                           <tr>
                             <td>
@@ -216,7 +216,7 @@ export default class ReviewPage extends React.Component {
                             <td>{item}</td>
                           </tr>
                         ))}
-                      </p>
+                      </div>
                     );
                   })}
                 </tbody>
@@ -270,7 +270,7 @@ export default class ReviewPage extends React.Component {
               hover
             >
               <tbody>
-                {this.props.nResp.map(items => {
+                {this.props.noResp.map(items => {
                   return (
                     <div>
                       {items.map(item => (
