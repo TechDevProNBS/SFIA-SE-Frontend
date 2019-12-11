@@ -68,11 +68,6 @@ export default class SessionWindow extends React.Component {
     });
   };
 
-  skillLevelRefreshed = () => {
-    this.setState({
-      refreshSkillLevel: false
-    })
-  }
 
   /**
    * Updates remindInDate to the value of the slider
