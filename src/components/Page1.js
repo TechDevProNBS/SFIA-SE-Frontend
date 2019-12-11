@@ -22,7 +22,8 @@ export default class Page1 extends React.Component {
    * 
    */
   getReports = () => {
-    fetch(`http://localhost:2500/API/getReportListByDate/desc`)
+    var uri = (process.env.ADDRESS ? `http://${process.env.ADDRESS}` : `http://localhost:2500`) + `/API/reports/getReportListByDate/desc`
+    fetch(uri)
       .then(response => response.json())
       .then(reports => this.setState({ reports: reports }))
   }

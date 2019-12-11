@@ -249,7 +249,8 @@ export default class SessionWindow extends React.Component {
    * Fetchs skill list criteria from database based on selected skill
    */
   getList = () => {
-    fetch(`http://localhost:5500/API/showSkillLevelIn?skill_name=${this.state.newSkillList}`)
+    var uri = (process.env.ADDRESS ? `http://${process.env.ADDRESS}` : `http://localhost:5500`) + `/API/SkillLevel/findIn?skill_name=${this.state.newSkillList}`
+    fetch(uri)
       .then(response => response.json())
       .then(skillname => this.setState({ selectedSkill: skillname }))
   }
