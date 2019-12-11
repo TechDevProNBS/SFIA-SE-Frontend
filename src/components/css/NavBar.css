@@ -1,12 +1,12 @@
 /* Altering Bootstrap buttons */
-.btn {
+.btnNav {
     border-radius: 50% !important;
     border: solid !important;
     background-color: white !important;
 }
 
 /* Altering Bootstrap buttons when hovered */
-.btn:hover {
+.btnNav:hover {
     border-color: blue !important;
     background-color: blue !important;
 }
@@ -44,7 +44,7 @@
 /* Determines the parameters for the blue part of the Nav Bar */
 .Progress-Bar-Completed {
     background-color: blue;
-    width: 50%;
+    /* width: 50%; */
     height: 100%;
 }
 
