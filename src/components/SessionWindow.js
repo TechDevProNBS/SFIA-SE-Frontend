@@ -39,7 +39,7 @@ export default class SessionWindow extends React.Component {
       refreshSkillLevel: true
     });
     this.getList();
-  
+
   };
   // Deletes a Custom Goal, called from ReviewPage.js
   deleteCustomGoal = input => {
@@ -141,7 +141,7 @@ export default class SessionWindow extends React.Component {
       .then(skillname => this.setState({ selectedSkill: skillname }))
   }
 
- 
+
   render() {
     // edits Carousel_Style to display the page decieded by Session.js
     var Carousel_Style = {
