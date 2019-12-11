@@ -17,19 +17,19 @@ export default class SkillList extends React.Component {
     //This pulls the data from the database and puts it into "records"
     getSkills = () => {
         fetch(`http://localhost:4500/API/showSkillList`)
-          .then(response => response.json())
-          .then(SkillList_info => this.setState({ records: SkillList_info }))
-      }
-      componentDidMount = () => {
+            .then(response => response.json())
+            .then(SkillList_info => this.setState({ records: SkillList_info }))
+    }
+    componentDidMount = () => {
         this.getSkills();
-      }
+    }
     //calls the handleForm function on session window
     handleForm() {
         var newArray = this.state.array
         this.props.handleForm(newArray)
         this.props.handlePageChange("SkillLevels")
-      };
-      getRoles = () => {
+    };
+    getRoles = () => {
         var selectMenu = document.getElementById("dropdown");
         var selectVal = selectMenu.options[selectMenu.selectedIndex].text;
         if (selectVal === "---Select---") {
@@ -87,34 +87,38 @@ export default class SkillList extends React.Component {
             }
         }
     }
-//maps the skills from the database and renders to the screen. CCS is still needed here
+    //maps the skills from the database and renders to the screen. CCS is still needed here
     render() {
-        return <div>
-            <Col>
-                <h3>Skill List</h3>
-                <p>Please select an appropriate job role, or customise your own list.</p>
-                <center>
-                    <select id="dropdown" onChange={()=>this.getRoles()}>
-                        <option>---Select---</option>
-                        <option>Analyst</option>
-                    </select>
-                </center><br />
-                <div>To alter or make your own custom list, select the checkboxes below:</div>
-            </Col>
-            <form >
-                {this.state.records.map((cat, index) => (
-                    <div Key={index}>Catergory: {cat.category_name}
-                        {cat.subcategories.map((subcat, index) => (
-                            <div Key={index}>Subatergory: {subcat.subcategory_name}
-                                {subcat.skills.map((skill, index) => (
-                                    <span><div Key={index}> <input type="checkbox" id={(skill.skill_name)} onChange={() => this.boxChecked(skill.skill_name)} /> {skill.skill_name} </div>  </span>
-                                ))} </div>
+        return (
+            <div className="outter">
+                <div className="inner">
+                    <Col>
+                        <h3>Skill List</h3>
+                        <p>Please select an appropriate job role, or customise your own list.</p>
+                        <center>
+                            <select id="dropdown" onChange={() => this.getRoles()}>
+                                <option>---Select---</option>
+                                <option>Analyst</option>
+                            </select>
+                        </center><br />
+                        <div>To alter or make your own custom list, select the checkboxes below:</div>
+                    </Col>
+                    <form >
+                        {this.state.records.map((cat, index) => (
+                            <div Key={index}>Catergory: {cat.category_name}
+                                {cat.subcategories.map((subcat, index) => (
+                                    <div Key={index}>Subatergory: {subcat.subcategory_name}
+                                        {subcat.skills.map((skill, index) => (
+                                            <span><div Key={index}> <input type="checkbox" id={(skill.skill_name)} onChange={() => this.boxChecked(skill.skill_name)} /> {skill.skill_name} </div>  </span>
+                                        ))} </div>
+                                ))}
+                            </div>
                         ))}
-                    </div>
-                ))}
-                
-            </form>
-            <button type="submit" id="newArray" onClick={this.handleForm}>Submit</button>
-        </div>;
+
+                    </form>
+                </div><br />
+                <button type="submit" id="newArray" onClick={this.handleForm}>Submit</button>
+            </div>
+        )
     }
 }
