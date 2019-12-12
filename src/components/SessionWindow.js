@@ -294,6 +294,7 @@ export default class SessionWindow extends React.Component {
           </div>
           <div className="Carousel_Item">
             <SkillLevel
+              resetSkillLvl={this.resetSkillLevel}
               newSkillList={this.state.newSkillList}
               level={this.state.lvl}
               selectedSkill={this.state.selectedSkill}
