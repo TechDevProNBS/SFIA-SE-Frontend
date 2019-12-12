@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Row, Col, Form, } from 'react-bootstrap';
-
 export default class SkillList extends React.Component {
 
     constructor(props) {
@@ -19,8 +18,8 @@ export default class SkillList extends React.Component {
     getSkills = () => {
         var uri = (process.env.ADDRESS ? `http://${process.env.ADDRESS}` : `http://localhost:4500`) + `/API/SkillList/getAll`
         fetch(uri)
-          .then(response => response.json())
-          .then(SkillList_info => this.setState({ records: SkillList_info }))
+            .then(response => response.json())
+            .then(SkillList_info => this.setState({ records: SkillList_info }))
     }
 
     componentDidMount = () => {
@@ -40,14 +39,14 @@ export default class SkillList extends React.Component {
     getRoleNames = () => {
         var uri = (process.env.ADDRESS ? `http://${process.env.ADDRESS}` : `http://localhost:2000`) + `/API/roles/get`
         fetch(uri)
-          .then(response => response.json())
-          .then(roles => this.populateDropdown(roles))
-        
+            .then(response => response.json())
+            .then(roles => this.populateDropdown(roles))
+
     }
 
     populateDropdown = (roles) => {
         let options = [];
-        roles.map( (role) =>{
+        roles.map((role) => {
             options.push(<option>{role.role_name}</option>)
         })
         this.setState({
@@ -134,9 +133,16 @@ export default class SkillList extends React.Component {
                     </Col>
                     <form >
                         {this.state.records.map((cat, index) => (
-                            <div Key={index}>Catergory: {cat.category_name}
+                            <div Key={index}><h1>Catergory: {cat.category_name}</h1>
+                                <p></p>
+                                <p></p>
+                                <p></p>
                                 {cat.subcategories.map((subcat, index) => (
-                                    <div Key={index}>Subcatergory: {subcat.subcategory_name}
+                                    <div Key={index}><h3>Subcategory: {subcat.subcategory_name}</h3>
+                                        <p></p>
+                                        <p></p>
+                                        <p></p>
+                                        <div></div>
                                         {subcat.skills.map((skill, index) => (
                                             <span><div Key={index}> <input type="checkbox" id={(skill.skill_name)} onChange={() => this.boxChecked(skill.skill_name)} /> {skill.skill_name} </div>  </span>
                                         ))} </div>
