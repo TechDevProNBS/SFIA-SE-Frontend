@@ -1,0 +1,13 @@
+div.outer{
+    width: 100vw;
+    overflow-x: hidden;
+    height:84vh
+}
+
+div.inner{
+    margin-top:2vh;
+    width: 100vw;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    height:76vh
+}

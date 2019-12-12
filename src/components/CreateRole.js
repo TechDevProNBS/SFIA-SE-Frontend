@@ -4,7 +4,6 @@ import { Container, Row, Col, Form, } from 'react-bootstrap';
 export default class SkillList extends React.Component {
 
     constructor(props) {
-
         super(props);
         this.boxChecked = this.boxChecked.bind(this);
         this.handleForm = this.handleForm.bind(this);
@@ -14,22 +13,32 @@ export default class SkillList extends React.Component {
             array: []
         }
     }
-    //This pulls the data from the database and puts it into "records"
+
+    /**
+     * Gets the skills and stores them in the state
+     */
     getSkills = () => {
         var uri = (process.env.ADDRESS ? `http://${process.env.ADDRESS}` : `http://localhost:4500`) + `/API/SkillList/getAll`
         fetch(uri)
-          .then(response => response.json())
-          .then(SkillList_info => this.setState({ records: SkillList_info }))
-      }
-      componentDidMount = () => {
+            .then(response => response.json())
+            .then(SkillList_info => this.setState({ records: SkillList_info }))
+    }
+
+    componentDidMount = () => {
         this.getSkills();
     }
-    //calls the handleForm function on session window
+
+    /**
+     * calls the handleForm function on session window
+     */
     handleForm() {
         var newArray = this.state.array
         this.props.handleForm(newArray)
-        this.props.handlePageChange("SkillLevels")
     };
+
+    /**
+     * Finds the role selected and fetches data from the database to autofill the boxes
+     */
     getRoles = () => {
         var selectMenu = document.getElementById("dropdown");
         var selectVal = selectMenu.options[selectMenu.selectedIndex].text;
@@ -50,9 +59,13 @@ export default class SkillList extends React.Component {
                 )
                 .then(this.state.array = tempArray)
                 .then(this.autofill)
+
         }
     }
-    //This auto fills the skills after the role is selected
+
+    /**
+     * Autofills the boxes based on if they are in the array that gets passed to the next page
+     */
     autofill = () => {
         var array = this.state.array;
         for (var i = 0; i < array.length; i++) {
@@ -61,7 +74,10 @@ export default class SkillList extends React.Component {
             tick.checked = true;
         }
     }
-    //this removes the auto fiolled ticks when select is clicked
+
+    /**
+     * When the default option is pressed, it resets all the checks for the boxes
+     */
     autofillRemove = () => {
         var array = this.state.array;
         for (var i = 0; i < array.length; i++) {
@@ -70,15 +86,14 @@ export default class SkillList extends React.Component {
             tick.checked = false;
         }
     }
-    //creates an array and also deletes entries if needed
-
     /**
     * 
-    * Example message
+    * Checks if box is checked and adds skill to the array
     * 
-    * @param  input.
+    * @param  input. Name of the skill being added
     * 
     */
+
     boxChecked(input) {
         var a = document.getElementById(`${input}`);
         if (a.checked == true) {
@@ -88,39 +103,42 @@ export default class SkillList extends React.Component {
                 this.state.array.splice(this.state.array.indexOf(input), 1);
             }
         }
+        console.log(this.state.array)
     }
-    //maps the skills from the database and renders to the screen. CSS is still needed here
+    /**
+     * Maps the skills from the database and renders to the screen. CSS is still needed here
+     */
     render() {
-        return (
-            <div className="outter">
-                <div className="inner">
-                    <Col>
-                        <h3>Skill List</h3>
-                        <p>Please select an appropriate job role, or customise your own list.</p>
-                        <center>
-                            <select id="dropdown" onChange={() => this.getRoles()}>
-                                <option>---Select---</option>
-                                <option>Analyst</option>
-                            </select>
-                        </center><br />
-                        <div>To alter or make your own custom list, select the checkboxes below:</div>
-                    </Col>
-                    <form >
-                        {this.state.records.map((cat, index) => (
-                            <div Key={index}>Catergory: {cat.category_name}
-                                {cat.subcategories.map((subcat, index) => (
-                                    <div Key={index}>Subcatergory: {subcat.subcategory_name}
-                                        {subcat.skills.map((skill, index) => (
-                                            <span><div Key={index}> <input type="checkbox" id={(skill.skill_name)} onChange={() => this.boxChecked(skill.skill_name)} /> {skill.skill_name} </div>  </span>
-                                        ))} </div>
-                                ))}
-                            </div>
+        return <div>
+            <Col>
+                <h3>Skill List</h3>
+                <p>Please select an appropriate job role, or customise your own list.</p>
+                <center>
+                    <select id="dropdown" onChange={() => this.getRoles()}>
+                        <option>---Select---</option>
+                        <option>Analyst</option>
+                    </select>
+                    <br />
+                    Please enter a job role to create
+                    <br />
+                    <input type="text" style={{ textAlign: "center" }} />
+                </center><br />
+                <div>To alter or make your own custom list, select the checkboxes below:</div>
+            </Col>
+            <form >
+                {this.state.records.map((cat, index) => (
+                    <div Key={index}>Category: {cat.category_name}
+                        {cat.subcategories.map((subcat, index) => (
+                            <div Key={index}>Subcategory: {subcat.subcategory_name}
+                                {subcat.skills.map((skill, index) => (
+                                    <span><div Key={index}> <input type="checkbox" id={(skill.skill_name)} onChange={() => this.boxChecked(skill.skill_name)} /> {skill.skill_name} </div>  </span>
+                                ))} </div>
                         ))}
+                    </div>
+                ))}
 
-                    </form>
-                </div><br />
-                <button type="submit" id="newArray" onClick={this.handleForm}>Submit</button>
-            </div>
-        )
+            </form>
+            <button type="submit" id="newArray" onClick={this.handleForm}>Submit</button>
+        </div>;
     }
 }

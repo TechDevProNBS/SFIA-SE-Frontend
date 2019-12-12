@@ -21,7 +21,8 @@ export default class Responsibilities extends React.Component {
    * Gets the responsibilities from the database and sets it in the state
    */
   getResp = () => {
-    fetch(`http://localhost:3500/API/showResponsibilities`)
+    var uri = (process.env.ADDRESS ? `http://${process.env.ADDRESS}` : `http://localhost:3500`) + `/API/responsibilities/findAll`
+    fetch(uri)
       .then(response => response.json())
       .then(responsibility_info => this.setState({ resp: responsibility_info }))
   }
@@ -368,11 +369,11 @@ export default class Responsibilities extends React.Component {
 
   render() {
     return (
-      <Container>
-        <div className="lvls">
-          <table id="table" class="table table-hover">
+      <div className="outter">
+        <div className="inner">
+          <table id="table" className="table table-hover responsibilities">
             <thead>
-              <tr>
+              <tr className="responsibilities">
                 <th></th>
                 <th onClick={() => this.autoFill(1)}>Level 1</th>
                 <th onClick={() => this.autoFill(2)}>Level 2</th>
@@ -385,7 +386,7 @@ export default class Responsibilities extends React.Component {
             </thead>
             <tbody id="list">
               {this.state.resp.map((name, index) => (
-                <tr id="">
+                <tr id="" className="responsibilities">
                   <td><b>{name.responsibility_name}</b></td>
                   {name.responsibility_descriptions.map((desc, index) => (
                     <td>
@@ -407,7 +408,7 @@ export default class Responsibilities extends React.Component {
           </table>
         </div><br />
         <button name="skillList" onClick={() => this.handleOnClick()}>Skill List Selection</button>
-      </Container>
+      </div>
     );
   }
 }

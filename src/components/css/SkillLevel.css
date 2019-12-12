@@ -1,0 +1,7 @@
+table.skilllevel {
+    table-layout: fixed;
+}
+
+.skilllevel th,  .skilllevel td{
+    width: 15vw;
+}

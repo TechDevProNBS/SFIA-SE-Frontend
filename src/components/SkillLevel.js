@@ -475,11 +475,11 @@ export default class SkillLevel extends React.Component {
 
   render() {
     return (
-      <Container>
-        <div className="lvls">
-          <table id="tableSL" class="table table-hover">
+      <div className="outter">
+        <div className="inner">
+          <table id="tableSL" class="table table-hover skilllevel">
             <thead>
-              <tr>
+              <tr className="skilllevel">
                 <th></th>
                 <th onClick={() => this.autoFill(1)}>Level 1</th>
                 <th onClick={() => this.autoFill(2)}>Level 2</th>
@@ -492,7 +492,7 @@ export default class SkillLevel extends React.Component {
             </thead>
             <tbody id="list1">
               {this.props.selectedSkill.map((name, index) => (
-                <tr>
+                <tr className="skilllevel">
                   <td><b>{name.skill_name}</b></td>
                   {[...Array(name.skill_descriptions[0].level - 1)].map((e, i) => (
                     <td></td>
@@ -517,7 +517,7 @@ export default class SkillLevel extends React.Component {
           </table>
         </div> <br />
         <button name="skillList" onClick={() => this.handleOnClick()}>Review</button>
-      </Container>
+      </div>
     );
   }
 }

@@ -30,8 +30,8 @@ export default class Review extends React.Component {
    */
   componentDidMount = () => {
     const { id } = this.props.match.params
-
-    fetch(`http://localhost:2500/API/getReportById/${id}`)
+    var uri = (process.env.ADDRESS ? `http://${process.env.ADDRESS}` : `http://localhost:2500`) + `/API/reports/getReportById/${id}`
+    fetch(uri)
       .then(response => response.json())
       .then(SkillList_info =>
         this.setState(
