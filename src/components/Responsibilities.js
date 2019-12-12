@@ -197,10 +197,7 @@ export default class Responsibilities extends React.Component {
    * Calls getLvl and nextPage function on button click
    */
   handleOnClick = () => {
-    // this.check();
-    this.getLvl();
-    this.nextPage();
-
+    this.check();
   }
 
   /**
@@ -222,7 +219,6 @@ export default class Responsibilities extends React.Component {
         }
       }
     }
-    console.log(lvl)
     switch (lvl) {
       case 1:
         this.addArr(lvl);
@@ -276,6 +272,14 @@ export default class Responsibilities extends React.Component {
           nArr.push(curArr[i].lastElementChild.innerHTML);
         }
       }
+    } else if (lvl === 7) {
+      for (var i = 0; i < curArr.length; i++) {
+        if (curArr[i].firstElementChild.value === "true") {
+          yArr.push(curArr[i].lastElementChild.innerHTML);
+        } else if (curArr[i].firstElementChild.value === "false") {
+          nArr.push(curArr[i].lastElementChild.innerHTML);
+        }
+      }
     } else {
       for (var j = 0; j < curArr.length; j++) {
         if (curArr[j].firstElementChild.value === "true") {
@@ -307,6 +311,8 @@ export default class Responsibilities extends React.Component {
     if (selected === false) {
       alert("Please select all boxes")
     } else {
+      this.getLvl();
+      this.nextPage();
     }
   }
 
