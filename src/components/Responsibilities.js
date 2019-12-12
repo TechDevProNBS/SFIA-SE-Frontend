@@ -13,7 +13,8 @@ export default class Responsibilities extends React.Component {
       disable: true,
       respYesArr: [],
       respNoArr: [],
-      lvl: ""
+      lvl: "",
+      newLvl: 1
     }
   }
 
@@ -159,9 +160,9 @@ export default class Responsibilities extends React.Component {
     per = ((count / total) * 100).toFixed(2);
 
     if (per > ((2 / 3) * 100)) {
-      this.state.lvl = index;
+      this.state.newLvl = index;
     } else {
-      this.state.lvl = index - 1;
+      this.state.newLvl = index - 1;
     }
   }
 
@@ -257,6 +258,7 @@ export default class Responsibilities extends React.Component {
    * Assigns arrays and current level to state
    * Calls pushResp function 
    */
+
   addArr = (lvl) => {
     var prev = lvl - 1;
     var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
@@ -320,7 +322,7 @@ export default class Responsibilities extends React.Component {
    * Passes array and level in state to SessionWindow
    */
   pushResp = () => {
-    var lvl = this.state.lvl;
+    var lvl = this.state.newLvl;
     var newYArray = this.state.respYesArr;
     var newNArray = this.state.respNoArr;
     this.props.pushResp(newYArray);

@@ -72,7 +72,7 @@ export default class Review extends React.Component {
               </h4>
               <Table
                 style={{ fontSize: 18 }}
-                className="ReviewPage-Table"
+                className="Review-Table"
                 striped
                 bordered
                 hover
@@ -101,7 +101,7 @@ export default class Review extends React.Component {
               </h4>
               <Table
                 style={{ fontSize: 18 }}
-                className="ReviewPage-Table"
+                className="Review-Table"
                 striped
                 bordered
                 hover
@@ -135,7 +135,7 @@ export default class Review extends React.Component {
               </h4>
               <Table
                 style={{ fontSize: 18 }}
-                className="ReviewPage-Table"
+                className="Review-Table"
                 striped
                 bordered
                 hover
@@ -164,7 +164,7 @@ export default class Review extends React.Component {
               </h4>
               <Table
                 style={{ fontSize: 18 }}
-                className="ReviewPage-Table"
+                className="Review-Table"
                 striped
                 bordered
                 hover
@@ -199,7 +199,7 @@ export default class Review extends React.Component {
             <br></br>
             <Table
                 style={{ fontSize: 18 }}
-                className="ReviewPage-Table"
+                className="Review-Table"
                 striped
                 bordered
                 hover
