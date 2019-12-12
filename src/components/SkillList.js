@@ -133,7 +133,7 @@ export default class SkillList extends React.Component {
                     </Col>
                     <form >
                         {this.state.records.map((cat, index) => (
-                            <div Key={index}><h1>Catergory: {cat.category_name}</h1>
+                            <div Key={index}><h1>Category: {cat.category_name}</h1>
                                 <p></p>
                                 <p></p>
                                 <p></p>
