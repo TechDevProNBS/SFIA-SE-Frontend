@@ -26,7 +26,7 @@ export default class SessionWindow extends React.Component {
       noSkillList: [],
       lvl: "",
       slLvl: "",
-      selectedSkill: []
+      selectedSkill: [],
     };
   }
 
