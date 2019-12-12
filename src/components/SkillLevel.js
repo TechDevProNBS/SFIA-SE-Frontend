@@ -22,7 +22,7 @@ export default class SkillLevel extends React.Component {
    * Calls the skillLevelStart function
    */
   componentDidUpdate = () => {
-    this.skillLevelStart()
+    this.skillLevelStart();
   }
 
   /**
@@ -36,6 +36,7 @@ export default class SkillLevel extends React.Component {
     var lvlArr = []
     var min = 1;
     var check;
+    this.props.resetSkillLvl();
     for (var i = 0; i < select.length; i++) {
       var name = select[i].firstElementChild.getAttribute("name")
       if (parseInt(name) == parseInt(this.props.level)) {
@@ -463,7 +464,7 @@ export default class SkillLevel extends React.Component {
             </tbody>
           </table>
         </div> <br />
-        <button name="skillList" onClick={() => this.handleOnClick()}>Review</button>
+        <button name="reviewPage" onClick={() => this.handleOnClick()}>Review</button>
       </div>
     );
   }
