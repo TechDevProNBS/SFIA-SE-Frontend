@@ -188,8 +188,9 @@ export default class Responsibilities extends React.Component {
    * Calls getLvl and nextPage function on button click
    */
   handleOnClick = () => {
-    this.getLvl();
-    this.nextPage();
+    // this.getLvl();
+    // this.nextPage();
+    this.check();
   }
 
   /**
@@ -281,6 +282,78 @@ export default class Responsibilities extends React.Component {
     this.pushResp();
   }
 
+  check = () => {
+    var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
+    var select = Array.from(carousel[0].getElementsByTagName("select"))
+    var selected;
+    for (var i = 0; i < select.length; i++) {
+      if (select[i].disabled === false) {
+        if (select[i].value === "default") {
+          selected = false;
+        }
+      }
+    }
+    if (selected === false) {
+      alert("Please select all boxes")
+    } else {
+      this.getLvl();
+      this.nextPage();
+    }
+  }
+
+  /**
+   * Autofills select boxes with yes if default value is selected or no if yes is selected
+   */
+  autoFill = (lvl) => {
+    var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
+    var curArr = Array.from(carousel[0].querySelectorAll("[name=" + "'" + lvl + "'" + "]"))
+    for (var i = 0; i < curArr.length; i++) {
+      if (curArr[i].firstElementChild.disabled === false) {
+        if (curArr[i].firstElementChild.value !== "true") {
+          curArr[i].firstElementChild.value = "true";
+          this.enableSelect(lvl + 1);
+        } else {
+          curArr[i].firstElementChild.value = "false";
+          switch (lvl) {
+            case 1:
+              this.disableSelect(2);
+              this.disableSelect(3);
+              this.disableSelect(4);
+              this.disableSelect(5);
+              this.disableSelect(6);
+              this.disableSelect(7);
+              break;
+            case 2:
+              this.disableSelect(3);
+              this.disableSelect(4);
+              this.disableSelect(5);
+              this.disableSelect(6);
+              this.disableSelect(7);
+              break;
+            case 3:
+              this.disableSelect(4);
+              this.disableSelect(5);
+              this.disableSelect(6);
+              this.disableSelect(7);
+              break;
+            case 4:
+              this.disableSelect(5);
+              this.disableSelect(6);
+              this.disableSelect(7);
+              break;
+            case 5:
+              this.disableSelect(6);
+              this.disableSelect(7);
+              break;
+            case 6:
+              this.disableSelect(7);
+              break;
+          }
+        }
+      }
+    }
+  }
+
   /**
    * Passes array and level in state to SessionWindow
    */
@@ -301,13 +374,13 @@ export default class Responsibilities extends React.Component {
             <thead>
               <tr>
                 <th></th>
-                <th>Level 1</th>
-                <th>Level 2</th>
-                <th>Level 3</th>
-                <th>Level 4</th>
-                <th>Level 5</th>
-                <th>Level 6</th>
-                <th>Level 7</th>
+                <th onClick={() => this.autoFill(1)}>Level 1</th>
+                <th onClick={() => this.autoFill(2)}>Level 2</th>
+                <th onClick={() => this.autoFill(3)}>Level 3</th>
+                <th onClick={() => this.autoFill(4)}>Level 4</th>
+                <th onClick={() => this.autoFill(5)}>Level 5</th>
+                <th onClick={() => this.autoFill(6)}>Level 6</th>
+                <th onClick={() => this.autoFill(7)}>Level 7</th>
               </tr>
             </thead>
             <tbody id="list">

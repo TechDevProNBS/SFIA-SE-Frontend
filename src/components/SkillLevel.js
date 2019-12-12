@@ -384,11 +384,86 @@ export default class SkillLevel extends React.Component {
   }
 
   /**
+  * Checks is any select boxes are still they're default
+  * If they are, alert message shown to user, if not calls nextPage and sendSkillList function
+  */
+  check = () => {
+    var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
+    var select = Array.from(carousel[2].getElementsByTagName("select"))
+    var selected;
+    for (var i = 0; i < select.length; i++) {
+      if (select[i].disabled === false) {
+        if (select[i].value === "default") {
+          selected = false;
+        }
+      }
+    }
+    if (selected === false) {
+      alert("Please select all boxes")
+    } else {
+      this.sendSkillList();
+      this.nextPage();
+    }
+  }
+
+  /**
+   * Autofills select boxes with yes if default value is selected or no if yes is selected
+   */
+  autoFill = (lvl) => {
+    var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
+    var curArr = Array.from(carousel[2].querySelectorAll("[name=" + "'" + lvl + "'" + "]"))
+    for (var i = 0; i < curArr.length; i++) {
+      if (curArr[i].firstElementChild.disabled === false) {
+        if (curArr[i].firstElementChild.value !== "true") {
+          curArr[i].firstElementChild.value = "true";
+          this.enableSelect(lvl + 1);
+        } else {
+          curArr[i].firstElementChild.value = "false";
+          switch (lvl) {
+            case 1:
+              this.disableSelect(2);
+              this.disableSelect(3);
+              this.disableSelect(4);
+              this.disableSelect(5);
+              this.disableSelect(6);
+              this.disableSelect(7);
+              break;
+            case 2:
+              this.disableSelect(3);
+              this.disableSelect(4);
+              this.disableSelect(5);
+              this.disableSelect(6);
+              this.disableSelect(7);
+              break;
+            case 3:
+              this.disableSelect(4);
+              this.disableSelect(5);
+              this.disableSelect(6);
+              this.disableSelect(7);
+              break;
+            case 4:
+              this.disableSelect(5);
+              this.disableSelect(6);
+              this.disableSelect(7);
+              break;
+            case 5:
+              this.disableSelect(6);
+              this.disableSelect(7);
+              break;
+            case 6:
+              this.disableSelect(7);
+              break;
+          }
+        }
+      }
+    }
+  }
+
+  /**
    * Calls sendSkillList and nextPage function on button click
    */
   handleOnClick = () => {
-    this.sendSkillList();
-    this.nextPage();
+    this.check();
   }
 
   /**
@@ -406,13 +481,13 @@ export default class SkillLevel extends React.Component {
             <thead>
               <tr>
                 <th></th>
-                <th>Level 1</th>
-                <th>Level 2</th>
-                <th>Level 3</th>
-                <th>Level 4</th>
-                <th>Level 5</th>
-                <th>Level 6</th>
-                <th>Level 7</th>
+                <th onClick={() => this.autoFill(1)}>Level 1</th>
+                <th onClick={() => this.autoFill(2)}>Level 2</th>
+                <th onClick={() => this.autoFill(3)}>Level 3</th>
+                <th onClick={() => this.autoFill(4)}>Level 4</th>
+                <th onClick={() => this.autoFill(5)}>Level 5</th>
+                <th onClick={() => this.autoFill(6)}>Level 6</th>
+                <th onClick={() => this.autoFill(7)}>Level 7</th>
               </tr>
             </thead>
             <tbody id="list1">
@@ -426,8 +501,8 @@ export default class SkillLevel extends React.Component {
                     <td className="slData">
                       {desc.skill_criteria.map((desc2, index2) => (
                         <span name={desc.level} className={desc.level} >
-                          <select id={index2} disabled={this.state.disable} onChange={() => this.selectCount(desc.level)}>
-                            <option selected>{this.state.lblDefault}</option>
+                          <select required id={index2} disabled={this.state.disable} onChange={() => this.selectCount(desc.level)}>
+                            <option value="default" selected>{this.state.lblDefault}</option>
                             <option value="true">&#10004;</option>
                             <option value="false">&#10006;</option>
                           </select>
