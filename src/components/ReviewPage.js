@@ -11,7 +11,10 @@ import "./css/ReviewPage.css";
 */
 
 export default class ReviewPage extends React.Component {
-  // Contains all information required for the slider to function
+  /**
+   * Contains all information required for the slider to function
+   * @param {*} props 
+   */
   constructor(props) {
     super(props);
 
@@ -37,18 +40,25 @@ export default class ReviewPage extends React.Component {
         "1 Year"
       ],
       skillLevelYesArr: [],
-      skillLevelNoArr: []
+      skillLevelNoArr: [],
+      array: []
     };
   }
 
-  // Calls the deleteCustomGoal function in SessionWindow.js
-  // input is the item in custom goals which needs to be deleted
+  /**
+   *   Calls the deleteCustomGoal function in SessionWindow.js
+   *   input is the item in custom goals which needs to be deleted
+   */
+
   deleteCustomGoal = input => {
     this.props.deleteCustomGoal(input);
+    this.state.array.splice(this.state.array.indexOf(input), 1);
   };
 
-  // Checks if the key pressed inside the "add custom goal" Textbox was the enterkey and
-  // calls the addCustomGoal function in SessionWindow.js if true.
+  /**
+   * Checks if the key pressed inside the "add custom goal" Textbox was the enterkey and
+   * calls the addCustomGoal function in SessionWindow.js if true.
+   */
   addCustomGoal() {
     document
       .getElementById("addCustomGoal")
@@ -58,22 +68,26 @@ export default class ReviewPage extends React.Component {
           document.getElementById("addCustomGoal").value !== ""
         ) {
           event.preventDefault();
-          this.props.addCustomGoal(
-            document.getElementById("addCustomGoal").value
+          this.props.addCustomGoal(document.getElementById("addCustomGoal").value);
+          this.state.array.push(document.getElementById("addCustomGoal").value
           );
           document.getElementById("addCustomGoal").value = "";
         }
       });
   }
 
-  // Updated remindInDate as the value of the slider to SessionWindow.js
+  /**
+   *   Updated remindInDate as the value of the slider to SessionWindow.js
+   */
   updateRemindInDate = () => {
     this.props.updateRemindInDate(
       document.getElementById("slidecontainer").value
     );
   };
 
-  // Updates the value of remindInDate to be the length of the slider on a first render in SessionWindow.js
+  /**
+   *     Updates the value of remindInDate to be the length of the slider on a first render in SessionWindow.js
+   */
   componentDidMount() {
     this.props.updateRemindInDate(this.state.remindIn.length - 1);
     document.getElementById("addCustomGoal").value = "";
@@ -82,8 +96,203 @@ export default class ReviewPage extends React.Component {
     });
   }
 
+  /**
+   * Submit review
+   */
+  submitReview = () => {
+    console.log(this.props.yesResp);
+    this.formattingGreat_Skills()
+  }
+
+  /**
+   * Store checked options for goals in array
+   */
+  boxChecked = (input) => {
+    var a = document.getElementById(`${input}`);
+    if (a.checked == true) {
+      this.state.array.push(input);
+    } else {
+      while (this.state.array.indexOf(input) !== -1) {
+        this.state.array.splice(this.state.array.indexOf(input), 1);
+      }
+    }
+  }
+
+  /**
+   * Formatting and sending data to database
+   */
+  formattingGreat_Skills = () => {
+    var arr = this.props.yesResp;
+    var newArr = [];
+    arr.forEach(element => {
+      element.forEach(item => {
+        var value =
+        {
+          "responsibility_criterion": item
+        }
+        newArr.push(value)
+      })
+    })
+
+    var arr2 = this.props.noResp;
+    var newArr2 = [];
+    arr2.forEach(element => {
+      element.forEach(item => {
+        var value =
+        {
+          "responsibility_criterion": item
+        }
+        newArr2.push(value)
+      })
+    })
+
+    var arr3 = this.props.yesSkillList;
+    var newArr3 = [];
+    arr3.forEach(element => {
+      element.forEach(item => {
+        var value =
+        {
+          "skill_criterion": item
+        }
+        newArr3.push(value)
+      })
+    })
+
+    var arr4 = this.props.noSkillList;
+    var newArr4 = [];
+    arr4.forEach(element => {
+      element.forEach(item => {
+        var value =
+        {
+          "skill_criterion": item
+        }
+        newArr4.push(value)
+      })
+    })
+
+    var arr5 = this.state.array;
+    var newArr5 = [];
+    arr5.forEach(item => {
+      var value =
+      {
+        "criterion": item
+      }
+      newArr5.push(value)
+    })
+
+    var weeks = 0;
+    var months = 0;
+    var year = 0;
+
+    if (this.props.remindInDate == 0) {
+      weeks = 1
+      months = 0
+      year = 0
+    } else if (this.props.remindInDate == 1) {
+      weeks = 1
+      months = 0
+      year = 0
+    } else if (this.props.remindInDate == 2) {
+      weeks = 3
+      months = 0
+      year = 0
+    } else if (this.props.remindInDate == 3) {
+      weeks = 4
+      months = 0
+      year = 0
+    } else if (this.props.remindInDate == 4) {
+      weeks = 5
+      months = 0
+      year = 0
+    } else if (this.props.remindInDate == 5) {
+      weeks = 6
+      months = 0
+      year = 0
+    } else if (this.props.remindInDate == 6) {
+      weeks = 7
+      months = 0
+      year = 0
+    } else if (this.props.remindInDate == 7) {
+      weeks = 8
+      months = 0
+      year = 0
+    } else if (this.props.remindInDate == 8) {
+      weeks = 0
+      months = 3
+      year = 0
+    } else if (this.props.remindInDate == 9) {
+      weeks = 0
+      months = 4
+      year = 0
+    } else if (this.props.remindInDate == 10) {
+      weeks = 0
+      months = 5
+      year = 0
+    } else if (this.props.remindInDate == 11) {
+      weeks = 0
+      months = 6
+      year = 0
+    } else if (this.props.remindInDate == 12) {
+      weeks = 0
+      months = 7
+      year = 0
+    } else if (this.props.remindInDate == 13) {
+      weeks = 0
+      months = 8
+      year = 0
+    } else if (this.props.remindInDate == 14) {
+      weeks = 0
+      months = 9
+      year = 0
+    } else if (this.props.remindInDate == 15) {
+      weeks = 0
+      months = 10
+      year = 0
+    } else if (this.props.remindInDate == 16) {
+      weeks = 0
+      months = 11
+      year = 0
+    } else {
+      weeks = 0
+      months = 0
+      year = 1
+    }
+
+    var oldDate = new Date();
+    var newDate = new Date(oldDate.getFullYear() + year, oldDate.getMonth() + months, oldDate.getDate() + (7 * weeks))
+    var toPost =
+    {
+      "date_created": oldDate.toISOString(),
+      "level": this.props.slLevel,
+      "great_skills": newArr3,
+      "improve_skills": newArr4,
+      "great_responsibilities": newArr,
+      "improve_responsibilities": newArr2,
+      "goals": newArr5,
+      "goal_deadline": newDate.toISOString()
+    }
+
+    var uri = (process.env.ADDRESS ? `http://${process.env.ADDRESS}` : `http://localhost:2500`) + `/API/reports/postReport`
+    fetch(uri, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(toPost)
+    })
+      .then(response => {
+        if (response.status === 200) {
+          window.location.replace("/page1");
+        } else {
+          alert("Error sending data")
+        }
+      })
+  }
+
   render() {
-    // Determines the position of the words (date reminder set) underneath the slider
+    /**
+     *     Determines the position of the words (date reminder set) underneath the slider
+     */
     var remindPosition = {
       left:
         (this.props.remindInDate / (this.state.remindIn.length - 1)) * 100 -
@@ -128,7 +337,6 @@ export default class ReviewPage extends React.Component {
                 >
                   <tbody>
                     {this.props.yesResp.map(items => {
-                      console.log(items);
                       return (
                         <div>
                           {items.map(item => (
@@ -270,7 +478,7 @@ export default class ReviewPage extends React.Component {
                           <tr>
                             {/* The Checkbox */}
                             <td style={{ width: "24px" }}>
-                              <input type="checkbox" label={item} />
+                              <span><div Key={item}> <input type="checkbox" id={(item)} onChange={() => this.boxChecked(item)} /></div></span>
                             </td>
                             <td>
                               {/* Custom Goal Content */}
@@ -291,7 +499,7 @@ export default class ReviewPage extends React.Component {
                           <tr>
                             {/* The Checkbox */}
                             <td style={{ width: "24px" }}>
-                              <input type="checkbox" label={item} />
+                              <span><div Key={item}> <input type="checkbox" id={(item)} onChange={() => this.boxChecked(item)} /></div></span>
                             </td>
                             <td>
                               {/* Custom Goal Content */}
@@ -319,14 +527,6 @@ export default class ReviewPage extends React.Component {
                     return (
                       <tr>
                         {/* The Checkbox */}
-                        <td style={{ width: "24px" }}>
-                          <input type="checkbox" label={label} />
-                        </td>
-                        <td>
-                          {/* Custom Goal Content */}
-                          <div>{label}</div>
-                        </td>
-                        {/* The Delete Button */}
                         <td
                           style={{ width: "24px" }}
                           className="deleteButtonCell"
@@ -341,12 +541,18 @@ export default class ReviewPage extends React.Component {
                             &times;
                         </button>
                         </td>
+                        <td>
+                          {/* Custom Goal Content */}
+                          <div>{label}</div>
+                        </td>
+                        {/* The Delete Button */}
+
                       </tr>
                     );
                   })}
                 </tbody>
               </Table>
-              {/* The Add Custom GOal textbox */}
+              {/* The Add Custom Goal textbox */}
               <p class="font-weight-bold" style={{ fontSize: 20 }}>
                 <input
                   type="text"
@@ -388,7 +594,7 @@ export default class ReviewPage extends React.Component {
         </div>
         <div className="Centre-Bordered-Section">
           {/* The Submit Button */}
-          <Button variant="primary" className="Submit-Button" >
+          <Button variant="primary" className="Submit-Button" onClick={this.submitReview} >
             Submit
         </Button>
         </div>
