@@ -35,12 +35,14 @@ export default class SkillLevel extends React.Component {
     var select = startLvl[2].getElementsByClassName("slData")
     var lvlArr = []
     var min = 1;
+    var check;
     for (var i = 0; i < select.length; i++) {
       var name = select[i].firstElementChild.getAttribute("name")
       if (parseInt(name) == parseInt(this.props.level)) {
         var span = select[i].getElementsByTagName("span")
         for (var j = 0; j < span.length; j++) {
           span[j].firstElementChild.disabled = false;
+          check = true;
         }
       }
       else {
@@ -48,13 +50,13 @@ export default class SkillLevel extends React.Component {
         min = lvlArr.sort((a, b) => a - b)[0];
       }
     }
-    if (parseInt(min) < parseInt(this.props.level)) {
+    if (check !== true) {
       for (var i = 0; i < select.length; i++) {
         var name = select[i].firstElementChild.getAttribute("name")
         if (parseInt(name) == parseInt(min)) {
           var span = select[i].getElementsByTagName("span")
           for (var j = 0; j < span.length; j++) {
-            span[j].firstElementChild.disabled = true;
+            span[j].firstElementChild.disabled = false;
           }
         }
       }
@@ -62,11 +64,11 @@ export default class SkillLevel extends React.Component {
   }
 
   /**
- * Calculates the percentage of true and false select boxes for each column 
- * Then calls the enable function if greater than 2/3
- * Calls disable function if less
- * Calls add array function passing current level
- */
+  * Calculates the percentage of true and false select boxes for each column 
+  * Then calls the enable function if greater than 2/3
+  * Calls disable function if less
+  * Calls add array function passing current level
+  */
   selectCount = (index) => {
     var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
     var select = Array.from(carousel[2].querySelectorAll("[name=" + "'" + index + "'" + "]"))
