@@ -320,13 +320,13 @@ export default class Responsibilities extends React.Component {
             <thead>
               <tr className="responsibilities">
                 <th></th>
-                <th onClick={() => this.autoFill(1)}>Level 1</th>
-                <th onClick={() => this.autoFill(2)}>Level 2</th>
-                <th onClick={() => this.autoFill(3)}>Level 3</th>
-                <th onClick={() => this.autoFill(4)}>Level 4</th>
-                <th onClick={() => this.autoFill(5)}>Level 5</th>
-                <th onClick={() => this.autoFill(6)}>Level 6</th>
-                <th onClick={() => this.autoFill(7)}>Level 7</th>
+                <th>Level 1</th>
+                <th>Level 2</th>
+                <th>Level 3</th>
+                <th>Level 4</th>
+                <th>Level 5</th>
+                <th>Level 6</th>
+                <th>Level 7</th>
               </tr>
             </thead>
             <tbody id="list">
