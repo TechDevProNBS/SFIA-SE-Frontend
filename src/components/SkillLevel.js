@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import './css/Responsibilities.css'
+import './css/SkillLevel.css'
 import { thisExpression } from '@babel/types';
 
 export default class SkillLevel extends React.Component {

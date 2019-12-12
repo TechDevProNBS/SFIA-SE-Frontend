@@ -30,8 +30,7 @@
 }
 
 .ReviewPage-Table {
-    /* width: 40% !important; */
-    /* font-size: 40px !important; */
+    width: 40vw !important;
 }
 
 /* Css for the delete button */
