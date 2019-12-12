@@ -189,8 +189,6 @@ export default class Responsibilities extends React.Component {
    * Calls getLvl and nextPage function on button click
    */
   handleOnClick = () => {
-    // this.getLvl();
-    // this.nextPage();
     this.check();
   }
 
@@ -299,59 +297,6 @@ export default class Responsibilities extends React.Component {
     } else {
       this.getLvl();
       this.nextPage();
-    }
-  }
-
-  /**
-   * Autofills select boxes with yes if default value is selected or no if yes is selected
-   */
-  autoFill = (lvl) => {
-    var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
-    var curArr = Array.from(carousel[0].querySelectorAll("[name=" + "'" + lvl + "'" + "]"))
-    for (var i = 0; i < curArr.length; i++) {
-      if (curArr[i].firstElementChild.disabled === false) {
-        if (curArr[i].firstElementChild.value !== "true") {
-          curArr[i].firstElementChild.value = "true";
-          this.enableSelect(lvl + 1);
-        } else {
-          curArr[i].firstElementChild.value = "false";
-          switch (lvl) {
-            case 1:
-              this.disableSelect(2);
-              this.disableSelect(3);
-              this.disableSelect(4);
-              this.disableSelect(5);
-              this.disableSelect(6);
-              this.disableSelect(7);
-              break;
-            case 2:
-              this.disableSelect(3);
-              this.disableSelect(4);
-              this.disableSelect(5);
-              this.disableSelect(6);
-              this.disableSelect(7);
-              break;
-            case 3:
-              this.disableSelect(4);
-              this.disableSelect(5);
-              this.disableSelect(6);
-              this.disableSelect(7);
-              break;
-            case 4:
-              this.disableSelect(5);
-              this.disableSelect(6);
-              this.disableSelect(7);
-              break;
-            case 5:
-              this.disableSelect(6);
-              this.disableSelect(7);
-              break;
-            case 6:
-              this.disableSelect(7);
-              break;
-          }
-        }
-      }
     }
   }
 
