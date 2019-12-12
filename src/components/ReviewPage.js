@@ -37,7 +37,8 @@ export default class ReviewPage extends React.Component {
         "1 Year"
       ],
       skillLevelYesArr: [],
-      skillLevelNoArr: []
+      skillLevelNoArr: [],
+      array: []
     };
   }
 
@@ -45,6 +46,7 @@ export default class ReviewPage extends React.Component {
   // input is the item in custom goals which needs to be deleted
   deleteCustomGoal = input => {
     this.props.deleteCustomGoal(input);
+    this.state.array.splice(this.state.array.indexOf(input), 1);
   };
 
   // Checks if the key pressed inside the "add custom goal" Textbox was the enterkey and
@@ -58,8 +60,8 @@ export default class ReviewPage extends React.Component {
           document.getElementById("addCustomGoal").value !== ""
         ) {
           event.preventDefault();
-          this.props.addCustomGoal(
-            document.getElementById("addCustomGoal").value
+          this.props.addCustomGoal(document.getElementById("addCustomGoal").value);
+          this.state.array.push(document.getElementById("addCustomGoal").value
           );
           document.getElementById("addCustomGoal").value = "";
         }
@@ -80,6 +82,110 @@ export default class ReviewPage extends React.Component {
     this.setState({
       customGoalsTextbox: ""
     });
+  }
+  submitReview = () => {
+    console.log(this.props.yesResp);
+    this.formattingGreat_Skills()
+
+    // console.log(this.props.noResp);
+    // console.log(this.props.yesSkillList);
+    // console.log(this.props.noSkillList);
+    // console.log(this.props.customGoals);
+    // console.log(this.props.slLevel);
+
+    // this.props.reviewToDB
+    // this.props.reviewToP1
+  }
+
+  boxChecked = (input) => {
+    var a = document.getElementById(`${input}`);
+    if (a.checked == true) {
+      this.state.array.push(input);
+    } else {
+      while (this.state.array.indexOf(input) !== -1) {
+        this.state.array.splice(this.state.array.indexOf(input), 1);
+      }
+    }
+  }
+
+  formattingGreat_Skills = () => {
+    var arr = this.props.yesResp;
+    var newArr = [];
+    arr.forEach(element => {
+      element.forEach(item => {
+        var value =
+        {
+          "responsibility_criterion": item
+        }
+        newArr.push(value)
+      })
+    })
+    console.log(newArr);
+
+    var arr2 = this.props.noResp;
+    var newArr2 = [];
+    arr2.forEach(element => {
+      element.forEach(item => {
+        var value =
+        {
+          "responsibility_criterion": item
+        }
+        newArr2.push(value)
+      })
+    })
+    console.log(newArr2);
+
+    var arr3 = this.props.yesSkillList;
+    var newArr3 = [];
+    arr3.forEach(element => {
+      element.forEach(item => {
+        var value =
+        {
+          "skill_criterion": item
+        }
+        newArr3.push(value)
+      })
+    })
+    console.log(newArr3);
+
+    var arr4 = this.props.noSkillList;
+    var newArr4 = [];
+    arr4.forEach(element => {
+      element.forEach(item => {
+        var value =
+        {
+          "skill_criterion": item
+        }
+        newArr4.push(value)
+      })
+    })
+    console.log(newArr4);
+
+    // var arr5 = this.props.customGoals;
+    // var newArr5 = [];
+    // arr5.forEach(element => {
+    //   element.forEach(item => {
+    //     var value = 
+    //     {
+    //       "criterion": item
+    //     }
+    //     newArr5.push(value)
+    //   })
+    // })
+    console.log(this.state.array);
+
+    var toPost =
+    {
+      "level": this.props.slLevel,
+      "great_skills": newArr3,
+      "improve_skills": newArr4,
+      "great_responsibilities": newArr,
+      "improve_responsibilities": newArr2,
+      // "goals": newArr5
+    }
+
+    console.log(toPost);
+
   }
 
   render() {
@@ -128,7 +234,6 @@ export default class ReviewPage extends React.Component {
                 >
                   <tbody>
                     {this.props.yesResp.map(items => {
-                      console.log(items);
                       return (
                         <div>
                           {items.map(item => (
@@ -270,7 +375,7 @@ export default class ReviewPage extends React.Component {
                           <tr>
                             {/* The Checkbox */}
                             <td style={{ width: "24px" }}>
-                              <input type="checkbox" label={item} />
+                            <span><div Key={item}> <input type="checkbox" id={(item)} onChange={() => this.boxChecked(item)} /></div></span>
                             </td>
                             <td>
                               {/* Custom Goal Content */}
@@ -291,7 +396,7 @@ export default class ReviewPage extends React.Component {
                           <tr>
                             {/* The Checkbox */}
                             <td style={{ width: "24px" }}>
-                              <input type="checkbox" label={item} />
+                            <span><div Key={item}> <input type="checkbox" id={(item)} onChange={() => this.boxChecked(item)} /></div></span>
                             </td>
                             <td>
                               {/* Custom Goal Content */}
@@ -319,14 +424,6 @@ export default class ReviewPage extends React.Component {
                     return (
                       <tr>
                         {/* The Checkbox */}
-                        <td style={{ width: "24px" }}>
-                          <input type="checkbox" label={label} />
-                        </td>
-                        <td>
-                          {/* Custom Goal Content */}
-                          <div>{label}</div>
-                        </td>
-                        {/* The Delete Button */}
                         <td
                           style={{ width: "24px" }}
                           className="deleteButtonCell"
@@ -341,12 +438,18 @@ export default class ReviewPage extends React.Component {
                             &times;
                         </button>
                         </td>
+                        <td>
+                          {/* Custom Goal Content */}
+                          <div>{label}</div>
+                        </td>
+                        {/* The Delete Button */}
+
                       </tr>
                     );
                   })}
                 </tbody>
               </Table>
-              {/* The Add Custom GOal textbox */}
+              {/* The Add Custom Goal textbox */}
               <p class="font-weight-bold" style={{ fontSize: 20 }}>
                 <input
                   type="text"
@@ -388,7 +491,7 @@ export default class ReviewPage extends React.Component {
         </div>
         <div className="Centre-Bordered-Section">
           {/* The Submit Button */}
-          <Button variant="primary" className="Submit-Button" >
+          <Button variant="primary" className="Submit-Button" onClick={this.submitReview} >
             Submit
         </Button>
         </div>
