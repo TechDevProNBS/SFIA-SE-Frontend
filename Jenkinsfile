@@ -10,8 +10,8 @@ pipeline {
 	}
             steps {
             echo "Testing"
-		sh 'docker image build --build-arg ENVIRON1="location.hostname" -t="10.0.5.4/5000:testing" .'
-                sh 'docker push 10.0.5.4/5000:testing' 
+		sh 'docker image build --build-arg ENVIRON1="51.143.140.68" -t="51.140.99.70:5000/sfiafrontend:testing" .'
+                sh 'docker push 51.140.99.70:5000/sfiafrontend:testing' 
 		sh '/home/manager/terraform-azure/frontEndUpdate.sh'
                 }
             }
@@ -25,8 +25,8 @@ pipeline {
 	}
             steps {
 		echo "staging"
-		sh 'docker image build --build-arg ENVIRON1="location.hostname" -t="10.0.5.4/5000:staging" .'
-                sh 'docker push 10.0.5.4/5000:staging' 
+		sh 'docker image build --build-arg ENVIRON1="51.143.140.68" -t="51.140.99.70:5000/sfiafrontend:staging" .'
+                sh 'docker push 51.140.99.70:5000/sfiafrontend:staging' 
 		sh '/home/manager/terraform-azure/frontEndUpdate.sh'
                 } 
             }
@@ -40,8 +40,8 @@ pipeline {
 	}
             steps {
 		echo "production"
-                sh 'docker image build --build-arg ENVIRON1="location.hostname" -t="10.0.5.4/5000:production" .'
-                sh 'docker push 10.0.5.4/5000:production' 
+                sh 'docker image build --build-arg ENVIRON1="51.143.140.68" -t="51.140.99.70:5000/sfiafrontend:production" .'
+                sh 'docker push 51.140.99.70:5000/sfiafrontend:production' 
 		sh '/home/manager/terraform-azure/frontEndUpdate.sh'
             }
         }
