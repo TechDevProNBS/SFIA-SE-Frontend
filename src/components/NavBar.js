@@ -12,7 +12,7 @@ export default class NavBar extends React.Component {
 
     this.state = {
       old_Carousel_Page: 0,
-      progressBarWidth: "0%"
+      progressBarWidth: "0%",
     }
   }
 
@@ -20,28 +20,44 @@ export default class NavBar extends React.Component {
    * When the Responsibilities button is clicked send "Responsibilities" to props (in Session.js)"
    *  */ 
   toResponsibilities = event => {
-    this.props.handlePageChange("Responsibilities");
+    let pageIdx = 0;
+
+    if(pageIdx <= this.props.currentPageIdx){
+      this.props.handlePageChange("Responsibilities");
+    }  
   };
 
   /**
    * When the SkillList button is clicked send "SkillList to props (in Session.js)"
    */
   toSkillList = event => {
-    this.props.handlePageChange("SkillList");
+    let pageIdx = 1;
+
+    if(pageIdx <= this.props.currentPageIdx){
+      this.props.handlePageChange("SkillList");
+    }
   };
 
   /**
    * When the SkillLevels button is clicked send "SkillLevels" to props (in Session.js)"
    */
   toSkillLevels = event => {
-    this.props.handlePageChange("SkillLevels");
+    let pageIdx = 2;
+
+    if(pageIdx <= this.props.currentPageIdx){
+      this.props.handlePageChange("SkillLevels");
+    }
   };
   
   /**
    * When the SkillReviewPage button is clicked send "SkillReviewPage" to props (in Session.js)"
    */
   toSkillReviewPage = event => {
-    this.props.handlePageChange("SkillReviewPage");
+    let pageIdx = 3;
+
+    if(pageIdx <= this.props.currentPageIdx){
+      this.props.handlePageChange("SkillReviewPage");
+    }
   };
 
   /**
@@ -226,7 +242,7 @@ export default class NavBar extends React.Component {
             >
               &nbsp;&nbsp;&nbsp;
             </button>
-            <div>Review_Page</div>
+            <div>Review Page</div>
           </div>
         </div>
       </div>

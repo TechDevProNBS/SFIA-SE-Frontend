@@ -10,7 +10,8 @@ import "./css/Session.css"
 */
 export default class Session extends React.Component {
   state = {
-    Carousel_Page: 0
+    Carousel_Page: 0,
+    currentPageIdx: 0
   };
 
 
@@ -29,14 +30,23 @@ export default class Session extends React.Component {
       this.setState({
         Carousel_Page: 1
       });
+      if (this.state.currentPageIdx === 0) {
+        this.setState({
+          currentPageIdx: 1
+        });
+      }
     }
 
     // Assignes the word "SkillLevels" to the first page inside SessionWindow.js
     else if (event == "SkillLevels") {
-
       this.setState({
         Carousel_Page: 2
       });
+      if (this.state.currentPageIdx === 1) {
+        this.setState({
+          currentPageIdx: 2
+        });
+      }
     }
 
     // Assignes the word "SkillReviewPage" to the first page inside SessionWindow.js
@@ -44,6 +54,12 @@ export default class Session extends React.Component {
       this.setState({
         Carousel_Page: 3
       });
+    
+      if (this.state.currentPageIdx === 2) {
+        this.setState({
+          currentPageIdx: 3
+        });
+      }
     }
 
     return event;
@@ -57,12 +73,17 @@ export default class Session extends React.Component {
           SFIA Development
         </div>
         {/* HandlePageChange is the Output from NavBar */}
-        <NavBar handlePageChange={this.handlePageChange} Carousel_Page={this.state.Carousel_Page} />
+        <NavBar 
+          handlePageChange={this.handlePageChange} 
+          Carousel_Page={this.state.Carousel_Page}
+          currentPageIdx={this.state.currentPageIdx}
+         />
         {/* Carousel_Page is the page that should appear in the session */}
         <SessionWindow 
-        Carousel_Page={this.state.Carousel_Page} 
-        handlePageChange={this.handlePageChange} />
-       
+          Carousel_Page={this.state.Carousel_Page} 
+          handlePageChange={this.handlePageChange} 
+          currentPageIdx={this.state.currentPageIdx}
+        />
         {/* skillLevel is the page that should appear in the session */}
       </div>
     );
