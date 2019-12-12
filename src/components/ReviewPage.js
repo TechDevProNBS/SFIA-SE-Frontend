@@ -103,13 +103,8 @@ export default class ReviewPage extends React.Component {
           <h2>
             <center>
               <p class="font-weight-bold" style={{ fontSize: 26 }}>
-                <u>YOU ARE SFIA LEVEL {this.props.level}</u>
+                <u>YOU ARE SFIA LEVEL {this.props.slLevel}</u>
               </p>
-              <p>{this.props.yesResp}</p>
-              <p>{this.props.noResp}</p><br />
-              <p>{this.props.slLevel}</p>
-              <p>{this.props.yesSkillList}</p>
-              <p>{this.props.noSkillList}</p>
             </center>
           </h2>
 
@@ -393,7 +388,7 @@ export default class ReviewPage extends React.Component {
         </div>
         <div className="Centre-Bordered-Section">
           {/* The Submit Button */}
-          <Button variant="primary" className="Submit-Button">
+          <Button variant="primary" className="Submit-Button" >
             Submit
         </Button>
         </div>
