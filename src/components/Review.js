@@ -194,7 +194,7 @@ export default class Review extends React.Component {
         <div className="Centre-Bordered-Section">
           <div className="Bordered-Section">
             <h4>
-              <p className="subHeader">Goals for the future:</p>
+              <p className="subHeader">Goals for {(new Date(this.state.report[0].goal_deadline)).getDate()}-{(new Date(this.state.report[0].goal_deadline)).getMonth()}-{(new Date(this.state.report[0].goal_deadline)).getFullYear()}</p>
             </h4>
             <br></br>
             <Table
