@@ -89,7 +89,7 @@ export default class SkillList extends React.Component {
             }
         }
     }
-    //maps the skills from the database and renders to the screen. CCS is still needed here
+    //maps the skills from the database and renders to the screen. CSS is still needed here
     render() {
         return (
             <div className="outter">
@@ -109,7 +109,7 @@ export default class SkillList extends React.Component {
                         {this.state.records.map((cat, index) => (
                             <div Key={index}>Catergory: {cat.category_name}
                                 {cat.subcategories.map((subcat, index) => (
-                                    <div Key={index}>Subatergory: {subcat.subcategory_name}
+                                    <div Key={index}>Subcatergory: {subcat.subcategory_name}
                                         {subcat.skills.map((skill, index) => (
                                             <span><div Key={index}> <input type="checkbox" id={(skill.skill_name)} onChange={() => this.boxChecked(skill.skill_name)} /> {skill.skill_name} </div>  </span>
                                         ))} </div>
