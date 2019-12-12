@@ -233,8 +233,8 @@ export default class ReviewPage extends React.Component {
                             <tr>
                               <td>
                                 <span
-                                  class="glyphicon glyphicon-ok"
-                                  style={{ color: "green" }}
+                                  class="glyphicon glyphicon-remove"
+                                  style={{ color: "red" }}
                                 ></span>
                               </td>
                               <td>{item}</td>
