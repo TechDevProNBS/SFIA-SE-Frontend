@@ -60,75 +60,83 @@ export default class Responsibilities extends React.Component {
       }
       total++;
     }
-    per = ((count / total) * 100).toFixed(2);
-    if (per > ((2 / 3) * 100)) {
-      switch (index) {
-        case 1:
-          this.enableSelect(2);
-          break;
-        case 2:
-          this.enableSelect(3);
-          break;
-        case 3:
-          this.enableSelect(4);
-          break;
-        case 4:
-          this.enableSelect(5);
-          break;
-        case 5:
-          this.enableSelect(6);
-          break;
-        case 6:
-          this.enableSelect(7);
-          break;
+    var noOfSelect = 0;
+    for (var j = 0; j < select.length; j++) {
+      if (select[j].firstElementChild.value !== "true" && select[j].firstElementChild.value !== "false") {
+        noOfSelect++;
       }
-    } else {
-      switch (index) {
-        case 1:
-          if (per < ((2 / 3) * 100)) {
-            this.disableSelect(2);
-            this.disableSelect(3);
-            this.disableSelect(4);
-            this.disableSelect(5);
-            this.disableSelect(6);
-            this.disableSelect(7);
-          }
-          break;
-        case 2:
-          if (per < ((2 / 3) * 100)) {
-            this.disableSelect(3);
-            this.disableSelect(4);
-            this.disableSelect(5);
-            this.disableSelect(6);
-            this.disableSelect(7);
-          }
-          break;
-        case 3:
-          if (per < ((2 / 3) * 100)) {
-            this.disableSelect(4);
-            this.disableSelect(5);
-            this.disableSelect(6);
-            this.disableSelect(7);
-          }
-          break;
-        case 4:
-          if (per < ((2 / 3) * 100)) {
-            this.disableSelect(5);
-            this.disableSelect(6);
-            this.disableSelect(7);
-          }
-          break;
-        case 5:
-          if (per < ((2 / 3) * 100)) {
-            this.disableSelect(6);
-            this.disableSelect(7);
-          }
-          break;
-        case 6:
-          if (per < ((2 / 3) * 100)) {
-            this.disableSelect(7);
-          }
-          break;
+    }
+    per = ((count / total) * 100).toFixed(2);
+    if (noOfSelect === 0) {
+      if (per > ((2 / 3) * 100)) {
+        switch (index) {
+          case 1:
+            this.enableSelect(2);
+            break;
+          case 2:
+            this.enableSelect(3);
+            break;
+          case 3:
+            this.enableSelect(4);
+            break;
+          case 4:
+            this.enableSelect(5);
+            break;
+          case 5:
+            this.enableSelect(6);
+            break;
+          case 6:
+            this.enableSelect(7);
+            break;
+        }
+      } else {
+        switch (index) {
+          case 1:
+            if (per < ((2 / 3) * 100)) {
+              this.disableSelect(2);
+              this.disableSelect(3);
+              this.disableSelect(4);
+              this.disableSelect(5);
+              this.disableSelect(6);
+              this.disableSelect(7);
+            }
+            break;
+          case 2:
+            if (per < ((2 / 3) * 100)) {
+              this.disableSelect(3);
+              this.disableSelect(4);
+              this.disableSelect(5);
+              this.disableSelect(6);
+              this.disableSelect(7);
+            }
+            break;
+          case 3:
+            if (per < ((2 / 3) * 100)) {
+              this.disableSelect(4);
+              this.disableSelect(5);
+              this.disableSelect(6);
+              this.disableSelect(7);
+            }
+            break;
+          case 4:
+            if (per < ((2 / 3) * 100)) {
+              this.disableSelect(5);
+              this.disableSelect(6);
+              this.disableSelect(7);
+            }
+            break;
+          case 5:
+            if (per < ((2 / 3) * 100)) {
+              this.disableSelect(6);
+              this.disableSelect(7);
+            }
+            break;
+          case 6:
+            if (per < ((2 / 3) * 100)) {
+              this.disableSelect(7);
+            }
+            break;
+        }
       }
     }
     this.levelFunc(index);
@@ -264,6 +272,14 @@ export default class Responsibilities extends React.Component {
           nArr.push(curArr[i].lastElementChild.innerHTML);
         }
       }
+    } else if (lvl === 7) {
+      for (var i = 0; i < curArr.length; i++) {
+        if (curArr[i].firstElementChild.value === "true") {
+          yArr.push(curArr[i].lastElementChild.innerHTML);
+        } else if (curArr[i].firstElementChild.value === "false") {
+          nArr.push(curArr[i].lastElementChild.innerHTML);
+        }
+      }
     } else {
       for (var j = 0; j < curArr.length; j++) {
         if (curArr[j].firstElementChild.value === "true") {
@@ -338,7 +354,7 @@ export default class Responsibilities extends React.Component {
                       {desc.responsibility_criteria.map((desc2, index2) => (
                         <span name={desc.level}>
                           <select id={index2} disabled={this.state.disable} onChange={() => this.selectCount(desc.level)}>
-                            <option selected>{this.state.lblDefault}</option>
+                            <option value="default" selected>{this.state.lblDefault}</option>
                             <option value="true">&#10004;</option>
                             <option value="false">&#10006;</option>
                           </select>

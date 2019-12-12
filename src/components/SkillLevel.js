@@ -35,7 +35,6 @@ export default class SkillLevel extends React.Component {
     var select = startLvl[2].getElementsByClassName("slData")
     var lvlArr = []
     var min = 1;
-    var temp = 0;
     for (var i = 0; i < select.length; i++) {
       var name = select[i].firstElementChild.getAttribute("name")
       if (parseInt(name) == parseInt(this.props.level)) {
@@ -47,16 +46,15 @@ export default class SkillLevel extends React.Component {
       else {
         lvlArr.push(name)
         min = lvlArr.sort((a, b) => a - b)[0];
-        temp++;
       }
     }
-    if (temp !== 0) {
+    if (parseInt(min) < parseInt(this.props.level)) {
       for (var i = 0; i < select.length; i++) {
         var name = select[i].firstElementChild.getAttribute("name")
         if (parseInt(name) == parseInt(min)) {
           var span = select[i].getElementsByTagName("span")
           for (var j = 0; j < span.length; j++) {
-            span[j].firstElementChild.disabled = false;
+            span[j].firstElementChild.disabled = true;
           }
         }
       }
