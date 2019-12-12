@@ -384,11 +384,33 @@ export default class SkillLevel extends React.Component {
   }
 
   /**
+  * Checks is any select boxes are still they're default
+  * If they are, alert message shown to user, if not calls nextPage and sendSkillList function
+  */
+  check = () => {
+    var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
+    var select = Array.from(carousel[2].getElementsByTagName("select"))
+    var selected;
+    for (var i = 0; i < select.length; i++) {
+      if (select[i].disabled === false) {
+        if (select[i].value === "default") {
+          selected = false;
+        }
+      }
+    }
+    if (selected === false) {
+      alert("Please select all boxes")
+    } else {
+      this.sendSkillList();
+      this.nextPage();
+    }
+  }
+
+  /**
    * Calls sendSkillList and nextPage function on button click
    */
   handleOnClick = () => {
-    this.sendSkillList();
-    this.nextPage();
+    this.check();
   }
 
   /**
@@ -426,8 +448,8 @@ export default class SkillLevel extends React.Component {
                     <td className="slData">
                       {desc.skill_criteria.map((desc2, index2) => (
                         <span name={desc.level} className={desc.level} >
-                          <select id={index2} disabled={this.state.disable} onChange={() => this.selectCount(desc.level)}>
-                            <option selected>{this.state.lblDefault}</option>
+                          <select required id={index2} disabled={this.state.disable} onChange={() => this.selectCount(desc.level)}>
+                            <option value="default" selected>{this.state.lblDefault}</option>
                             <option value="true">&#10004;</option>
                             <option value="false">&#10006;</option>
                           </select>

@@ -28,7 +28,6 @@ export default class SessionWindow extends React.Component {
       slLvl: "",
       selectedSkill: []
     };
-
   }
 
   /**
@@ -39,11 +38,10 @@ export default class SessionWindow extends React.Component {
     skillList.push(newArray);
     var uniqueSL = Array.from(new Set(skillList));
     this.setState({
-      newSkillList: uniqueSL,
-      refreshSkillLevel: true
+      newSkillList: uniqueSL
     });
     this.getList();
-
+    this.resetSkillLevel();
   };
 
   /**
@@ -71,7 +69,7 @@ export default class SessionWindow extends React.Component {
 
   /**
    * Updates remindInDate to the value of the slider
-   */ 
+   */
   updateRemindInDate = event => {
     this.setState({
       remindInDate: event
@@ -153,7 +151,7 @@ export default class SessionWindow extends React.Component {
         var newPercent =
           (1 -
             1 /
-              (1 + a_1 * x + a_2 * x ** 2 + a_3 * x ** 3 + a_4 * x ** 4) ** 4) *
+            (1 + a_1 * x + a_2 * x ** 2 + a_3 * x ** 3 + a_4 * x ** 4) ** 4) *
           progression;
         firstHalf.push(50 - newPercent);
         secondHalf.push(newPercent + 50);
@@ -253,6 +251,18 @@ export default class SessionWindow extends React.Component {
     fetch(uri)
       .then(response => response.json())
       .then(skillname => this.setState({ selectedSkill: skillname }))
+  }
+
+  resetSkillLevel = () => {
+    var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
+    var span = Array.from(carousel[2].getElementsByTagName("span"))
+    for (var i = 0; i < span.length; i++) {
+      var select = [span[i].firstElementChild];
+      for (var opt, j = 0; opt = select[j]; j++) {
+        opt.selectedIndex = 0;
+        select[j].disabled = true;
+      }
+    }
   }
 
   render() {

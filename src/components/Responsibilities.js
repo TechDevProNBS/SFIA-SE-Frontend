@@ -189,8 +189,7 @@ export default class Responsibilities extends React.Component {
    * Calls getLvl and nextPage function on button click
    */
   handleOnClick = () => {
-    this.getLvl();
-    this.nextPage();
+    this.check();
   }
 
   /**
@@ -280,6 +279,25 @@ export default class Responsibilities extends React.Component {
     this.state.respYesArr = yArr;
     this.state.respNoArr = nArr;
     this.pushResp();
+  }
+
+  check = () => {
+    var carousel = Array.from(document.getElementsByClassName("Carousel_Item"))
+    var select = Array.from(carousel[0].getElementsByTagName("select"))
+    var selected;
+    for (var i = 0; i < select.length; i++) {
+      if (select[i].disabled === false) {
+        if (select[i].value === "default") {
+          selected = false;
+        }
+      }
+    }
+    if (selected === false) {
+      alert("Please select all boxes")
+    } else {
+      this.getLvl();
+      this.nextPage();
+    }
   }
 
   /**
