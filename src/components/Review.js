@@ -54,7 +54,7 @@ export default class Review extends React.Component {
         <h2>
           <center>
             <p class="font-weight-bold" style={{ fontSize: 26 }}>
-              <u>YOU ARE SFIA LEVEL X</u>
+              <u>YOU ARE SFIA LEVEL {this.state.report[0].level}</u>
             </p>
           </center>
         </h2>
