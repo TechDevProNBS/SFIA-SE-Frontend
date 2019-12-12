@@ -11,7 +11,8 @@ export default class SkillList extends React.Component {
 
         this.state = {
             records: [],
-            array: []
+            array: [],
+            roles: [],
         }
     }
     //This pulls the data from the database and puts it into "records"
@@ -20,9 +21,11 @@ export default class SkillList extends React.Component {
         fetch(uri)
           .then(response => response.json())
           .then(SkillList_info => this.setState({ records: SkillList_info }))
-      }
-      componentDidMount = () => {
+    }
+
+    componentDidMount = () => {
         this.getSkills();
+        this.getRoleNames();
     }
     //calls the handleForm function on session window
     handleForm() {
@@ -30,6 +33,29 @@ export default class SkillList extends React.Component {
         this.props.handleForm(newArray)
         this.props.handlePageChange("SkillLevels")
     };
+
+    /**
+     * Requests all the role information from the database to populate the drop down box
+     */
+    getRoleNames = () => {
+        var uri = (process.env.ADDRESS ? `http://${process.env.ADDRESS}` : `http://localhost:2000`) + `/API/roles/get`
+        fetch(uri)
+          .then(response => response.json())
+          .then(roles => this.populateDropdown(roles))
+        
+    }
+
+    populateDropdown = (roles) => {
+        let options = [];
+        roles.map( (role) =>{
+            options.push(<option>{role.role_name}</option>)
+        })
+        this.setState({
+            roles: options
+        })
+
+    }
+
     getRoles = () => {
         var selectMenu = document.getElementById("dropdown");
         var selectVal = selectMenu.options[selectMenu.selectedIndex].text;
@@ -39,6 +65,7 @@ export default class SkillList extends React.Component {
             }
             this.state.array = [];
         } else {
+            this.autofillRemove();
             var tempArray = [];
             var uri = (process.env.ADDRESS ? `http://${process.env.ADDRESS}` : `http://localhost:2000`) + `/API/roles/getRoleByName/${selectVal}`
             fetch(uri)
@@ -100,7 +127,7 @@ export default class SkillList extends React.Component {
                         <center>
                             <select id="dropdown" onChange={() => this.getRoles()}>
                                 <option>---Select---</option>
-                                <option>Analyst</option>
+                                {this.state.roles}
                             </select>
                         </center><br />
                         <div>To alter or make your own custom list, select the checkboxes below:</div>
